@@ -9,6 +9,9 @@ module.exports = function(grunt) {
             'dir': {
                 src: ['build/*']
             },
+            'zip': {
+                src: ['<%= pkg.name %>.zip']
+            },
             'scss': {
                 src: ['build/**/*.scss']
             },
@@ -46,7 +49,7 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: (function() {
-                    var files = grunt.file.readJSON('build/static/js/all.json').files;
+                    var files = grunt.file.readJSON('src/static/js/all.json').files;
                     for (var i = 0; i < files.length; i++) {
                         files[i] = 'build/static/js/' + files[i];
                     }
@@ -71,6 +74,15 @@ module.exports = function(grunt) {
             optimize: {
                 files: 'build/**/*.svg'
             }
+        },
+
+        compress: {
+            dist: {
+                options: {
+                    archive: '<%= pkg.name %>.zip'
+                },
+                src: ['build/**']
+            }
         }
 
     });
@@ -82,6 +94,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('svgo-grunt');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
     // Default task(s).
     grunt.registerTask('default', [
@@ -93,6 +106,11 @@ module.exports = function(grunt) {
         'uglify',
         'clean:js',
         'svgo'
+    ]);
+
+    grunt.registerTask('zip', [
+        'clean:zip',
+        'compress'
     ]);
 
 };
