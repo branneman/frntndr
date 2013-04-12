@@ -96,7 +96,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('svgo-grunt');
     grunt.loadNpmTasks('grunt-contrib-compress');
 
-    // Default task(s).
+    // Default task
     grunt.registerTask('default', [
         'clean:dir',
         'copy',
@@ -108,6 +108,7 @@ module.exports = function(grunt) {
         'svgo'
     ]);
 
+    // Zip task.
     grunt.registerTask('zip', [
         'clean:zip',
         'compress'

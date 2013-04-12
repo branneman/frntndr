@@ -11,7 +11,7 @@ app.set('views', __dirname + '/src/views/pages');
 app.set('view engine', 'html');
 
 // Serve compiled sass as css
-/*app.get('/static/css/all.css', function(req, res) {
+app.get('/static/css/all.css', function(req, res) {
     var scss = fs.readFileSync(__dirname + '/src/static/css/all.scss');
     sass.render(scss, function(err, css) {
         if (!err) {
@@ -20,17 +20,8 @@ app.set('view engine', 'html');
         } else {
             res.send('[node-sass] ' + err);
         }
-    }, {
-        includePaths: [__dirname + '/src/static/css/'],
-        outputStyle: 'compressed'
     });
-});*/
-
-// Serve compiled sass as css
-app.use(sass.middleware({
-    src:  __dirname + '/src/',
-    dest: __dirname + '/src/'
-}));
+});
 
 // Serve combined .js file
 app.get('/static/js/all.js', function(req, res) {
@@ -60,4 +51,6 @@ app.use(function(req, res) {
     });
 });
 
+// Listen for requests
+console.log('Listening on port ' + config.port);
 app.listen(config.port);
