@@ -1,12 +1,3 @@
-/*@import "typography";
+@import "typography";
 @import "grid";
-@import "components/faq";*/
-$bodycopy: #00d;
-
-body {
-    font: {
-        family: serif;
-        size: 16px;
-    }
-    color: $bodycopy;
-}
+@import "components/faq";

@@ -5,11 +5,12 @@ var express = require('express'),
     sass    = require('node-sass'),
     app     = express();
 
-// Set EJS as template engine
+// Set and configure EJS template engine
 app.engine('.html', engine);
 app.set('views', __dirname + '/src/views/pages');
 app.set('view engine', 'html');
 
+// Serve compiled sass as css
 /*app.get('/static/css/all.css', function(req, res) {
     var scss = fs.readFileSync(__dirname + '/src/static/css/all.scss');
     sass.render(scss, function(err, css) {
@@ -25,13 +26,13 @@ app.set('view engine', 'html');
     });
 });*/
 
-// Serve compiled sass (thus plain css)
+// Serve compiled sass as css
 app.use(sass.middleware({
-    src: __dirname + '/src/',
+    src:  __dirname + '/src/',
     dest: __dirname + '/src/'
 }));
 
-// Combine all .js files into a single file
+// Serve combined .js file
 app.get('/static/js/all.js', function(req, res) {
     var files = require(__dirname + '/src/static/js/all.json').files,
         combined = '';
@@ -45,7 +46,7 @@ app.get('/static/js/all.js', function(req, res) {
 // Serve all URL's starting with /static from the /src/static directory
 app.use('/static', express.static(__dirname + '/src/static'));
 
-// Server .html files
+// Serve .html files
 app.use(function(req, res) {
     var url  = req.url.substr(1) || 'index',
         file = __dirname + '/src/views/pages/' + url + (url.substr(-5) !== '.html' ? '.html' : '');
