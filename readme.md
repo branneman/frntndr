@@ -4,7 +4,8 @@
 
 ### How to: Setup development environment
 First install node.js on your machine.
-	npm install
+
+    npm install
 
 ### Start development server
-	node server
+    node server
