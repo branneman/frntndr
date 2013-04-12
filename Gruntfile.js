@@ -6,8 +6,14 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         clean: {
-            dist: {
+            'dir': {
                 src: ['build/*']
+            },
+            'scss': {
+                src: ['build/**/*.scss']
+            },
+            'js': {
+                src: ['build/**/*.js', 'build/**/*.json', '!build/static/js/all.js']
             }
         },
 
@@ -78,6 +84,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('svgo-grunt');
 
     // Default task(s).
-    grunt.registerTask('default', ['clean', 'copy', 'sass', 'concat', 'uglify', 'svgo']);
+    grunt.registerTask('default', [
+        'clean:dir',
+        'copy',
+        'sass',
+        'clean:scss',
+        'concat',
+        'uglify',
+        'clean:js',
+        'svgo'
+    ]);
 
 };
