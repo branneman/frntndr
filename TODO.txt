@@ -1,0 +1,5 @@
+- grunt: concatting, jquery-noconflict, uglify, cssmin, httpcopy flatten, docs, zip
+- js reusable component system (with api)
+- js conditioner
+- js unit testing framework (jasmine? qunit?)
+- element-level mq's
