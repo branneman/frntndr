@@ -28,8 +28,7 @@ app.set('view engine', 'html');
 // Serve compiled sass (thus plain css)
 app.use(sass.middleware({
 	src: __dirname + '/src/',
-	dest: __dirname + '/src/',
-	debug: true
+	dest: __dirname + '/src/'
 }));
 
 // Combine all .js files into a single file
