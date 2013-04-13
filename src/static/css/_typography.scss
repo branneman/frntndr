@@ -1,9 +1,13 @@
-$bodycopy: #00d;
+$bodycopy: #333;
+$linkblue: royalblue;
 
 body {
     font: {
-        family: serif;
-        size: 16px;
+        family: Constantia, Baskerville, Georgia, serif;
+        size: 18px;
     }
     color: $bodycopy;
+}
+a {
+    color: $linkblue;
 }

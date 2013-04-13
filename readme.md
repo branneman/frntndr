@@ -12,6 +12,8 @@ Run:
 
 	node server
 
+Then point your browser to localhost:3000
+
 ### How to: Setup development environment
 Make sure the following is installed on your machine:
 
