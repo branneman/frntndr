@@ -21,7 +21,7 @@ app.get('/static/css/all.css', function(req, res) {
 
 // Serve combined .js file
 app.get('/static/js/all.js', function(req, res) {
-    var files = require(__dirname + '/src/static/js/all.json').files,
+    var files = JSON.parse(fs.readFileSync(__dirname + '/src/static/js/all.json')).files,
         combined = '';
     for (var i = 0; i < files.length; i++) {
         combined += fs.readFileSync(__dirname + '/src/static/js/' + files[i]); // 'utf8'
