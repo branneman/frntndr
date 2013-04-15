@@ -10,9 +10,20 @@ Setup is *really* easy, and there is virtually no learning curve when you're com
 ### How to: Start the development server
 Run:
 
-	node server
+    cd /path/to/project
+    node server
 
 Then point your browser to localhost:3000
+
+### How to: Build
+Run:
+
+    cd /path/to/project
+    grunt
+
+And, to create a zip:
+
+    grunt zip
 
 ### How to: Setup development environment
 Make sure the following is installed on your machine:
@@ -22,6 +33,7 @@ Make sure the following is installed on your machine:
 
 When installed, run these commands:
 
+    cd /path/to/project
     gem install sass
     npm install
 
