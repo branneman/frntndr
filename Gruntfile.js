@@ -1,9 +1,12 @@
 module.exports = function(grunt) {
 
+    var pkg = grunt.file.readJSON('package.json'),
+        cfg = grunt.file.readJSON('config.json');
+
     // Project configuration.
     grunt.initConfig({
 
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: pkg,
 
         clean: {
             'dir': {
@@ -83,6 +86,19 @@ module.exports = function(grunt) {
                 },
                 src: ['build/**']
             }
+        },
+
+        'ftp-deploy': {
+            build: {
+                auth: {
+                    host: cfg.deploy.host,
+                    port: cfg.deploy.port,
+                    authKey: 'dtg'
+                },
+                src: 'build',
+                dest: cfg.deploy.dest,
+                exclusions: ['**/.DS_Store', '**/Thumbs.db', '**/.gitignore']
+            }
         }
 
     });
@@ -95,6 +111,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('svgo-grunt');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-ftp-deploy');
 
     // Default task
     grunt.registerTask('default', [
@@ -112,6 +129,11 @@ module.exports = function(grunt) {
     grunt.registerTask('zip', [
         'clean:zip',
         'compress'
+    ]);
+
+    // Deploy task.
+    grunt.registerTask('deploy', [
+        'ftp-deploy'
     ]);
 
 };

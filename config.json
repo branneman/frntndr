@@ -1,0 +1,10 @@
+{
+    "server": {
+        "port": 3000
+    },
+    "deploy": {
+        "host": "ftp.example.org",
+        "port": 21,
+        "dest": "/front-end"
+    }
+}

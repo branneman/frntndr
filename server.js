@@ -1,7 +1,7 @@
 var express = require('express'),
     engine  = require('ejs-locals'),
     fs      = require('fs'),
-    config  = require(__dirname + '/server-config.json'),
+    config  = require(__dirname + '/config.json'),
     sass    = require('node-sass'),
     app     = express();
 
@@ -38,10 +38,15 @@ app.use(function(req, res) {
     var url = req.url.substr(1) || 'index',
         file = __dirname + '/src/views/pages/' + url + (url.substr(-5) !== '.html' ? '.html' : '');
     fs.exists(file, function(exists) {
-        res.render(exists ? url : '404');
+        if (exists) {
+            res.render(url);
+        } else {
+            res.render('404');
+            res.send(404);
+        }
     });
 });
 
 // Listen for requests
-console.log('Listening on port ' + config.port);
-app.listen(config.port);
+console.log('Listening on port ' + config.server.port);
+app.listen(config.server.port);
