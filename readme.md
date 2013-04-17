@@ -28,7 +28,7 @@ And, to create a zip:
 ### How to: Setup development environment
 Make sure the following is installed on your machine:
 
-- [Node.js](http://nodejs.org/)
+- [Node.js](http://nodejs.org/) (nodejs version must be exact 0.10.3 on Windows at the moment)
 - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
 When installed, run these commands:
