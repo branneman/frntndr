@@ -8,7 +8,6 @@ Setup is *really* easy, and there is virtually no learning curve when you're com
 ## Development environment
 
 ### How to: Start the development server
-Run:
 
     cd /path/to/project
     node server
@@ -16,19 +15,22 @@ Run:
 Then point your browser to localhost:3000
 
 ### How to: Build
-Run:
 
     cd /path/to/project
     grunt
 
-And, to create a zip:
+After the build, to create a zip:
 
     grunt zip
+
+After the build, to upload to an ftp server:
+
+    grunt deploy
 
 ### How to: Setup development environment
 Make sure the following is installed on your machine:
 
-- [Node.js](http://nodejs.org/) (nodejs version must be exact 0.10.3 on Windows at the moment)
+- [Node.js](http://nodejs.org/)
 - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
 When installed, run these commands:
