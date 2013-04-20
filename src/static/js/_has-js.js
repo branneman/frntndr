@@ -1,3 +1,4 @@
-$(function() {
-	$('html').addClass('has-js');
-});
+(function() {
+    'use strict';
+    $('html').addClass('has-js');
+}());

@@ -16,6 +16,7 @@
         "grunt-contrib-concat": "~0.2.0",
         "svgo-grunt": "0.0.3",
         "grunt-contrib-compress": "~0.4.9",
+        "grunt-contrib-jshint": "~0.4.3",
         "grunt-contrib-jasmine": "~0.4.2"
     }
 }

@@ -1,8 +1,8 @@
 module.exports = function(grunt) {
 
-    var pkg = grunt.file.readJSON('package.json'),
-        cfg = grunt.file.readJSON('config.json'),
-        js  = grunt.file.readJSON('src/static/js/all.json').files;
+    var pkg     = grunt.file.readJSON('package.json'),
+        config  = grunt.file.readJSON('config.json'),
+        jsFiles = grunt.file.readJSON('src/static/js/all.json').files;
 
     // Project configuration.
     grunt.initConfig({
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 
         concat: {
             dist: {
-                src: js,
+                src: jsFiles,
                 dest: 'build/static/js/all.js'
             }
         },
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
 
         httpcopy: {
             options: {
-                serverUrl: 'http://localhost:' + cfg.server.port + '/',
+                serverUrl: 'http://localhost:' + config.server.port + '/',
                 urlMapper: function (serverUrl, filePath) {
                     return serverUrl + filePath.replace(/^src\/views\/pages\//, '');
                 }
@@ -100,19 +100,24 @@ module.exports = function(grunt) {
         'ftp-deploy': {
             build: {
                 auth: {
-                    host: cfg.deploy.host,
-                    port: cfg.deploy.port,
+                    host: config.deploy.host,
+                    port: config.deploy.port,
                     authKey: 'dtg'
                 },
                 src: 'build',
-                dest: cfg.deploy.dest,
+                dest: config.deploy.dest,
                 exclusions: ['**/.DS_Store', '**/Thumbs.db', '**/.gitignore']
             }
         },
 
+        jshint: {
+            dist: jsFiles,
+            options: config.jshint
+        },
+
         jasmine: {
             dist: {
-                src: js,
+                src: jsFiles,
                 options: {
                     vendor: 'src/static/js/vendor/*.js',
                     specs: 'src/static/js/spec/*.js'
@@ -129,6 +134,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-ftp-deploy');
 
@@ -146,6 +152,7 @@ module.exports = function(grunt) {
 
     // Test task.
     grunt.registerTask('test', [
+        'jshint',
         'jasmine',
         'clean:test'
     ]);
