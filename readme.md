@@ -19,6 +19,10 @@ Then point your browser to localhost:3000
     cd /path/to/project
     grunt
 
+To run the Jasmine specs through PhantomJS:
+
+    grunt test
+
 After the build, to create a zip:
 
     grunt zip

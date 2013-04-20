@@ -1,4 +1,5 @@
 .idea
+.grunt
 build
 node_modules
 .sass-cache

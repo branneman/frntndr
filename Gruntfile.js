@@ -1,7 +1,8 @@
 module.exports = function(grunt) {
 
     var pkg = grunt.file.readJSON('package.json'),
-        cfg = grunt.file.readJSON('config.json');
+        cfg = grunt.file.readJSON('config.json'),
+        js  = grunt.file.readJSON('src/static/js/all.json').files;
 
     // Project configuration.
     grunt.initConfig({
@@ -9,17 +10,20 @@ module.exports = function(grunt) {
         pkg: pkg,
 
         clean: {
-            'dir': {
+            dir: {
                 src: ['build/*']
             },
-            'zip': {
+            zip: {
                 src: ['<%= pkg.name %>.zip']
             },
-            'scss': {
+            scss: {
                 src: ['build/**/*.scss']
             },
-            'js': {
+            js: {
                 src: ['build/**/*.js', 'build/**/*.json', '!build/static/js/all.js']
+            },
+            test: {
+                src: ['.grunt', '_SpecRunner.html']
             }
         },
 
@@ -28,7 +32,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**', '!**/views/**'],
+                    src: ['**', '!**/views/**', '!**/static/js/spec/**'],
                     dest: 'build'
                 }]
             }
@@ -51,13 +55,7 @@ module.exports = function(grunt) {
 
         concat: {
             dist: {
-                src: (function() {
-                    var files = grunt.file.readJSON('src/static/js/all.json').files;
-                    for (var i = 0; i < files.length; i++) {
-                        files[i] = 'build/static/js/' + files[i];
-                    }
-                    return files;
-                }()),
+                src: js,
                 dest: 'build/static/js/all.js'
             }
         },
@@ -110,6 +108,16 @@ module.exports = function(grunt) {
                 dest: cfg.deploy.dest,
                 exclusions: ['**/.DS_Store', '**/Thumbs.db', '**/.gitignore']
             }
+        },
+
+        jasmine: {
+            dist: {
+                src: js,
+                options: {
+                    vendor: 'src/static/js/vendor/*.js',
+                    specs: 'src/static/js/spec/*.js'
+                }
+            }
         }
 
     });
@@ -120,8 +128,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('svgo-grunt');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-ftp-deploy');
 
     // Default task
@@ -131,9 +139,15 @@ module.exports = function(grunt) {
         'sass',
         'clean:scss',
         'concat',
-        'uglify',
         'clean:js',
+        'uglify',
         'httpcopy'
+    ]);
+
+    // Test task.
+    grunt.registerTask('test', [
+        'jasmine',
+        'clean:test'
     ]);
 
     // Zip task.
