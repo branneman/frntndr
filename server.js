@@ -38,12 +38,9 @@ app.use(function(req, res) {
     var url = req.url.substr(1) || 'index',
         file = __dirname + '/src/views/pages/' + url + (url.substr(-5) !== '.html' ? '.html' : '');
     fs.exists(file, function(exists) {
-        if (exists) {
-            res.render(url);
-        } else {
-            res.render('404');
-            res.send(404);
-        }
+        res.render(exists ? url : '404', {
+            baseUrl: (new Array(url.split('/').length)).join('../')
+        });
     });
 });
 

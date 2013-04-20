@@ -73,18 +73,29 @@ module.exports = function(grunt) {
             }
         },
 
-        svgo: {
-            optimize: {
-                files: 'build/**/*.svg'
-            }
-        },
-
         compress: {
             dist: {
                 options: {
                     archive: '<%= pkg.name %>.zip'
                 },
                 src: ['build/**']
+            }
+        },
+
+        httpcopy: {
+            options: {
+                serverUrl: 'http://localhost:' + cfg.server.port + '/',
+                urlMapper: function (serverUrl, filePath) {
+                    return serverUrl + filePath.replace(/^src\/views\/pages\//, '');
+                }
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/views/pages/',
+                    src: ['**/*.html'],
+                    dest: 'build/'
+                }]
             }
         },
 
@@ -122,7 +133,7 @@ module.exports = function(grunt) {
         'concat',
         'uglify',
         'clean:js',
-        'svgo'
+        'httpcopy'
     ]);
 
     // Zip task.
@@ -135,5 +146,62 @@ module.exports = function(grunt) {
     grunt.registerTask('deploy', [
         'ftp-deploy'
     ]);
+
+    // Define httpcopy task
+    grunt.registerMultiTask('httpcopy', 'HTTP copy.', function () {
+
+        var path = require('path'),
+            http = require('http'),
+            done = this.async();
+
+        // File path (relative) to url mapper
+        var urlMapper = function (serverUrl, filePath) {
+            return serverUrl + filePath;
+        };
+
+        // Set options
+        var options = this.options({
+            serverUrl: 'http://localhost/',
+            urlMapper: urlMapper
+        });
+
+        // Iterate over all src-dest file pairs.
+        grunt.util.async.forEach(this.files, function (filePair, filePairDone) {
+
+            grunt.util.async.forEach(filePair.src, function (filePath, fileCopyDone) {
+
+                var url = options.urlMapper(options.serverUrl, filePath),
+                    urlColored = grunt.log.wordlist([url], {color: 'cyan'});
+
+                http.get(url, function (response) {
+
+                    if (response.statusCode != 200) {
+                        grunt.log.warn('Got response code ' + response.statusCode + ' while trying to copy ' + urlColored + ' -> ' + filePair.dest.cyan);
+                    }
+
+                    var data = '';
+                    response.setEncoding('binary');
+                    response.on('data', function (chunk) {
+                        data += chunk;
+                    });
+
+                    response.on('end', function () {
+                        grunt.file.mkdir(path.dirname(filePair.dest));
+                        grunt.file.write(filePair.dest, data);
+                        grunt.log.writeln('Copied ' + urlColored + ' -> ' + filePair.dest.cyan);
+                        fileCopyDone();
+                    });
+
+                    response.on('error', function (e) {
+                        grunt.fail.warn('Got error: ' + e.message);
+                        fileCopyDone(false);
+                    });
+                }).on('error', function(e) {
+                        grunt.fail.warn('Got error: ' + e.message);
+                        fileCopyDone(false);
+                    });
+            }, filePairDone);
+        }, done);
+    });
 
 };
