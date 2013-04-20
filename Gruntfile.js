@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**'],
+                    src: ['**', '!**/views/**'],
                     dest: 'build'
                 }]
             }
