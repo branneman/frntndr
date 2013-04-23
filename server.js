@@ -17,7 +17,8 @@ app.get('/static/css/all.css', function(req, res) {
         res.setHeader('Content-Type', 'text/css');
         res.send(err ? err : css);
     }, {
-        includePaths: [__dirname + '/src/static/css']
+        includePaths: [__dirname + '/src/static/css'],
+        outputStyle: config.sass.outputStyle
     });
 });
 
