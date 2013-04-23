@@ -7,8 +7,12 @@
 
     <title>Front-End Bootstrap</title>
 
-    <link rel="stylesheet" href="<%= baseUrl %>static/css/all.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if gt IE 8]><!--><link rel="stylesheet" href="<%= baseUrl %>static/css/all.css"><!--<![endif]-->
+    <!--[if lt IE 9]><link rel="stylesheet" href="<%= baseUrl %>static/css/all-oldie.css"><![endif]-->
+
     <link rel="shortcut icon" href="<%= baseUrl %>static/favicon.ico">
+
     <!--[if lt IE 9]><script>'article footer'.replace(/\w+/g,function(n){document.createElement(n)})</script><![endif]-->
 </head>
 <body>

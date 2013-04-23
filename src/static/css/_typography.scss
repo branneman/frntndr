@@ -2,11 +2,12 @@ $bodycopy: #333;
 $linkblue: royalblue;
 
 body {
-    font: {
-        family: Constantia, Baskerville, Georgia, serif;
-        size: 18px;
-    }
+    font-size: 18px;
     color: $bodycopy;
+    font-family: Constantia, Baskerville, Georgia, serif;
+    @include old-ie {
+        font-family: monospace;
+    }
 }
 a {
     color: $linkblue;
