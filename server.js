@@ -16,6 +16,8 @@ app.get('/static/css/all.css', function(req, res) {
     sass.render(scss, function(err, css) {
         res.setHeader('Content-Type', 'text/css');
         res.send(err ? err : css);
+    }, {
+        includePaths: [__dirname + '/src/static/css']
     });
 });
 
@@ -24,7 +26,7 @@ app.get('/static/js/all.js', function(req, res) {
     var files = JSON.parse(fs.readFileSync(__dirname + '/src/static/js/all.json')).files,
         combined = '';
     for (var i = 0; i < files.length; i++) {
-        combined += fs.readFileSync(__dirname + '/src/static/js/' + files[i]); // 'utf8'
+        combined += fs.readFileSync(files[i]); // 'utf8'
     }
     res.setHeader('Content-Type', 'text/javascript');
     res.send(combined);
