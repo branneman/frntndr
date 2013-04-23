@@ -4,6 +4,10 @@ module.exports = function(grunt) {
         config  = grunt.file.readJSON('config.json'),
         jsFiles = grunt.file.readJSON('src/static/js/all.json').files;
 
+    jsFiles.forEach(function(v, i) {
+        jsFiles[i] = 'src/static/js/' + v;
+    });
+
     // Project configuration.
     grunt.initConfig({
 

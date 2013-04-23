@@ -1,6 +1,6 @@
 {
     "files": [
-        "src/static/js/_has-js.js",
-        "src/static/js/_features.js"
+        "_has-js.js",
+        "_features.js"
     ]
 }
