@@ -2,6 +2,7 @@ var express = require('express'),
     engine  = require('ejs-locals'),
     fs      = require('fs'),
     config  = require(__dirname + '/config.json'),
+    url     = require('url'),
     exec    = require('child_process').exec,
     app     = express();
 
@@ -11,10 +12,11 @@ app.set('views', __dirname + '/src/views/pages');
 app.set('view engine', 'html');
 
 // Serve compiled sass as css
-app.get('/static/css/all.css', function(req, res) {
-    var sassCwd = __dirname + '/src/static/css/',
-        sassCmd = 'sass -t ' + config.sass.outputStyle + ' all.scss';
-    exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {
+app.get('/static/css/*.css', function(req, res) {
+    var file = url.parse(req.url).path.split('/').pop().replace('.css', '.scss'),
+        cwd  = __dirname + '/src/static/css/',
+        cmd  = 'sass -t ' + config.sass.outputStyle + ' ' + file;
+    exec(cmd, {cwd: cwd}, function(err, stdout, stderr) {
         res.setHeader('Content-Type', 'text/css');
         res.send(err ? err : stdout);
     });
