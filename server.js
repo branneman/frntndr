@@ -2,7 +2,7 @@ var express = require('express'),
     engine  = require('ejs-locals'),
     fs      = require('fs'),
     config  = require(__dirname + '/config.json'),
-    sass    = require('node-sass'),
+    exec    = require('child_process').exec,
     app     = express();
 
 // Set and configure EJS template engine
@@ -12,13 +12,11 @@ app.set('view engine', 'html');
 
 // Serve compiled sass as css
 app.get('/static/css/all.css', function(req, res) {
-    var scss = fs.readFileSync(__dirname + '/src/static/css/all.scss');
-    sass.render(scss, function(err, css) {
+    var sassCwd = __dirname + '/src/static/css/',
+        sassCmd = 'sass -t ' + config.sass.outputStyle + ' all.scss';
+    exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {
         res.setHeader('Content-Type', 'text/css');
-        res.send(err ? err : css);
-    }, {
-        includePaths: [__dirname + '/src/static/css'],
-        outputStyle: config.sass.outputStyle
+        res.send(err ? err : stdout);
     });
 });
 
