@@ -3,7 +3,7 @@ This codebase is a blueprint environment to quick start new front-end projects. 
 
 Setup is *really* easy, and there is virtually no learning curve when you're coming from Apache SSI and/or Ant build scripts for example. Node.js, EJS and Sass all have a very gentle learning curve.
 
-*Warning*: I used a lot of conventions I personally prefer you might not agree! [If you don't like my code, fork off!](http://www.flickr.com/photos/codepo8/5018350616/)
+*Warning*: I used a lot of conventions I personally prefer you might not agree with! [If you don't like my code, fork off!](http://www.flickr.com/photos/codepo8/5018350616/)
 
 ## Development environment
 
