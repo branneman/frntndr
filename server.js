@@ -11,15 +11,13 @@ app.engine('.html', engine);
 app.set('views', __dirname + '/src/views/pages');
 app.set('view engine', 'html');
 
-// Serve compiled sass as css
-app.get('/static/css/*.css', function(req, res) {
-    var file = url.parse(req.url).path.split('/').pop().replace('.css', '.scss'),
-        cwd  = __dirname + '/src/static/css/',
-        cmd  = 'sass -t ' + config.sass.outputStyle + ' ' + file;
-    exec(cmd, {cwd: cwd}, function(err, stdout, stderr) {
-        res.setHeader('Content-Type', 'text/css');
-        res.send(err ? err : stdout);
-    });
+// Start SASS watcher, and output to src/static/css/ directory
+var sassCwd  = __dirname + '/src/static/',
+    sassCmd  = 'sass -t ' + config.sass.outputStyle + ' --no-cache --watch scss:css',
+    sassProc = exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {});
+process.on('SIGINT', function() {
+    sassProc.kill();
+    process.exit();
 });
 
 // Serve combined .js file
@@ -49,4 +47,5 @@ app.use(function(req, res) {
 
 // Listen for requests
 console.log('Listening on port ' + config.server.port);
+console.log('Use CTRL + C to exit.');
 app.listen(config.server.port);

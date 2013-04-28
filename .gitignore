@@ -3,5 +3,5 @@
 build
 node_modules
 .sass-cache
-*.css
+css
 *.zip
