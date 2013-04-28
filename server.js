@@ -6,12 +6,9 @@ var express = require('express'),
     exec    = require('child_process').exec,
     app     = express();
 
-// Set and configure EJS template engine
-app.engine('.html', engine);
-app.set('views', __dirname + '/src/views/pages');
-app.set('view engine', 'html');
-
-// Serve compiled sass as css
+/**
+ * SASS handler
+ */
 app.get('/static/css/*.css', function(req, res) {
     var file = url.parse(req.url).path.split('/').pop().replace('.css', '.scss'),
         cwd  = __dirname + '/src/static/css/',
@@ -22,7 +19,9 @@ app.get('/static/css/*.css', function(req, res) {
     });
 });
 
-// Serve combined .js file
+/**
+ * JavaScript handler
+ */
 app.get('/static/js/all.js', function(req, res) {
     var files = JSON.parse(fs.readFileSync(__dirname + '/src/static/js/all.json')).files,
         combined = '';
@@ -33,10 +32,12 @@ app.get('/static/js/all.js', function(req, res) {
     res.send(combined);
 });
 
-// Serve all URL's starting with /static from the /src/static directory
-app.use('/static', express.static(__dirname + '/src/static'));
-
-// Serve .html files
+/**
+ * HTML handler
+ */
+app.engine('.html', engine);
+app.set('views', __dirname + '/src/views/pages');
+app.set('view engine', 'html');
 app.use(function(req, res) {
     var url = req.url.substr(1) || 'index',
         file = __dirname + '/src/views/pages/' + url + (url.substr(-5) !== '.html' ? '.html' : '');
@@ -47,6 +48,18 @@ app.use(function(req, res) {
     });
 });
 
-// Listen for requests
+/**
+ * Static file handler
+ */
+app.use('/static', express.static(__dirname + '/src/static'));
+
+/**
+ * 404 handler
+ */
+// .. todo ..
+
+/**
+ * Start server
+ */
 console.log('Listening on port ' + config.server.port);
 app.listen(config.server.port);
