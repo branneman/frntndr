@@ -1,13 +1,13 @@
-var express = require('express'),
-    engine  = require('ejs-locals'),
+var config  = require(__dirname + '/config.json'),
     fs      = require('fs'),
-    config  = require(__dirname + '/config.json'),
     url     = require('url'),
     exec    = require('child_process').exec,
+    express = require('express'),
+    ejs     = require('ejs-locals'),
     app     = express();
 
 /**
- * SASS handler
+ * SASS watcher
  */
 var sassCwd  = __dirname + '/src/static/',
     sassCmd  = 'sass -t ' + config.sass.outputStyle + ' --no-cache --watch scss:css',
@@ -31,34 +31,34 @@ app.get('/static/js/all.js', function(req, res) {
 });
 
 /**
- * HTML handler
+ * View & static file handler
  */
-app.engine('.html', engine);
-app.set('views', __dirname + '/src/views/pages');
+app.engine('.html', ejs);
+app.set('views', __dirname + '/src/');
 app.set('view engine', 'html');
-app.use(function(req, res) {
-    var url = req.url.substr(1) || 'index',
-        file = __dirname + '/src/views/pages/' + url + (url.substr(-5) !== '.html' ? '.html' : '');
+app.use(function (req, res) {
+
+    var pathname = url.parse(req.url).pathname.substr(1),
+        file     = app.get('views') + '/' + (pathname || 'index.html'),
+        baseUrl  = new Array(pathname.split('/').length).join('../'),
+        viewObj  = { baseUrl: baseUrl, req: req };
+
     fs.exists(file, function(exists) {
-        res.render(exists ? url : '404', {
-            baseUrl: (new Array(url.split('/').length)).join('../')
-        });
+        if (exists) {
+            if (file.substr(-5) === '.html') {
+                res.render(file, viewObj);
+            } else {
+                res.sendfile(file);
+            }
+        } else {
+            res.status(404).render(app.get('views') + config.page404, viewObj);
+        }
     });
 });
 
 /**
- * Static file handler
- */
-app.use('/static', express.static(__dirname + '/src/static'));
-
-/**
- * 404 handler
- */
-// .. todo ..
-
-/**
  * Start server
  */
-console.log('Listening on port ' + config.server.port);
-console.log('Use CTRL + C to exit.');
 app.listen(config.server.port);
+console.log('Listening on port ' + config.server.port);
+console.log('Use Ctrl+C or SIGINT to exit.');
