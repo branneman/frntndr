@@ -49,7 +49,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**', '!**/views/**', '!**/static/scss/**', '!**/static/js/spec/**'],
+                    src: ['**', '!**/layout/**', '!**/components/**', '!**/static/scss/**', '!**/static/js/spec/**'],
                     dest: 'build'
                 }]
             }
@@ -85,15 +85,15 @@ module.exports = function(grunt) {
         httpcopy: {
             options: {
                 serverUrl: 'http://localhost:' + config.server.port + '/',
-                urlMapper: function (serverUrl, filePath) {
-                    return serverUrl + filePath.replace(/^src\/views\/pages\//, '');
+                urlMapper: function(serverUrl, filePath) {
+                    return serverUrl + filePath.replace(/^src\//, '');
                 }
             },
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'src/views/pages/',
-                    src: ['**/*.html'],
+                    cwd: 'src/',
+                    src: ['**/*.html', '!**/layout/**', '!**/components/**'],
                     dest: 'build/'
                 }]
             }
