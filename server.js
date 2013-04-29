@@ -9,14 +9,12 @@ var express = require('express'),
 /**
  * SASS handler
  */
-app.get('/static/css/*.css', function(req, res) {
-    var file = url.parse(req.url).path.split('/').pop().replace('.css', '.scss'),
-        cwd  = __dirname + '/src/static/css/',
-        cmd  = 'sass -t ' + config.sass.outputStyle + ' ' + file;
-    exec(cmd, {cwd: cwd}, function(err, stdout, stderr) {
-        res.setHeader('Content-Type', 'text/css');
-        res.send(err ? err : stdout);
-    });
+var sassCwd  = __dirname + '/src/static/',
+    sassCmd  = 'sass -t ' + config.sass.outputStyle + ' --no-cache --watch scss:css',
+    sassProc = exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {});
+process.on('SIGINT', function() {
+    sassProc.kill();
+    process.exit();
 });
 
 /**
@@ -62,4 +60,5 @@ app.use('/static', express.static(__dirname + '/src/static'));
  * Start server
  */
 console.log('Listening on port ' + config.server.port);
+console.log('Use CTRL + C to exit.');
 app.listen(config.server.port);
