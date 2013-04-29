@@ -17,17 +17,30 @@ module.exports = function(grunt) {
             dir: {
                 src: ['build/*']
             },
-            zip: {
-                src: ['<%= pkg.name %>.zip']
-            },
-            scss: {
-                src: ['build/**/*.scss']
-            },
             js: {
                 src: ['build/**/*.js', 'build/**/*.json', '!build/static/js/all.js']
             },
             test: {
                 src: ['.grunt', '_SpecRunner.html']
+            },
+            zip: {
+                src: ['<%= pkg.name %>.zip']
+            }
+        },
+
+        sass: {
+            options: {
+                style: 'compressed',
+                noCache: true
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/static/scss/',
+                    src: ['**/*.scss', '!**/_*.scss'],
+                    dest: 'src/static/css/',
+                    ext: '.css'
+                }]
             }
         },
 
@@ -36,23 +49,8 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**', '!**/views/**', '!**/static/js/spec/**'],
+                    src: ['**', '!**/views/**', '!**/static/scss/**', '!**/static/js/spec/**'],
                     dest: 'build'
-                }]
-            }
-        },
-
-        sass: {
-            options: {
-                style: 'compressed'
-            },
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: 'build/',
-                    src: ['**/*.scss', '!**/_*.scss'],
-                    dest: 'build/',
-                    ext: '.css'
                 }]
             }
         },
@@ -146,9 +144,8 @@ module.exports = function(grunt) {
     // Default task
     grunt.registerTask('default', [
         'clean:dir',
-        'copy',
         'sass',
-        'clean:scss',
+        'copy',
         'concat',
         'clean:js',
         'uglify',
