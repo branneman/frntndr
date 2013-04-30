@@ -1,3 +1,6 @@
+var fs = require('fs'),
+    jsonminify = require('./json.minify.js');
+
 module.exports = function(grunt) {
 
     var pkg     = grunt.file.readJSON('package.json'),
@@ -114,9 +117,7 @@ module.exports = function(grunt) {
 
         jshint: {
             dist: jsFiles,
-            options: {
-                'jshintrc': '.jshintrc'
-            }
+            options: JSON.parse(jsonminify(fs.readFileSync('.jshintrc', 'utf8')))
         },
 
         jasmine: {
