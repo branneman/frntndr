@@ -114,7 +114,9 @@ module.exports = function(grunt) {
 
         jshint: {
             dist: jsFiles,
-            options: config.build.jshint
+            options: {
+                'jshintrc': '.jshintrc'
+            }
         },
 
         jasmine: {
