@@ -102,19 +102,19 @@ module.exports = function(grunt) {
         'ftp-deploy': {
             build: {
                 auth: {
-                    host: config.deploy.host,
-                    port: config.deploy.port,
+                    host: config.build.deploy.host,
+                    port: config.build.deploy.port,
                     authKey: 'dtg'
                 },
                 src: 'build',
-                dest: config.deploy.dest,
+                dest: config.build.deploy.dest,
                 exclusions: ['**/.DS_Store', '**/Thumbs.db', '**/.gitignore']
             }
         },
 
         jshint: {
             dist: jsFiles,
-            options: config.jshint
+            options: config.build.jshint
         },
 
         jasmine: {

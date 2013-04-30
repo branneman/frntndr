@@ -10,7 +10,7 @@ var config  = require(__dirname + '/config.json'),
  * SASS watcher
  */
 var sassCwd  = __dirname + '/src/static/',
-    sassCmd  = 'sass -t ' + config.sass.outputStyle + ' --no-cache --watch scss:css',
+    sassCmd  = 'sass -t ' + config.sassOutputStyle + ' --no-cache --watch scss:css',
     sassProc = exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {});
 process.on('SIGINT', function() {
     sassProc.kill();
@@ -56,7 +56,7 @@ app.use(function (req, res) {
                 res.sendfile(file);
             }
         } else {
-            res.status(404).render(app.get('views') + config.page404, viewObj);
+            res.status(404).render(app.get('views') + config.server.page404, viewObj);
         }
     });
 });
