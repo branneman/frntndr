@@ -18,6 +18,14 @@ process.on('SIGINT', function() {
 });
 
 /**
+ * View configuration
+ */
+app.engine('.html', ejs);
+app.set('views', __dirname + '/src/');
+app.set('view engine', 'html');
+app.use(express.compress());
+
+/**
  * JavaScript handler
  */
 app.get('/static/js/all.js', function(req, res) {
@@ -33,9 +41,6 @@ app.get('/static/js/all.js', function(req, res) {
 /**
  * View & static file handler
  */
-app.engine('.html', ejs);
-app.set('views', __dirname + '/src/');
-app.set('view engine', 'html');
 app.use(function (req, res) {
 
     var pathname = url.parse(req.url).pathname.substr(1),
