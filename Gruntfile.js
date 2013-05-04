@@ -1,3 +1,6 @@
+var fs = require('fs');
+JSON.minify = require('jsonminify');
+
 module.exports = function(grunt) {
 
     var pkg     = grunt.file.readJSON('package.json'),
@@ -18,7 +21,7 @@ module.exports = function(grunt) {
                 src: ['build/*']
             },
             js: {
-                src: ['build/**/*.js', 'build/**/*.json', '!build/static/js/all.js']
+                src: ['build/**/*.{js,json}', '!build/**/vendor/*.js', '!build/static/js/all.js']
             },
             test: {
                 src: ['.grunt', '_SpecRunner.html']
@@ -114,9 +117,7 @@ module.exports = function(grunt) {
 
         jshint: {
             dist: jsFiles,
-            options: {
-                'jshintrc': '.jshintrc'
-            }
+            options: JSON.parse(JSON.minify(fs.readFileSync('.jshintrc', 'utf8')))
         },
 
         jasmine: {
