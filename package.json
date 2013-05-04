@@ -2,7 +2,18 @@
   "name": "project-name",
   "description": "",
   "version": "0.1.0",
+  "author": "You <you@example.org> (http://example.org/)",
+  "contributors": [
+    "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)"
+  ],
   "private": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "preinstall": "gem install sass",
+    "test": "grunt test"
+  },
   "dependencies": {
     "express": "~3.1.1",
     "ejs-locals": "~1.0.2"

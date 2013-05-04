@@ -17,13 +17,12 @@ Or use [Yeoman](http://yeoman.io/), a scaffolding tool which could give you the 
 ### How to: Setup development environment
 Make sure the following is installed on your machine:
 
-- [Node.js](http://nodejs.org/)
+- [Node.js](http://nodejs.org/), 0.10.0 or bigger
 - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
 When installed, run these commands:
 
     cd /path/to/project
-    gem install sass
     npm install
 
 Done!
