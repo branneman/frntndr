@@ -10,7 +10,7 @@ Setup is *really* easy, there is virtually no learning curve to make these trans
 
 *Warning*: I used a lot of conventions I personally prefer you might not agree with! [If you don't like my code, fork off!](http://www.flickr.com/photos/codepo8/5018350616/)
 
-Or use [Yeoman](http://yeoman.io/), a scaffolding tool which could give you the same stack of tools, with more flexibility without the strict rules.
+Or use [Yeoman](http://yeoman.io/), a scaffolding tool which could give you the same stack of tools, with more overhead and flexibility without the strict rules.
 
 ## Development environment
 
@@ -23,7 +23,7 @@ Make sure the following is installed on your machine:
 When installed, run these commands:
 
     cd /path/to/project
-    npm install
+    npm i
 
 Done!
 
