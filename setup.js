@@ -18,6 +18,6 @@ exec('gem install sass', function(err, stdout, stderr) {
 /**
  * Install Grunt CLI
  */
-exec('npm install -g grunt-cli', function(err, stdout, stderr) {
+exec('npm i -g grunt-cli', function(err, stdout, stderr) {
     console.log(err ? stderr : 'Grunt CLI successfully installed.');
 });

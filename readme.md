@@ -1,5 +1,5 @@
 # Front-End Bootstrap
-This codebase is a blueprint environment to quick start new front-end projects. It contains a [Node.js](http://nodejs.org/) server with [Express](http://expressjs.com/), [EJS](http://embeddedjs.com/), [Sass](http://sass-lang.com/) (scss syntax) and a [Grunt](http://gruntjs.com/) build script which compresses your CSS (via Sass) and JavaScript (with [UglifyJS](http://github.com/mishoo/UglifyJS)) and can run your code through [JSHint](http://www.jshint.com/) and [Jasmine](http://pivotal.github.io/jasmine/).
+This codebase is a blueprint environment to quick start new front-end projects. It contains a local [Node.js](http://nodejs.org/) server for front-end development with [EJS](http://embeddedjs.com/) as a template engine, [Sass](http://sass-lang.com/) (scss syntax) and a [Grunt](http://gruntjs.com/) build script which compresses your CSS (via Sass) and JavaScript (with [UglifyJS](http://github.com/mishoo/UglifyJS)) and can run your code through [JSHint](http://www.jshint.com/) and [Jasmine](http://pivotal.github.io/jasmine/).
 
 Setup is *really* easy, there is virtually no learning curve to make these transitions:
 
@@ -20,7 +20,7 @@ Make sure the following is installed on your machine:
 - [Node.js](http://nodejs.org/), 0.10.0 or bigger
 - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
-When installed, run these commands:
+When installed, run these commands to automagically [install Sass](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#using_sass) and all the [node dependencies](https://github.com/branneman/frontend-bootstrap/blob/master/package.json):
 
     cd /path/to/project
     npm i
@@ -32,7 +32,7 @@ Done!
     cd /path/to/project
     node server
 
-Then point your browser to localhost:3000
+Then point your browser to [localhost:1337](http://localhost:1337/)
 
 ### How to: Build, test and deploy
 

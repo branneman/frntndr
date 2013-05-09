@@ -1,6 +1,6 @@
 {
     "server": {
-        "port": 3000,
+        "port": 1337,
         "page404": "404.html",
         "sassOutputStyle": "expanded"
     },
