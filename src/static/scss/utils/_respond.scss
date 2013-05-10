@@ -22,11 +22,3 @@ $fix-mqs: false !default;
         }
     }
 }
-
-$old-ie: false !default;
-
-@mixin old-ie {
-    @if $old-ie {
-        @content;
-    }
-}

@@ -1,0 +1,33 @@
+@mixin before-after {
+    @if $old-ie {
+        &:before, &:after {
+            @content;
+        }
+    } @else {
+        &::before, &::after {
+            @content;
+        }
+    }
+}
+@mixin before {
+    @if $old-ie {
+        &:before {
+            @content;
+        }
+    } @else {
+        &::before {
+            @content;
+        }
+    }
+}
+@mixin after {
+    @if $old-ie {
+        &:after {
+            @content;
+        }
+    } @else {
+        &::after {
+            @content;
+        }
+    }
+}
