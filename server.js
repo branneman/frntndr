@@ -10,7 +10,7 @@ var config  = require(__dirname + '/config.json'),
  * SASS watcher
  */
 var sassCwd  = __dirname + '/src/static/',
-    sassCmd  = 'sass -t ' + config.sassOutputStyle + ' --debug-info --no-cache --watch scss:css',
+    sassCmd  = 'sass -t ' + config.server.sassOutputStyle + ' --debug-info --no-cache --watch scss:css',
     sassProc = exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {});
 process.on('SIGINT', function() {
     sassProc.kill();
