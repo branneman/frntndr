@@ -35,6 +35,7 @@ Done!
 Then point your browser to [localhost:1337](http://localhost:1337/)
 
 ### How to: Build, test and deploy
+Make sure your `node server` is running, then execute:
 
     cd /path/to/project
     grunt
@@ -43,11 +44,11 @@ To run JSHint & Jasmine:
 
     grunt test
 
-After the build, to create a zip:
+*After* the build, to create a zip:
 
     grunt zip
 
-After the build, to upload to an ftp server (you have to update `config.json` and `.ftppass` first):
+*After* the build, to upload to an ftp server (you have to update `config.json` and `.ftppass` first):
 
     grunt deploy
 
