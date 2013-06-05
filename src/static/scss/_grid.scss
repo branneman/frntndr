@@ -1,8 +1,9 @@
 $gutter: 20px;
 
 .wrapper {
-    width: 35em;
-    margin: 4em auto 0;
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
     padding: $gutter;
     @include respond-min(60em) {
         padding: $gutter * 2;
