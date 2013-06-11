@@ -21,22 +21,10 @@ process.on('SIGINT', function() {
  * View configuration
  */
 app.engine('.html', ejs);
+app.engine('.js', ejs);
 app.set('views', __dirname + '/src/');
 app.set('view engine', 'html');
 app.use(express.compress());
-
-/**
- * JavaScript handler
- */
-app.get('/static/js/all.js', function(req, res) {
-    var files = JSON.parse(fs.readFileSync(__dirname + '/src/static/js/all.json')).files,
-        combined = '';
-    for (var i = 0; i < files.length; i++) {
-        combined += fs.readFileSync(__dirname + '/src/static/js/' + files[i]); // 'utf8'
-    }
-    res.setHeader('Content-Type', 'text/javascript');
-    res.send(combined);
-});
 
 /**
  * View & static file handler
@@ -52,6 +40,9 @@ app.use(function (req, res) {
         if (exists) {
             if (file.substr(-5) === '.html') {
                 res.render(file, viewObj);
+            } else if (file.substr(-3) === '.js') {
+                res.setHeader('Content-Type', 'text/javascript; charset=utf-8');
+                res.render(file, viewObj);
             } else {
                 res.sendfile(file);
             }
@@ -66,4 +57,4 @@ app.use(function (req, res) {
  */
 app.listen(config.server.port);
 console.log('Listening on port ' + config.server.port);
-console.log('Use Ctrl+C or SIGINT to exit.');
+console.log('Use Ctrl+C or SIGINT to exit.')
