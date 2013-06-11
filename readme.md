@@ -17,7 +17,7 @@ Or use [Yeoman](http://yeoman.io/), a scaffolding tool which could give you the 
 ### How to: Setup development environment
 Make sure the following is installed on your machine:
 
-- [Node.js](http://nodejs.org/), 0.10.0 or bigger (tested up until 0.10.6)
+- [Node.js](http://nodejs.org/), 0.10.0 or bigger (tested up until 0.10.10)
 - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
 When installed, run these commands to automagically [install Sass](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#using_sass) and all the [node dependencies](https://github.com/branneman/frontend-bootstrap/blob/master/package.json):
