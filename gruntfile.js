@@ -15,6 +15,12 @@ module.exports = function(grunt) {
             dir: {
                 src: ['build/*']
             },
+            emptydirs: {
+                src: ['build/**/*'],
+                filter: function(path) {
+                    return (grunt.file.isDir(path) && fs.readdirSync(path).length === 0);
+                }
+            },
             test: {
                 src: ['.grunt', '_SpecRunner.html']
             },
@@ -137,7 +143,8 @@ module.exports = function(grunt) {
         'sass',
         'copy',
         'uglify',
-        'httpcopy'
+        'httpcopy',
+        'clean:emptydirs'
     ]);
 
     // Test task.
