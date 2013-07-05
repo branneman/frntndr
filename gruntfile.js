@@ -116,7 +116,7 @@ module.exports = function(grunt) {
                 auth: {
                     host: config.build.deploy.host,
                     port: config.build.deploy.port,
-                    authKey: 'dtg'
+                    authKey: 'site'
                 },
                 src: 'build',
                 dest: config.build.deploy.dest,
