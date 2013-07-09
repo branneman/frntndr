@@ -27,6 +27,29 @@ app.set('view engine', 'html');
 app.use(express.compress());
 
 /**
+ * Serve generated PNG from SVG
+ *  generates 'checkmark.svg.107x94.png' from 'checkmark.svg' with Inkscape CLI
+ */
+app.get('/static/img/*.svg.*.png', function(req, res) {
+    var pngFile = 'src' + req.url,
+        svgFile = pngFile.substring(0, pngFile.indexOf('.svg') + 4);
+    if (!fs.existsSync(svgFile)) {
+        return res.render('404', {
+            baseUrl: (new Array(req.url.split('/').length)).join('../')
+        });
+    }
+    if (fs.existsSync(pngFile)) {
+        return res.sendfile(pngFile);
+    }
+    var size = pngFile.split('.')[pngFile.split('.').length - 2].split('x'),
+        cmd  = '"' + config.svg.pathToInkscape + '" -z -e "' + pngFile + '" -w ' + size[0] + ' -h ' + size[1] + ' "' + svgFile + '"';
+    exec(cmd, function(err, stdout) {
+        if (err) throw err;
+        res.sendfile(pngFile);
+    });
+});
+
+/**
  * View & static file handler
  */
 app.use(function (req, res) {
