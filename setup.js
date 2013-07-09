@@ -5,7 +5,7 @@ console.log('Installing dependencies...');
 /**
  * Install Sass
  */
-exec('gem install sass', function(err, stdout, stderr) {
+exec('gem install sass --pre', function(err, stdout, stderr) {
     if (err) {
         console.log(stderr);
     } else {
