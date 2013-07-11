@@ -9,9 +9,26 @@ body {
         font-family: monospace;
     }
 }
+
 a {
     color: $linkblue;
 }
+
 h2 {
     font-size: 1em;
+}
+
+ul {
+    padding-left: 0;
+
+    li {
+        margin-bottom: 5px;
+        padding-left: 40px;
+        list-style: none;
+        background: url('/static/img/arrow-ltr-black.svg') no-repeat 15px 5px;
+
+        @include old-ie {
+            background-image: url('/static/img/arrow-ltr-black.svg.10x15.png');
+        }
+    }
 }

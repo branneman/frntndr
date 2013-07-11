@@ -5,6 +5,7 @@ $gutter: 20px;
     max-width: 500px;
     margin: 0 auto;
     padding: $gutter;
+
     @include respond-min(60em) {
         padding: $gutter * 2;
     }
