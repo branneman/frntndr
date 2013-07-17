@@ -6,7 +6,7 @@ var exec   = require('child_process').exec,
 module.exports = function() {
 
     // Start Sass watcher
-    var sassCwd  = '../src/static/',
+    var sassCwd  = './src/static/',
         sassCmd  = 'sass -t ' + config.server.sassOutputStyle + ' --sourcemap --no-cache --watch scss:css',
         sassProc = exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {});
 
