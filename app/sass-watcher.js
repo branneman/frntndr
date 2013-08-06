@@ -7,7 +7,7 @@ module.exports = function() {
 
     // Start Sass watcher
     var sassCwd  = './src/static/',
-        sassCmd  = 'sass -t ' + config.server.sassOutputStyle + ' --sourcemap --no-cache --watch scss:css',
+        sassCmd  = 'sass -t ' + config.server.sassOutputStyle + ' --sourcemap --watch scss:css',
         sassProc = exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {});
 
     // Exit watcher when node.js is getting killed
