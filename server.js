@@ -12,7 +12,8 @@ var config         = require('./config.json'),
 // Start Sass watcher
 sassWatcher();
 
-// View configuration
+// App & view configuration
+express.static.mime.define({'text/plain': ['map']}); // source maps don't have a mimetype yet
 app.engine('.html', tplEngine);
 app.engine('.js', tplEngine);
 app.set('views', __dirname + '/src/');
