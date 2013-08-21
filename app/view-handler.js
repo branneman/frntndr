@@ -18,7 +18,7 @@ module.exports = function(req, res) {
 
     fs.exists(file, function(exists) {
         if (exists) {
-            if (file.substr(-5) === '.html') {
+            if (file.substr(-5) === '.html' || file.substr(-1) === '/') {
                 res.render(file, viewObj);
             } else if (file.substr(-3) === '.js') {
                 res.setHeader('Content-Type', 'text/javascript; charset=utf-8');
