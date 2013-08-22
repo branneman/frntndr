@@ -61,7 +61,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'build/',
-                    src: ['**/*.js'],
+                    src: ['**/*.js', '!**/js/vendor/**'],
                     dest: 'build/'
                 }]
             }
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**/*.{html,js}', '!**/layout/**', '!**/components/**', '!**/js/spec/**'],
+                    src: ['**/*.{html,js}', '!**/layout/**', '!**/components/**', '!**/js/**/_*.js', '!**/js/spec/**'],
                     dest: 'build/'
                 }]
             }
@@ -142,8 +142,8 @@ module.exports = function(grunt) {
         'clean:dir',
         'sass',
         'copy',
-        'uglify',
         'httpcopy',
+        'uglify',
         'clean:emptydirs'
     ]);
 
