@@ -1,16 +1,23 @@
-var exec = require('child_process').exec;
+var exec = require('child_process').exec,
+    existsInPath = require('node-fs-exists-in-path');
 
 console.log('Installing dependencies...');
 
 /**
  * Install Sass
  */
-exec('gem install sass --pre', function(err, stdout, stderr) {
-    if (err) {
-        console.log(stderr);
+existsInPath('sass', function(exists) {
+    if (exists) {
+        console.log('Sass seems to be already installed, skipping installation.');
     } else {
-        exec('sass -v', function(err, stdout, stderr) {
-            console.log(stdout.replace(/\s+$/, '') + ' successfully installed.');
+        exec('gem install sass --pre', function(err, stdout, stderr) {
+            if (err) {
+                console.log(stderr);
+            } else {
+                exec('sass -v', function(err, stdout, stderr) {
+                    console.log(stdout.replace(/\s+$/, '') + ' successfully installed.');
+                });
+            }
         });
     }
 });
@@ -18,6 +25,12 @@ exec('gem install sass --pre', function(err, stdout, stderr) {
 /**
  * Install Grunt CLI
  */
-exec('npm i -g grunt-cli', function(err, stdout, stderr) {
-    console.log(err ? stderr : 'Grunt CLI successfully installed.');
+existsInPath('grunt', function(exists) {
+    if (exists) {
+        console.log('grunt-cli seems to be already globally installed, skipping installation.');
+    } else {
+        exec('npm i -g grunt-cli', function(err, stdout, stderr) {
+            console.log(err ? stderr : 'Grunt CLI successfully installed.');
+        });
+    }
 });
