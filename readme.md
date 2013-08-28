@@ -34,6 +34,19 @@ Done!
 
 Then point your browser to [localhost:1337](http://localhost:1337/)
 
+### How to: Start automatic page reload for your dev environment
+
+    You might need to install the LiveReload plugin (http://livereload.com/) in your browser or add the following rules to every webpage:
+
+    <script>
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>');
+    </script>
+
+    Then do the following:
+
+    cd /path/to/project
+    grunt watch (the server has to be running of course)
+
 ### How to: Build, test and deploy
 Make sure your `node server` is running, then execute:
 
