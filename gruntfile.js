@@ -56,6 +56,38 @@ module.exports = function(grunt) {
             }
         },
 
+        // 'optimizationLevel' is only applied to PNG files (not JPG)
+        imagemin: {
+            png: {
+                options: {
+                    optimizationLevel: 7
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/static/img/',
+                        src: ['**/*.png'],
+                        dest: 'build/static/img/',
+                        ext: '.png'
+                    }
+                ]
+            },
+            jpg: {
+                options: {
+                    progressive: true
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/static/img/',
+                        src: ['**/*.jpg'],
+                        dest: 'build/static/img/',
+                        ext: '.jpg'
+                    }
+                ]
+            }
+        },
+
         uglify: {
             dist: {
                 files: [{
@@ -136,12 +168,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-ftp-deploy');
     grunt.loadNpmTasks('grunt-httpcopy');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 
     // Default task
     grunt.registerTask('default', [
         'clean:dir',
         'sass',
         'copy',
+        'imagemin',
         'httpcopy',
         'uglify',
         'clean:emptydirs'
