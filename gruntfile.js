@@ -56,38 +56,6 @@ module.exports = function(grunt) {
             }
         },
 
-        // 'optimizationLevel' is only applied to PNG files (not JPG)
-        imagemin: {
-            png: {
-                options: {
-                    optimizationLevel: 7
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'src/static/img/',
-                        src: ['**/*.png'],
-                        dest: 'build/static/img/',
-                        ext: '.png'
-                    }
-                ]
-            },
-            jpg: {
-                options: {
-                    progressive: true
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'src/static/img/',
-                        src: ['**/*.jpg'],
-                        dest: 'build/static/img/',
-                        ext: '.jpg'
-                    }
-                ]
-            }
-        },
-
         uglify: {
             dist: {
                 files: [{
@@ -130,10 +98,6 @@ module.exports = function(grunt) {
                 options: {
                     vendor: 'src/static/js/vendor/*.js',
                     specs: 'src/static/js/spec/*.js'
-                    /* FYI possibiliy to load a specific template with the test */
-                    //template: 'src/static/js/spec/templates/transavia.tmpl',
-                    //keepRunner: false,
-                    //helpers: 'src/static/js/spec/helpers/*.js'
                 }
             }
         },
@@ -158,17 +122,6 @@ module.exports = function(grunt) {
                 dest: config.build.deploy.dest,
                 exclusions: ['**/.DS_Store', '**/Thumbs.db', '**/.gitignore']
             }
-        },
-
-        watch: {
-            livereload: {
-                options: {
-                    livereload: 35729
-                },
-                files: [
-                    'src/**/*.*'
-                ]
-            }
         }
 
     });
@@ -183,15 +136,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-ftp-deploy');
     grunt.loadNpmTasks('grunt-httpcopy');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task
     grunt.registerTask('default', [
         'clean:dir',
         'sass',
         'copy',
-        'imagemin',
         'httpcopy',
         'uglify',
         'clean:emptydirs'
@@ -214,18 +164,5 @@ module.exports = function(grunt) {
     grunt.registerTask('deploy', [
         'ftp-deploy'
     ]);
-
-    grunt.registerTask('server', function (target) {
-        if (target === 'dist') {
-            return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
-        }
-
-        grunt.task.run([
-            'clean:server',
-            'connect:livereload',
-            'notify:watch',
-            'watch'
-        ]);
-    });
 
 };

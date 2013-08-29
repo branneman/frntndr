@@ -33,8 +33,6 @@
     "grunt-contrib-jasmine": "~0.5.1",
     "grunt-httpcopy": "~0.2.0",
     "grunt-ftp-deploy": "0.0.9",
-    "jsonminify": "~0.1.1",
-    "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-imagemin": "~0.1.4"
+    "jsonminify": "~0.1.1"
   }
 }
