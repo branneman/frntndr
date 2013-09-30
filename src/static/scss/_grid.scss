@@ -1,12 +1,13 @@
 $gutter: 20px;
 
 .wrapper {
+    @include rem(max-width, 500px);
     width: 90%;
-    max-width: 500px;
+
     margin: 0 auto;
-    padding: $gutter;
+    @include rem(padding, $gutter);
 
     @include respond-min(60em) {
-        padding: $gutter * 2;
+        @include rem(padding, $gutter * 2);
     }
 }

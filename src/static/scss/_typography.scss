@@ -1,8 +1,11 @@
 $bodycopy: #333;
 $linkblue: royalblue;
 
+html {
+    font-size: 10px;
+}
 body {
-    font-size: 18px;
+    @include rem(font-size, 18px);
     color: $bodycopy;
     font-family: Constantia, Baskerville, Georgia, serif;
     @include old-ie {
@@ -15,17 +18,18 @@ a {
 }
 
 h2 {
-    font-size: 1em;
+    @include rem(font-size, 16px);
 }
 
 ul {
     padding-left: 0;
 
     li {
-        margin-bottom: 5px;
-        padding-left: 40px;
+        @include rem(margin-bottom, 5px);
+        @include rem(padding-left, 40px);
         list-style: none;
-        background: url('/static/img/arrow-ltr-black.svg') no-repeat 15px 5px;
+
+        background: url('/static/img/arrow-ltr-black.svg') no-repeat rem(15px 5px);
 
         @include old-ie {
             background-image: url('/static/img/arrow-ltr-black.svg.10x15.png');

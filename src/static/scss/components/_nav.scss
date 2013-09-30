@@ -1,4 +1,6 @@
 nav {
-    padding-bottom: 1em;
-    border-bottom: 1px solid $linkblue;
+    @include rem(padding-bottom, 16px);
+
+    border-bottom: solid $linkblue;
+    @include rem(border-bottom-width, 1px);
 }
