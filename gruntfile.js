@@ -50,13 +50,12 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**', '!**/*.{html,js}', '!**/layout/**', '!**/components/**', '!**/static/scss/**'],
+                    src: ['**', '!**/*.{html,js}', '!**/layout/**', '!**/modules/**', '!**/static/scss/**'],
                     dest: 'build'
                 }]
             }
         },
 
-        // 'optimizationLevel' is only applied to PNG files (not JPG)
         imagemin: {
             png: {
                 options: {
@@ -110,7 +109,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**/*.{html,js}', '!**/layout/**', '!**/components/**', '!**/js/**/_*.js', '!**/js/spec/**'],
+                    src: ['**/*.{html,js}', '!**/layout/**', '!**/modules/**', '!**/js/**/_*.js', '!**/js/spec/**'],
                     dest: 'build/'
                 }]
             }
