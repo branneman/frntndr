@@ -29,19 +29,55 @@ module.exports = function(grunt) {
             }
         },
 
+        watch: {
+            scss: {
+                files: ['src/static/scss/**/*.scss'],
+                tasks: ['sass:dev', 'autoprefixer'],
+                options: {
+                    spawn: false
+                }
+            }
+        },
+
         sass: {
-            options: {
-                style: 'compressed',
-                noCache: true
-            },
-            dist: {
+            dev: {
+                options: {
+                    style: 'expanded',
+                    sourcemap: true,
+                    trace: true
+                },
                 files: [{
                     expand: true,
                     cwd: 'src/static/scss/',
                     src: ['**/*.scss', '!**/_*.scss'],
-                    dest: 'src/static/css/',
+                    dest: 'src/static/_css/',
                     ext: '.css'
                 }]
+            },
+            prod: {
+                options: {
+                    style: 'compressed',
+                    noCache: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/static/scss/',
+                    src: ['**/*.scss', '!**/_*.scss'],
+                    dest: 'src/static/_css/',
+                    ext: '.css'
+                }]
+            }
+        },
+
+        autoprefixer: {
+            options: {
+                browsers: config.server.sassBrowsers
+            },
+            dist: {
+                expand: true,
+                flatten: true,
+                src: 'src/static/_css/*.css',
+                dest: 'src/static/css/'
             }
         },
 
@@ -50,7 +86,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**', '!**/*.{html,js}', '!**/layout/**', '!**/modules/**', '!**/static/scss/**'],
+                    src: ['**', '!**/*.{html,js}', '!**/layout/**', '!**/modules/**', '!**/static/{_css,scss}/**', '!**/static/css/*.map'],
                     dest: 'build'
                 }]
             }
@@ -165,14 +201,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-ftp-deploy');
-    grunt.loadNpmTasks('grunt-httpcopy');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-httpcopy');
+    grunt.loadNpmTasks('grunt-ftp-deploy');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     // Default task
     grunt.registerTask('default', [
         'clean:dir',
-        'sass',
+        'sass:prod',
+        'autoprefixer',
         'copy',
         'imagemin',
         'httpcopy',
@@ -180,8 +219,16 @@ module.exports = function(grunt) {
         'clean:emptydirs'
     ]);
 
+    // Watch task.
+    grunt.registerTask('watcher', [
+        'sass:dev',
+        'autoprefixer',
+        'watch'
+    ]);
+
     // Test task.
     grunt.registerTask('test', [
+        //'csslint',
         'jshint',
         'jasmine',
         'clean:test'

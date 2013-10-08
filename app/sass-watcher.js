@@ -1,18 +1,15 @@
 'use strict';
 
-var exec   = require('child_process').exec,
-    config = require('../config.json');
+var exec = require('child_process').exec;
 
 module.exports = function() {
 
-    // Start Sass watcher
-    var sassCwd  = './src/static/',
-        sassCmd  = 'sass -t ' + config.server.sassOutputStyle + ' --sourcemap --watch scss:css',
-        sassProc = exec(sassCmd, {cwd: sassCwd}, function(err, stdout, stderr) {});
+    // Start grunt watcher (which in turn starts sass watcher, csslint and autoprefixer)
+    var sassProcess = exec('grunt watcher', function(err, stdout, stderr) {});
 
     // Exit watcher when node.js is getting killed
     process.on('SIGINT', function() {
-        sassProc.kill();
+        sassProcess.kill();
         process.exit();
     });
 
