@@ -15,6 +15,9 @@ module.exports = function(grunt) {
             dir: {
                 src: ['build/*']
             },
+            sass: {
+                src: ['src/static/_css']
+            },
             emptydirs: {
                 src: ['build/**/*'],
                 filter: function(path) {
@@ -32,7 +35,7 @@ module.exports = function(grunt) {
         watch: {
             scss: {
                 files: ['src/static/scss/**/*.scss'],
-                tasks: ['sass:dev', 'autoprefixer'],
+                tasks: ['sass:dev', 'autoprefixer', 'clean:sass'],
                 options: {
                     spawn: false
                 }
@@ -223,6 +226,7 @@ module.exports = function(grunt) {
     grunt.registerTask('watcher', [
         'sass:dev',
         'autoprefixer',
+        'clean:sass',
         'watch'
     ]);
 

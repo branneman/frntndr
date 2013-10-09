@@ -2,7 +2,7 @@ $bodycopy: #333;
 $linkblue: royalblue;
 
 html {
-    font-size: 10px;
+    font-size: 62.5%;
 }
 body {
     @include rem(font-size, 18px);
