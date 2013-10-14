@@ -23,7 +23,7 @@ Alternatively you can use [Yeoman](http://yeoman.io/), a great scaffolding tool 
 ### How to: Setup development environment
 Make sure the following is installed on your machine:
 
-- [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.17)
+- [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.20)
 - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
 When installed, run these commands to setup your environment. It will [install Sass](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#using_sass) and the [grunt cli](https://github.com/gruntjs/grunt-cli) when they're not found. And of course it also installs all the [node dependencies](https://github.com/branneman/frontend-library/blob/master/package.json):
