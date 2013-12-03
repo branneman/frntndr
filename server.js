@@ -19,11 +19,17 @@ app.set('views', __dirname + '/src/');
 app.set('view engine', 'html');
 app.set('view cache', false);
 app.use(express.compress());
+app.use(function(req, res, next) { req.app = app; next(); });
 
-// Bind request handles
+// Set request handlers with Express
 app.get('/static/img/*.svg.*.png', requestHandlers.svg2png);
-//app.get('/docs/*.html', requestHandlers.docs);
-app.use(requestHandlers.views.bind({app: app}));
+app.get('/docs/', requestHandlers.docs.index);
+app.get('/docs/modules/:name', requestHandlers.docs.module);
+app.get('/docs/pages/:name', requestHandlers.docs.page);
+app.get('/static/js/*.js', requestHandlers.concatJS);
+app.get('/static/*', requestHandlers.static);
+app.use(requestHandlers.views);
+app.use(requestHandlers.page404);
 
 // Start server
 app.listen(config.server.port);

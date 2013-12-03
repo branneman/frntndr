@@ -1,33 +1,21 @@
 /**
- * Views & static file request handler
+ * Views request handler
  */
 
-var fs     = require('fs'),
-    url    = require('url'),
-    ansi   = require('ansi-styles'),
-    config = require('../../config.json');
+var fs  = require('fs'),
+    url = require('url');
 
-module.exports = function viewsRequestHandler(req, res) {
+module.exports = function viewsRequestHandler(req, res, next) {
 
-    var app      = this.app,
-        pathname = url.parse(req.url).pathname.substr(1),
-        file     = app.get('views') + '/' + (pathname || 'index.html'),
-        baseUrl  = new Array(pathname.split('/').length).join('../'),
-        viewObj  = { baseUrl: baseUrl, req: req };
+    var pathname  = url.parse(req.url).pathname.substr(1),
+        file      = req.app.get('views') + '/' + (pathname || 'index.html'),
+        baseUrl   = new Array(pathname.split('/').length).join('../'),
+        viewObj   = { baseUrl: baseUrl, req: req },
+        validPath = file.substr(-5) === '.html' || file.substr(-1) === '/';
 
-    fs.exists(file, function fsExists(exists) {
-        if (exists) {
-            if (file.substr(-5) === '.html' || file.substr(-1) === '/') {
-                res.render(file, viewObj);
-            } else if (file.substr(-3) === '.js') {
-                res.setHeader('Content-Type', 'text/javascript; charset=utf-8');
-                res.render(file, viewObj);
-            } else {
-                res.sendfile(file);
-            }
-        } else {
-            console.log(ansi.red[0] + '404 Not Found: /' + pathname, ansi.red[1]);
-            res.status(404).render(app.get('views') + config.server.page404, viewObj);
-        }
-    });
+    if (validPath && fs.existsSync(file)) {
+        res.render(file, viewObj);
+    } else {
+        next();
+    }
 };
