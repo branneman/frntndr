@@ -1,6 +1,12 @@
+//
+// Colors
+//
 $bodycopy: #333;
 $linkblue: royalblue;
 
+//
+// Defaults
+//
 html {
     font-size: 62.5%;
 }
@@ -12,15 +18,39 @@ body > .wrapper { // quick fix for chrome bugs #320754, #296380, #319623, just '
         font-family: monospace;
     }
 }
+p {
+    margin-top: 0;
+}
 
+//
+// Headers
+//
+h1,
+h2 {
+    @include rem(margin-bottom, 10px);
+}
+h1 {
+    @include rem(font-size, 24px);
+}
+h2 {
+    @include rem(font-size, 20px);
+}
+
+//
+// Links
+//
 a {
     color: $linkblue;
+    text-decoration: none;
+}
+a:hover,
+a:focus {
+    text-decoration: underline;
 }
 
-h2 {
-    @include rem(font-size, 16px);
-}
-
+//
+// Lists
+//
 ul {
     padding-left: 0;
 
