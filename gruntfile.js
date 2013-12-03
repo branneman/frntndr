@@ -1,10 +1,10 @@
 var fs = require('fs');
 JSON.minify = require('jsonminify');
 
-module.exports = function(grunt) {
+module.exports = function Gruntfile(grunt) {
 
-    var pkg     = grunt.file.readJSON('package.json'),
-        config  = grunt.file.readJSON('config.json');
+    var pkg    = grunt.file.readJSON('package.json'),
+        config = grunt.file.readJSON('config.json');
 
     // Project configuration.
     grunt.initConfig({
@@ -80,6 +80,19 @@ module.exports = function(grunt) {
                 flatten: true,
                 src: 'src/static/_css/*.css',
                 dest: 'src/static/css/'
+            }
+        },
+
+        csso: {
+            options: {
+                restructure: false,
+                report: 'min'
+            },
+            dist: {
+                files: {
+                    'src/static/css/all.css': ['src/static/css/all.css'],
+                    'src/static/css/all-oldie.css': ['src/static/css/all-oldie.css']
+                }
             }
         },
 
@@ -208,16 +221,18 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-httpcopy');
     grunt.loadNpmTasks('grunt-ftp-deploy');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-csso');
 
     // Default task
     grunt.registerTask('default', [
         'clean:dir',
         'sass:prod',
         'autoprefixer',
+        'csso',
         'copy',
         'imagemin',
         'httpcopy',
-        'uglify',
+        //'uglify',
         'clean:emptydirs'
     ]);
 
