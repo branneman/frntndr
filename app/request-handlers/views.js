@@ -4,6 +4,7 @@
 
 var fs     = require('fs'),
     url    = require('url'),
+    ansi   = require('ansi-styles'),
     config = require('../../config.json');
 
 module.exports = function viewsRequestHandler(req, res) {
@@ -25,6 +26,7 @@ module.exports = function viewsRequestHandler(req, res) {
                 res.sendfile(file);
             }
         } else {
+            console.log(ansi.red[0] + '404 Not Found: /' + pathname, ansi.red[1]);
             res.status(404).render(app.get('views') + config.server.page404, viewObj);
         }
     });
