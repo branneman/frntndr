@@ -29,8 +29,8 @@ ul {
         @include rem(padding-left, 40px);
         list-style: none;
 
-        background: url('/static/img/arrow-ltr-black.svg') no-repeat rem(15px 5px);
-
+        // Example of a SVG-PNG fallback
+        @include rem(background, url('/static/img/arrow-ltr-black.svg') no-repeat 15px 5px);
         @include old-ie {
             background-image: url('/static/img/arrow-ltr-black.svg.10x15.png');
         }
