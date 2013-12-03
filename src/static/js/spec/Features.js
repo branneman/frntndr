@@ -1,4 +1,6 @@
 describe('Features', function() {
+    'use strict';
+
     it('must have a window.features object', function() {
         expect(window.features).toBeDefined();
     });
