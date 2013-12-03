@@ -13,8 +13,7 @@ tools, but should be usable by novices.
 ## Features
 - Setup is *really* easy, you only need to install Node.js, configuration like setting up Apache is not necessary
 - The Sass watcher is automatically started, you don't have to worry about it anymore
-- [EJS](http://embeddedjs.com/) is used as a template engine where your HTML lives, it's basically JavaScript between
-these tags: `<% %>`
+- [Swig](http://paularmstrong.github.io/swig/) is used as a template engine where your HTML lives
 - Sass with the scss syntax makes your CSS3 code valid Sass. You can start writing Sass at will, or just write CSS3 but
 still have minification
 - Grunt is integrated as the preferred build tool, just run `grunt` in your project root to run the build.
