@@ -46,7 +46,6 @@ module.exports = function(grunt) {
             dev: {
                 options: {
                     style: 'expanded',
-                    sourcemap: true,
                     trace: true
                 },
                 files: [{
