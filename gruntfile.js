@@ -232,7 +232,7 @@ module.exports = function Gruntfile(grunt) {
         'copy',
         'imagemin',
         'httpcopy',
-        //'uglify',
+        'uglify',
         'clean:emptydirs'
     ]);
 
@@ -246,7 +246,6 @@ module.exports = function Gruntfile(grunt) {
 
     // Test task.
     grunt.registerTask('test', [
-        //'csslint',
         'jshint',
         'jasmine',
         'clean:test'
