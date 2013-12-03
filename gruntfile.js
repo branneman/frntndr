@@ -117,8 +117,7 @@ module.exports = function Gruntfile(grunt) {
                         expand: true,
                         cwd: 'src/static/img/',
                         src: ['**/*.png'],
-                        dest: 'build/static/img/',
-                        ext: '.png'
+                        dest: 'build/static/img/'
                     }
                 ]
             },
@@ -131,8 +130,7 @@ module.exports = function Gruntfile(grunt) {
                         expand: true,
                         cwd: 'src/static/img/',
                         src: ['**/*.jpg'],
-                        dest: 'build/static/img/',
-                        ext: '.jpg'
+                        dest: 'build/static/img/'
                     }
                 ]
             }
@@ -194,7 +192,7 @@ module.exports = function Gruntfile(grunt) {
         },
 
         'ftp-deploy': {
-            build: {
+            dist: {
                 auth: {
                     host: config.build.deploy.host,
                     port: config.build.deploy.port,
