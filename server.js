@@ -1,7 +1,7 @@
 // Load external dependencies
-var express   = require('express'),
-    tplEngine = require('ejs-locals'),
-    app       = express();
+var express = require('express'),
+    swig    = require('swig'),
+    app     = express();
 
 // Load app dependencies
 var config          = require('./config.json'),
@@ -12,10 +12,12 @@ var config          = require('./config.json'),
 gruntWatcher();
 
 // App & view configuration
-app.engine('.html', tplEngine);
-app.engine('.js', tplEngine);
+swig.setDefaults({cache: false});
+app.engine('.html', swig.renderFile);
+app.engine('.js', swig.renderFile);
 app.set('views', __dirname + '/src/');
 app.set('view engine', 'html');
+app.set('view cache', false);
 app.use(express.compress());
 
 // Bind request handles
