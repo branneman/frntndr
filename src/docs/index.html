@@ -1,1 +1,6 @@
-<p>Index!</p>
+<p>Documentation Index!</p>
+<ul>
+    {% for module in modules %}
+        <li><a href="modules/{{ module }}">{{ module }}</a></li>
+    {% endfor %}
+</ul>

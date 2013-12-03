@@ -4,6 +4,7 @@
 
 var fs   = require('fs'),
     path = require('path'),
+    glob = require('glob'),
     swig = require('swig');
 
 module.exports = {
@@ -12,8 +13,11 @@ module.exports = {
      * Generates the Documentation Index page
      */
     index: function docsIndexRequestHandler(req, res) {
-        // 1. collect a list of modules
-        // 2. render: /src/docs/index.html
+        res.render('../src/docs/index.html', {
+            modules: glob.sync('src/modules/**/*.html').map(function(value) {
+                return path.basename(value);
+            })
+        });
     },
 
     /**
