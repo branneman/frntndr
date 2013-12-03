@@ -4,27 +4,24 @@ var express   = require('express'),
     app       = express();
 
 // Load app dependencies
-var config         = require('./config.json'),
-    sassWatcher    = require('./app/sass-watcher'),
-    svg2pngHandler = require('./app/svg2png-handler'),
-    viewHandler    = require('./app/view-handler').bind({app: app});
+var config          = require('./config.json'),
+    gruntWatcher    = require('./app/grunt-watcher'),
+    requestHandlers = require('./app/request-handlers');
 
-// Start Sass watcher
-sassWatcher();
+// Start Grunt watcher, for Sass & Autoprefixer
+gruntWatcher();
 
 // App & view configuration
-express.static.mime.define({'text/plain': ['map']}); // source maps don't have a mimetype yet
 app.engine('.html', tplEngine);
 app.engine('.js', tplEngine);
 app.set('views', __dirname + '/src/');
 app.set('view engine', 'html');
 app.use(express.compress());
 
-// Serve generated PNG from SVG
-app.get('/static/img/*.svg.*.png', svg2pngHandler);
-
-// View & static file handler
-app.use(viewHandler);
+// Bind request handles
+app.get('/static/img/*.svg.*.png', requestHandlers.svg2png);
+//app.get('/docs/*.html', requestHandlers.docs);
+app.use(requestHandlers.views.bind({app: app}));
 
 // Start server
 app.listen(config.server.port);

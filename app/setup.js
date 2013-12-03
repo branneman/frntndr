@@ -1,7 +1,7 @@
 var exec = require('child_process').exec,
     existsInPath = require('node-fs-exists-in-path');
 
-console.log('Installing dependencies...');
+console.log('Installing Sass and Grunt CLI. This will take a while!');
 
 /**
  * Install Sass
