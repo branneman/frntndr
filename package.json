@@ -1,7 +1,7 @@
 {
   "name": "front-end-library",
   "description": "",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/branneman/frontend-library.git"
@@ -25,7 +25,8 @@
     "express": "~3.4.6",
     "swig": "~1.2.2",
     "ansi-styles": "~0.2.0",
-    "glob": "~3.2.7"
+    "glob": "~3.2.7",
+    "underscore": "~1.5.2"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

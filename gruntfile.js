@@ -91,7 +91,8 @@ module.exports = function Gruntfile(grunt) {
             dist: {
                 files: {
                     'src/static/css/all.css': ['src/static/css/all.css'],
-                    'src/static/css/all-oldie.css': ['src/static/css/all-oldie.css']
+                    'src/static/css/all-oldie.css': ['src/static/css/all-oldie.css'],
+                    'src/static/css/github.css': ['src/static/css/github.css']
                 }
             }
         },
