@@ -59,7 +59,7 @@ module.exports = {
      * Generates the content of the module page for a single module
      *  For use inside an <iframe>
      */
-    _module: function docsModuleRequestHandler(req, res, next) {
+    _module: function docsModuleIframeRequestHandler(req, res, next) {
 
         var file = 'src/modules/' + path.basename(req.path);
 
