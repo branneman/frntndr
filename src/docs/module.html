@@ -7,18 +7,37 @@
     <title>Module: {{ title }}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ baseUrl }}static/css/github.css">
+    <link rel="stylesheet" href="{{ baseUrl }}static/css/docs.css">
+    <link href="{{ baseUrl }}static/img/icon/favicon.ico" rel="shortcut icon" type="image/x-icon">
 </head>
 <body>
 
     <div class="wrapper">
         <h1>Documentation</h1>
+        <nav>&laquo; <a href="{{ baseUrl }}docs/">Modules</a></nav>
 
         <h2>Module: {{ title }}</h2>
         <p>{{ description }}</p>
 
         <h3>Demo</h3>
-        <iframe src="{{ uri }}" style="resize:both;"></iframe>
+        <div class="resizable-demo">
+            <div class="controls">
+                <div class="inactive">
+                    &raquo; <button class="open">Open RWD Resizor 5000</button>
+                </div>
+                <div class="active">
+                    <button class="size icon-phone-portrait" data-width="320" data-height="480">Phone portrait</button>
+                    <button class="size icon-phone-landscape" data-width="480" data-height="320">Phone landscape</button>
+                    <button class="size icon-tablet-portrait" data-width="768" data-height="1024">Tablet portrait</button>
+                    <button class="size icon-tablet-landscape" data-width="1024" data-height="768">Tablet landscape</button>
+                    <button class="size max" data-width="auto" data-height="auto">max</button>
+                    <button class="close">Close</button>
+                </div>
+            </div>
+            <div class="resizable">
+                <iframe src="{{ uri }}"></iframe>
+            </div>
+        </div>
 
         <h3>Code</h3>
         <p>&hellip;</p>
@@ -26,6 +45,6 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="{{ baseUrl }}static/js/vendor/jquery-2.0.3.min.js"><\/script>')</script>
-    <script src="{{ baseUrl }}static/js/all.js"></script>
+    <script src="{{ baseUrl }}static/js/docs.js"></script>
 </body>
 </html>
