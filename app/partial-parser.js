@@ -20,7 +20,7 @@ module.exports.parse = function(source) {
 
 };
 
-var allowedProperties = ['title', 'description'],
+var allowedProperties = ['title', 'description', 'parent'],
     allowedFiles      = ['html', 'js', 'scss'];
 
 /**

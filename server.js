@@ -24,8 +24,8 @@ app.use(function(req, res, next) { req.app = app; next(); });
 // Set request handlers with Express
 app.get('/static/img/*.svg.*.png', requestHandlers.svg2png);
 app.get('/docs/', requestHandlers.docs.index);
-app.get('/docs/modules/:name', requestHandlers.docs.module);
-app.get('/docs/_modules/:name', requestHandlers.docs._module);
+app.get(/\/docs\/modules\/(.*)/, requestHandlers.docs.module);
+app.get(/\/docs\/_modules\/(.*)/, requestHandlers.docs._module);
 app.get('/static/js/*.js', requestHandlers.concatJS);
 app.get('/static/*', requestHandlers.static);
 app.use(requestHandlers.views);

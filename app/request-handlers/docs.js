@@ -24,7 +24,7 @@ module.exports = {
 
         // Grab all .html files inside modules
         var modules = glob.sync('src/modules/**/*.html').map(function(file) {
-            return path.basename(file);
+            return path.relative('src/modules/', file);
         });
 
         // Filter out the modules without a docblock
@@ -37,7 +37,7 @@ module.exports = {
         modules = modules.map(function(file) {
             var source     = fs.readFileSync('src/modules/' + file).toString(),
                 properties = PartialParser.parse(source);
-            properties.file = file;
+            properties.file = file.replace(/\\/g, '/');
             return properties;
         });
 
@@ -52,23 +52,24 @@ module.exports = {
      */
     module: function docsModuleRequestHandler(req, res, next) {
 
-        var file = 'src/modules/' + path.basename(req.path);
+        var file = 'src/modules/' + req.params[0];
 
         if (!fs.existsSync(file)) {
             return next();
         }
 
+        var pathname = url.parse(req.url).pathname.substr(1),
+            baseUrl  = new Array(pathname.split('/').length).join('../');
+
         var source     = fs.readFileSync(file).toString(),
             properties = PartialParser.parse(source);
 
         properties = properties || {};
-        properties.uri = '../_modules/' + path.basename(req.path);
+        properties.uri = baseUrl + 'docs/_modules/' + req.params[0];
 
         highlighter(properties);
 
-        var pathname = url.parse(req.url).pathname.substr(1),
-            baseUrl  = new Array(pathname.split('/').length).join('../'),
-            viewObj  = _.extend({baseUrl: baseUrl}, properties);
+        var viewObj  = _.extend({baseUrl: baseUrl}, properties);
 
         res.render('../src/docs/module.html', viewObj);
     },
@@ -79,7 +80,7 @@ module.exports = {
      */
     _module: function docsModuleIframeRequestHandler(req, res, next) {
 
-        var file = 'src/modules/' + path.basename(req.path);
+        var file = 'src/modules/' + req.params[0];
 
         if (!fs.existsSync(file)) {
             return next();
@@ -88,7 +89,7 @@ module.exports = {
         var pathname = url.parse(req.url).pathname.substr(1),
             baseUrl  = new Array(pathname.split('/').length).join('../'),
             content  = fs.readFileSync(file).toString(),
-            template = '{% extends \'../layout/docs/framed.html\' %}{% block demo %}' + content + '{% endblock %}',
+            template = '{% extends \'' + baseUrl + 'src/layout/docs/framed.html\' %}{% block demo %}' + content + '{% endblock %}',
             html     = swig.render(template, {
                 filename: file,
                 locals: {baseUrl: baseUrl}
