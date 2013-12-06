@@ -20,10 +20,26 @@ module.exports = {
     index: function docsIndexRequestHandler(req, res) {
 
         var pathname = url.parse(req.url).pathname.substr(1),
-            baseUrl  = new Array(pathname.split('/').length).join('../'),
-            modules  = glob.sync('src/modules/**/*.html').map(function(value) {
-                return path.basename(value);
-            });
+            baseUrl  = new Array(pathname.split('/').length).join('../');
+
+        // Grab all .html files inside modules
+        var modules = glob.sync('src/modules/**/*.html').map(function(file) {
+            return path.basename(file);
+        });
+
+        // Filter out the modules without a docblock
+        modules = modules.filter(function(file) {
+            var source = fs.readFileSync('src/modules/' + file).toString();
+            return PartialParser.hasDocBlock(source);
+        });
+
+        // Read the docblock and grab it's properties
+        modules = modules.map(function(file) {
+            var source     = fs.readFileSync('src/modules/' + file).toString(),
+                properties = PartialParser.parse(source);
+            properties.file = file;
+            return properties;
+        });
 
         res.render('../src/docs/index.html', {
             modules: modules,
@@ -43,7 +59,7 @@ module.exports = {
         }
 
         var source     = fs.readFileSync(file).toString(),
-            properties = PartialParser(source);
+            properties = PartialParser.parse(source);
 
         properties = properties || {};
         properties.uri = '../_modules/' + path.basename(req.path);

@@ -1,8 +1,14 @@
 /**
+ * Returns true if there's a Swig comment block with variables present
+ */
+module.exports.hasDocBlock = function(source) {
+    return !! getDocBlock(source);
+};
+
+/**
  * Parses a Swig comment block with variables
  */
-
-module.exports = function(source) {
+module.exports.parse = function(source) {
 
     var docblock = getDocBlock(source);
     if (!docblock) return false;
