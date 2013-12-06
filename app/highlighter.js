@@ -28,6 +28,12 @@ module.exports = function(properties) {
             var code   = fs.readFileSync(filename).toString(),
                 langID = getHighlightJSLanguage(file.lang);
 
+            // Remove dockblock from html
+            if (file.lang === 'html') {
+                code = code.replace(/{#([^#}]*)#}\s*/, '');
+            }
+
+            // Augment properties.files
             properties.files[index].filename = {
                 relative: getPrettyRelativeFilename(filename),
                 absolute: getPrettyAbsoluteFilename(filename)
