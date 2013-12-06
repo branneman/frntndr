@@ -8,19 +8,20 @@ $(function ResizableDemo() {
 
     // Open Resizable Demo
     $('.controls .open', $resizableDemo).on('click', function() {
+        resetStyles();
         $resizableDemo.addClass('fullscreen');
     });
 
     // Close Resizable Demo
     $('.controls .close', $resizableDemo).on('click', function() {
+        resetStyles();
         $resizableDemo.removeClass('fullscreen');
     });
 
     // Resize demo
     $('.controls .active button:not(.close)', $resizableDemo).on('click', function() {
+        resetStyles();
         var styles = {
-            left: '',
-            'margin-left': '',
             width: $(this).attr('data-width'),
             height: $(this).attr('data-height')
         };
@@ -30,5 +31,14 @@ $(function ResizableDemo() {
         }
         $resizable.css(styles);
     });
+
+    var resetStyles = function() {
+        $resizable.css({
+            left: '',
+            'margin-left': '',
+            width: '',
+            height: ''
+        });
+    };
 
 }());
