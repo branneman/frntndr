@@ -7,3 +7,20 @@ a:focus,
 a:hover {
     text-decoration: underline;
 }
+
+.filename {
+    margin-bottom: 0;
+    font-weight: normal;
+
+    .file,
+    .language {
+        font-weight: bold;
+    }
+    .language {
+        float: right;
+        color: #ccc;
+    }
+}
+.highlighted {
+    margin-top: 0px;
+}

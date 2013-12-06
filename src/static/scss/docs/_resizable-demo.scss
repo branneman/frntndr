@@ -88,11 +88,16 @@
     }
 
     .inactive {
-        margin-bottom: 10px;
+        position: relative;
+        float: right;
+        margin: -35px 0 10px;
+        z-index: 2;
+
         .open {
             color: #4183C4;
         }
     }
+
     .active {
         display: none;
     }

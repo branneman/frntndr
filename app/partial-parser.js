@@ -2,69 +2,55 @@
  * Parses a Swig comment block with variables
  */
 
-module.exports = {
+module.exports = function(source) {
 
-    _properties: ['title', 'description', 'js', 'css'],
+    var docblock = getDocBlock(source);
+    if (!docblock) return false;
 
-    parse: function (html) {
-        var result = html.match(new RegExp('{#[ \r\n\t]*(([^\-]|[\r\n]|-[^\-])*[ \r\n\t]*)#}'));
-        if (!result || !result[0]) {
-            return null;
-        }
-        return this._getProperties(result[0]);
-    },
+    var properties = getProperties(docblock);
+    if (!properties) return false;
 
-    _getProperties: function (str) {
+    return properties;
 
-        var result = {},
-            i = 0,
-            value = null,
-            property = null,
-            foundProperty = null,
-            c;
+};
 
-        while (c = str.charAt(i)) {
+var allowedProperties = ['title', 'description'],
+    allowedFiles      = ['html', 'js', 'scss'];
 
-            if (c === '$') {
+/**
+ * Returns the contents of a Swig comment block, delimited with: {# and #}
+ */
+var getDocBlock = function(source) {
+    var result = source.match(/{#([^#}]*)#}/);
+    return (result && result[1] ? result[1] : false);
+};
 
-                foundProperty = this._getProperty(str, i);
-                if (foundProperty) {
+/**
+ * Returns a properties object
+ */
+var getProperties = function(docblock) {
 
-                    if (property) {
-                        result[property] = value.trim();
-                    }
-
-                    property = foundProperty;
-                    value = '';
-                    i += property.length + 2;
-                    continue;
-                }
-
-            }
-
-            if (property) {
-                value += c;
-            }
-
-            i++;
-        }
-
-        if (value.length) {
-            result[property] = value.trim();
-        }
-
-        return result;
-    },
-
-    _getProperty: function (str, index) {
-        var i = 0,
-            l = this._properties.length;
-        for (; i < l; i++) {
-            if (str.indexOf('$' + this._properties[i] + ':') === index) {
-                return this._properties[i];
-            }
-        }
-        return null;
+    var result = docblock.match(/(\$.*:.*[^\s])/g);
+    if (!result || !result.length) {
+        return false;
     }
 
+    var properties = {files: []};
+    result.forEach(function(line) {
+
+        var property = {
+            lang: line.match(/\$([^:\s]+)/)[1],
+            file: line.match(/:\s*(.*)/)[1]
+        };
+
+        if (allowedProperties.indexOf(property.lang) !== -1) {
+            properties[property.lang] = property.file;
+        }
+
+        if (allowedFiles.indexOf(property.lang) !== -1) {
+            properties.files.push(property);
+        }
+    });
+
+    return properties;
 };

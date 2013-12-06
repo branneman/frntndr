@@ -13,34 +13,42 @@
 <body>
 
     <div class="wrapper">
-        <h1>Documentation</h1>
+        <h1>Module: {{ title }}</h1>
         <nav>&laquo; <a href="{{ baseUrl }}docs/">Modules</a></nav>
-
-        <h2>Module: {{ title }}</h2>
         <p>{{ description }}</p>
 
-        <h3>Demo</h3>
-        <div class="resizable-demo">
-            <div class="controls">
-                <div class="inactive">
-                    &raquo; <button class="open">Open RWD Resizor 5000</button>
+        <section>
+            <h2>Demo</h2>
+            <div class="resizable-demo">
+                <div class="controls">
+                    <div class="inactive">
+                        &raquo; <button class="open">See in different resolutions</button>
+                    </div>
+                    <div class="active">
+                        <button class="size icon-phone-portrait" data-width="320" data-height="480" title="Phone portrait (320x480)">Phone portrait</button>
+                        <button class="size icon-phone-landscape" data-width="480" data-height="320" title="Phone landscape (480x320)">Phone landscape</button>
+                        <button class="size icon-tablet-portrait" data-width="768" data-height="1024" title="Tablet portrait (768x1024)">Tablet portrait</button>
+                        <button class="size icon-tablet-landscape" data-width="1024" data-height="768" title="Tablet landscape (1024x768)">Tablet landscape</button>
+                        <button class="size max" data-width="auto" data-height="auto" title="Current browser width">max</button>
+                        <button class="close">Close</button>
+                    </div>
                 </div>
-                <div class="active">
-                    <button class="size icon-phone-portrait" data-width="320" data-height="480">Phone portrait</button>
-                    <button class="size icon-phone-landscape" data-width="480" data-height="320">Phone landscape</button>
-                    <button class="size icon-tablet-portrait" data-width="768" data-height="1024">Tablet portrait</button>
-                    <button class="size icon-tablet-landscape" data-width="1024" data-height="768">Tablet landscape</button>
-                    <button class="size max" data-width="auto" data-height="auto">max</button>
-                    <button class="close">Close</button>
-                </div>
+                <div class="resizable"><iframe src="{{ uri }}"></iframe></div>
             </div>
-            <div class="resizable">
-                <iframe src="{{ uri }}"></iframe>
-            </div>
-        </div>
+        </section>
 
-        <h3>Code</h3>
-        <p>&hellip;</p>
+        <section>
+            {% if files %}
+                <h2>Source</h2>
+                {% for file in files %}
+                    <h4 class="filename">
+                        <span title="{{ file.filename.absolute }}">{{ file.filename.relative|safe }}</span>
+                        <span class="language">{{ file.lang }}</span>
+                    </h4>
+                    <pre class="highlighted"><code>{{ file.code|safe }}</code></pre>
+                {% endfor %}
+            {% endif %}
+        </section>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

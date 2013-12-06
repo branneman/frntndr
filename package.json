@@ -26,7 +26,8 @@
     "swig": "~1.2.2",
     "ansi-styles": "~0.2.0",
     "glob": "~3.2.7",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "highlight.js": "~7.5.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

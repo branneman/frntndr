@@ -9,7 +9,8 @@ var fs   = require('fs'),
     swig = require('swig'),
     _    = require('underscore');
 
-var PartialParser = require('../partial-parser');
+var PartialParser = require('../partial-parser'),
+    highlighter = require('../highlighter');
 
 module.exports = {
 
@@ -41,16 +42,17 @@ module.exports = {
             return next();
         }
 
-        var partial = fs.readFileSync(file).toString(),
-            specs   = PartialParser.parse(partial);
-        specs = specs || {};
+        var source     = fs.readFileSync(file).toString(),
+            properties = PartialParser(source);
 
-        specs.uri = '../_modules/' + path.basename(req.path);
+        properties = properties || {};
+        properties.uri = '../_modules/' + path.basename(req.path);
+
+        highlighter(properties);
 
         var pathname = url.parse(req.url).pathname.substr(1),
-            baseUrl  = new Array(pathname.split('/').length).join('../');
-
-        viewObj = _.extend({baseUrl: baseUrl}, specs);
+            baseUrl  = new Array(pathname.split('/').length).join('../'),
+            viewObj  = _.extend({baseUrl: baseUrl}, properties);
 
         res.render('../src/docs/module.html', viewObj);
     },
