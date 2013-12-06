@@ -88,7 +88,7 @@ module.exports = {
         var pathname = url.parse(req.url).pathname.substr(1),
             baseUrl  = new Array(pathname.split('/').length).join('../'),
             content  = fs.readFileSync(file).toString(),
-            template = '{% extends \'../docs/_module.html\' %}{% block demo %}' + content + '{% endblock %}',
+            template = '{% extends \'../layout/docs/framed.html\' %}{% block demo %}' + content + '{% endblock %}',
             html     = swig.render(template, {
                 filename: file,
                 locals: {baseUrl: baseUrl}

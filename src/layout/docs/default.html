@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Documentation{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ baseUrl }}static/css/docs.css">
+    <link href="{{ baseUrl }}static/img/icon/favicon.ico" rel="shortcut icon" type="image/x-icon">
+</head>
+<body>
+
+    <div class="wrapper">
+        {%- block body %}{% endblock -%}
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ baseUrl }}static/js/vendor/jquery-2.0.3.min.js"><\/script>')</script>
+    <script src="{{ baseUrl }}static/js/docs.js"></script>
+</body>
+</html>

@@ -1,33 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% extends '../layout/docs/default.html' %}
 
-    <title>Module: {{ title }}</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ baseUrl }}static/css/docs.css">
-    <link href="{{ baseUrl }}static/img/icon/favicon.ico" rel="shortcut icon" type="image/x-icon">
-</head>
-<body>
-
-    <div class="wrapper">
-        <h1>Documentation</h1>
-        <h3>Index:</h3>
-        <ul>
-            <li><a href="{{ baseUrl }}docs/qrc.html">Quick Reference Card</a></li>
-        </ul>
-        <h3>Modules:</h3>
-        <ul>
-            {% for module in modules %}
-                <li><a href="{{ baseUrl }}docs/modules/{{ module.file }}">{{ module.title }}</a> &mdash; {{ module.file }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ baseUrl }}static/js/vendor/jquery-2.0.3.min.js"><\/script>')</script>
-    <script src="{{ baseUrl }}static/js/docs.js"></script>
-</body>
-</html>
+{%- block body %}
+    <h1>Documentation</h1>
+    <h3>Index:</h3>
+    <ul>
+        <li><a href="{{ baseUrl }}docs/qrc.html">Quick Reference Card</a></li>
+    </ul>
+    <h3>Modules:</h3>
+    <ul>
+        {% for module in modules %}
+            <li><a href="{{ baseUrl }}docs/modules/{{ module.file }}">{{ module.title }}</a> &mdash; {{ module.file }}</li>
+        {% endfor %}
+    </ul>
+{% endblock -%}
