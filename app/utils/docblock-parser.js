@@ -1,12 +1,6 @@
 /**
- * Returns true if there's a Swig comment block with variables present
- */
-module.exports.hasDocBlock = function(source) {
-    return !! getDocBlock(source);
-};
-
-/**
- * Parses a Swig comment block with variables
+ * Parses a Swig comment block with variables and returns the result
+ * @returns object | false
  */
 module.exports.parse = function(source) {
 
@@ -20,11 +14,15 @@ module.exports.parse = function(source) {
 
 };
 
+/**
+ * Allowed properties
+ */
 var allowedProperties = ['title', 'description', 'parent'],
     allowedFiles      = ['html', 'js', 'scss'];
 
 /**
- * Returns the contents of a Swig comment block, delimited with: {# and #}
+ * Grabs the contents of a Swig comment block, delimited with: {# and #}
+ * @returns string | false
  */
 var getDocBlock = function(source) {
     var result = source.match(/{#([^#}]*)#}/);
@@ -32,7 +30,8 @@ var getDocBlock = function(source) {
 };
 
 /**
- * Returns a properties object
+ * Parse a multiline string for $key:value pairs
+ * @returns object | false
  */
 var getProperties = function(docblock) {
 

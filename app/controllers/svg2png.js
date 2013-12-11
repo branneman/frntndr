@@ -1,5 +1,5 @@
 /**
- * svg2png request handler - Serves generated PNG from SVG
+ * svg2png controller - Serves generated PNG from SVG
  *  generates 'checkmark.svg.107x94.png' from 'checkmark.svg' with Inkscape CLI
  */
 

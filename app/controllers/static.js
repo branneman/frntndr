@@ -1,5 +1,5 @@
 /**
- * Static file request handler
+ * Static file Controller
  */
 
 var fs  = require('fs'),

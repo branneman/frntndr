@@ -1,10 +1,10 @@
 {% extends '../layout/docs/default.html' %}
-{% block title %}Module: {{ title }}{% endblock %}
+{% block title %}Module: {{ module.title }}{% endblock %}
 
 {%- block body %}
     <nav>&laquo; <a href="{{ baseUrl }}docs/">Documentation index</a></nav>
-    <h1>Module: {{ title }}</h1>
-    <p>{{ description }}</p>
+    <h1>Module: {{ module.title }}</h1>
+    <p>{{ module.description }}</p>
 
     <section>
         <h2>Demo</h2>
@@ -22,20 +22,20 @@
                     <button class="close">Close</button>
                 </div>
             </div>
-            <div class="resizable"><iframe src="{{ uri }}"></iframe></div>
+            <div class="resizable"><iframe src="{{ baseUrl }}docs/_{{ module.file.path.relative }}"></iframe></div>
         </div>
     </section>
 
-    <section>
-        {% if files %}
+    {% if module.files %}
+        <section>
             <h2>Source</h2>
-            {% for file in files %}
+            {% for file in module.files %}
                 <h4 class="filename">
-                    <span title="{{ file.filename.absolute }}">{{ file.filename.relative|safe }}</span>
-                    <span class="language">{{ file.lang }}</span>
+                    <span title="{{ file.path.absolute }}">{{ file.path.pretty|safe }}</span>
+                    <span class="language">{{ file.path.extension|upper }}</span>
                 </h4>
-                <pre class="highlighted"><code>{{ file.code|safe }}</code></pre>
+                <pre class="highlighted"><code>{{ file.contents.pretty|safe }}</code></pre>
             {% endfor %}
-        {% endif %}
-    </section>
+        </section>
+    {% endif %}
 {% endblock -%}
