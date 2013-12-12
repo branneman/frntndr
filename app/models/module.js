@@ -1,21 +1,17 @@
-/**
- * Module model
- */
+//
+// Module model
+//
 
 var fs = require('fs');
 
-var FileModel      = require('./file'),
-    DocblockParser = require('../utils/docblock-parser');
+var FileModel      = require('./file');
+var DocblockParser = require('../utils/docblock-parser');
 
-/**
- * Expose functions
- */
+// Expose module
 module.exports.ModuleModel  = ModuleModel;
 module.exports.createModule = createModule;
 
-/**
- * Constructor: Module model
- */
+// Constructor: Module model
 function ModuleModel(module) {
 
     this.file = module.file;
@@ -23,11 +19,9 @@ function ModuleModel(module) {
 
     this.title = module.title;
     this.description = module.description;
-};
+}
 
-/**
- * Tries to create a Module model, when passed a file
- */
+// Tries to create a Module model, when passed a file
 function createModule(file) {
 
     var module = {};
@@ -60,4 +54,4 @@ function createModule(file) {
         });
 
     return new ModuleModel(module);
-};
+}

@@ -1,12 +1,17 @@
-/**
- * Page 404 Controller
- */
+//
+// Page 404 Controller
+//
 
-var url    = require('url'),
-    ansi   = require('ansi-styles'),
-    config = require('../../config.json');
+var url    = require('url');
+var ansi   = require('ansi-styles');
 
-module.exports = function page404RequestHandler(req, res) {
+var config = require('../../config.json');
+
+// Expose module
+module.exports = page404RequestHandler;
+
+// Render 404 page from config
+function page404RequestHandler(req, res) {
 
     // Log 404 page url
     var pathname = url.parse(req.url).pathname.substr(1);
@@ -14,4 +19,4 @@ module.exports = function page404RequestHandler(req, res) {
 
     res.status(404).render(req.app.get('views') + config.server.page404);
 
-};
+}

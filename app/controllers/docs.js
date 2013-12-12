@@ -30,7 +30,7 @@ function indexAction(req, res) {
     res.render('docs/index.html', {
         modules: modules
     });
-};
+}
 
 //
 // Renders the Documentation Module page for a single module
@@ -45,7 +45,7 @@ function moduleAction(req, res, next) {
     res.render('docs/module.html', {
         module: module
     });
-};
+}
 
 //
 // Renders the content of the module page for a single module
@@ -69,4 +69,4 @@ function framedModuleAction(req, res, next) {
     });
 
     res.send(html);
-};
+}

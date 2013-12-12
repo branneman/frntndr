@@ -2,7 +2,7 @@
 // Sets common variables to the request object
 //
 
-var url  = require('url');
+var url = require('url');
 
 // Expose module
 module.exports = setRequestVariables;
@@ -17,11 +17,11 @@ function setRequestVariables(app) {
         req.app = app;
 
         // Set base url as request parameter, for other
-        var pathname = url.parse(req.url).pathname.substr(1),
-            baseUrl  = new Array(pathname.split('/').length).join('../');
+        var pathname = url.parse(req.url).pathname.substr(1);
+        var baseUrl  = new Array(pathname.split('/').length).join('../');
         req.baseUrl = baseUrl;
 
         // Fall-through to next middleware
         next();
     };
-};
+}

@@ -10,7 +10,7 @@ module.exports = viewHelpers;
 // Initialize all view helpers
 function viewHelpers(req, res, next) {
     defaultVariables(req, res, next);
-};
+}
 
 //
 // View Helper:
@@ -28,4 +28,4 @@ function defaultVariables(req, res, next) {
 
     // Fall-through to next middleware
     next();
-};
+}

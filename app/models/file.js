@@ -25,7 +25,7 @@ function FileModel(file) {
         raw:    file.contents.raw,
         pretty: file.contents.pretty
     };
-};
+}
 
 // Tries to create a File model, when passed a (partial) url
 function createFile(partialPath) {
@@ -48,7 +48,7 @@ function createFile(partialPath) {
     file.contents.pretty = highlight(file.path.extension, file.contents.raw);
 
     return new FileModel(file);
-};
+}
 
 // Autocomplete a filename:
 //  footer.html                ->  src/modules/footer.html
@@ -91,13 +91,13 @@ function autocompleteFilename(file) {
         }
     }
     return false;
-};
+}
 
 // Return the extension of a file, without the dot
 function getFileExtension(file) {
     var ext = file.match(/\.((?!.*\.).*)/)[1];
     return ext ? ext : false;
-};
+}
 
 // Prefix an underscores to a filename:
 //  aap.html            ->  _aap.html
@@ -107,7 +107,7 @@ function prefixUnderscoreFilename(file) {
         return file.replace(/\/(?!.*\/)/g, '/_');
     }
     return '_' + file;
-};
+}
 
 // Returns a relative (to src/) path with the filename wrapped with a <span>
 //  src\aap.html       ->  <span class="file">aap.html</span>
@@ -119,10 +119,10 @@ function getPrettyRelativeFilename(file) {
     file = file.replace(/\/((?!.*\/).*)/g, '/<span class="file">$1</span>');
 
     return file;
-};
+}
 
 // Returns a path with UNIX slashes
 //  aap\noot\mies.html  ->  aap/noot/mies.html
 function unixifyPath(file) {
     return file.replace(/\\/g, '/');
-};
+}

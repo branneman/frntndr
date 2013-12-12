@@ -1,13 +1,17 @@
-/**
- * Highlights files with Highlight.js
- */
+//
+// Highlights files with Highlight.js
+//
 
 var hljs = require('highlight.js');
 
-/**
- * Highlights the code of a single file
- */
-module.exports = function(extension, code) {
+// Expose module
+module.exports = highlight;
+
+// List of supported languages by Highlight.js
+var knownLanguages = ['html', 'scss', 'js'];
+
+// Highlights the code of a single file
+function highlight(extension, code) {
 
     if (extension === 'html') {
         code = code.replace(/{#([^#}]*)#}\s*/, '')
@@ -19,17 +23,10 @@ module.exports = function(extension, code) {
     }
 
     return hljs.highlightAuto(code).value;
-};
+}
 
-/**
- * List of supported languages by Highlight.js
- */
-var knownLanguages = ['html', 'scss', 'js'];
-
-/**
- * Converts known languages to a Highlight.js language identifier
- */
-var getHighlightJSLanguage = function(lang) {
+// Converts known languages to a Highlight.js language identifier
+function getHighlightJSLanguage(lang) {
 
     var map = {
         html: 'django', // Swig syntax is the same as Django's
@@ -40,4 +37,4 @@ var getHighlightJSLanguage = function(lang) {
         return map[lang];
     }
     return lang;
-};
+}

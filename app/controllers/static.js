@@ -1,17 +1,20 @@
-/**
- * Static file Controller
- */
+//
+// Static file Controller
+//
 
-var fs  = require('fs'),
-    url = require('url');
+var fs  = require('fs');
+var url = require('url');
 
-module.exports = function staticRequestHandler(req, res) {
+// Expose module
+module.exports = staticRequestHandler;
 
-    var pathname = url.parse(req.url).pathname.substr(1),
-        file     = req.app.get('views') + '/' + (pathname || 'index.html');
+function staticRequestHandler(req, res) {
+
+    var pathname = url.parse(req.url).pathname.substr(1);
+    var file     = req.app.get('views') + '/' + (pathname || 'index.html');
 
     if (fs.existsSync(file)) {
         res.sendfile(file);
     }
 
-};
+}

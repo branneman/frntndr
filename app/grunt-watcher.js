@@ -1,11 +1,14 @@
-/**
- * Starts `grunt watcher` and keeps it running while node is active
- */
+//
+// Starts `grunt watcher` and keeps it running while node is active
+//
 
-var exec = require('child_process').exec,
-    ansi = require('ansi-styles');
+var exec = require('child_process').exec;
+var ansi = require('ansi-styles');
 
-module.exports = function gruntWatcher() {
+// Expose module
+module.exports = gruntWatcher;
+
+function gruntWatcher() {
 
     // Start grunt watcher (which in turn starts sass watcher and autoprefixer)
     var sassProcess = exec('grunt watcher', function(err, stdout, stderr) {
@@ -21,4 +24,4 @@ module.exports = function gruntWatcher() {
         process.exit();
     });
 
-};
+}

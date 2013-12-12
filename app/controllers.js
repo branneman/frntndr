@@ -1,3 +1,6 @@
+//
+// Container for all controllers
+//
 module.exports = {
     svg2png:  require('./controllers/svg2png'),
     docs:     require('./controllers/docs'),

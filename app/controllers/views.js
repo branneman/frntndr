@@ -1,19 +1,23 @@
-/**
- * Views Controller
- */
+//
+// Views Controller
+//
 
-var fs  = require('fs'),
-    url = require('url');
+var fs  = require('fs');
+var url = require('url');
 
-module.exports = function viewsRequestHandler(req, res, next) {
+// Expose module
+module.exports = viewsRequestHandler;
 
-    var pathname  = url.parse(req.url).pathname.substr(1),
-        file      = req.app.get('views') + '/' + (pathname || 'index.html'),
-        validPath = file.substr(-5) === '.html' || file.substr(-1) === '/';
+// Render html views with Swig
+function viewsRequestHandler(req, res, next) {
+
+    var pathname  = url.parse(req.url).pathname.substr(1);
+    var file      = req.app.get('views') + '/' + (pathname || 'index.html');
+    var validPath = file.substr(-5) === '.html' || file.substr(-1) === '/';
 
     if (validPath && fs.existsSync(file)) {
         res.render(file);
     } else {
         next();
     }
-};
+}
