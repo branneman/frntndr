@@ -1,14 +1,19 @@
+//
+// Front-End Library server entry point
+//
+
 // Load external dependencies
-var express = require('express'),
-    swig    = require('swig'),
-    app     = express();
+var express = require('express');
+var swig    = require('swig');
+var app     = express();
 
 // Load app dependencies
-var config       = require('./config.json'),
-    gruntWatcher = require('./app/grunt-watcher'),
-    controllers  = require('./app/controllers'),
-    reqVariables = require('./app/middleware/req-variables'),
-    viewHelpers  = require('./app/middleware/view-helpers');
+var config       = require('./config.json');
+var gruntWatcher = require('./app/grunt-watcher');
+var redirects    = require('./app/middleware/redirects');
+var reqVariables = require('./app/middleware/req-variables');
+var viewHelpers  = require('./app/middleware/view-helpers');
+var controllers  = require('./app/controllers');
 
 // Start Grunt watcher, for Sass & Autoprefixer
 gruntWatcher();
@@ -23,6 +28,7 @@ app.set('view cache', false);
 
 // Set middleware
 app.use(express.compress());
+app.use(redirects);
 app.use(reqVariables(app));
 app.use(viewHelpers);
 

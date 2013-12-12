@@ -9,10 +9,10 @@ var exec = require('child_process').exec;
 var config = require('../../config.json');
 
 // Expose module
-module.exports = svg2pngRequestHandler;
+module.exports = svg2png;
 
 // Generate PNG from SVG and send it
-function svg2pngRequestHandler(req, res, next) {
+function svg2png(req, res, next) {
 
     var pngFile = 'src' + req.url;
     var svgFile = pngFile.substring(0, pngFile.indexOf('.svg') + 4);

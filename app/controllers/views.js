@@ -6,10 +6,10 @@ var fs  = require('fs');
 var url = require('url');
 
 // Expose module
-module.exports = viewsRequestHandler;
+module.exports = views;
 
 // Render html views with Swig
-function viewsRequestHandler(req, res, next) {
+function views(req, res, next) {
 
     var pathname  = url.parse(req.url).pathname.substr(1);
     var file      = req.app.get('views') + '/' + (pathname || 'index.html');

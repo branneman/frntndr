@@ -3,7 +3,10 @@
         "port": 1337,
         "page404": "404.html",
         "sassOutputStyle": "expanded",
-        "sassBrowsers": ["> 1%", "last 2 versions", "ie >= 8"]
+        "sassBrowsers": ["> 1%", "last 2 versions", "ie >= 8"],
+        "redirects": {
+            "/favicon.ico": "/static/img/icon/favicon.ico"
+        }
     },
     "svg": {
         "pathToInkscape": "C:\\Program Files (x86)\\Inkscape\\inkscape.com"

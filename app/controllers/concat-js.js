@@ -6,10 +6,10 @@ var fs  = require('fs');
 var url = require('url');
 
 // Expose module
-module.exports = concatJSRequestHandler;
+module.exports = concatJS;
 
 // Render .js file with Swig
-function concatJSRequestHandler(req, res) {
+function concatJS(req, res) {
 
     var pathname = url.parse(req.url).pathname.substr(1);
     var file     = req.app.get('views') + '/' + (pathname || 'index.html');
