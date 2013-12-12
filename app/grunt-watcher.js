@@ -2,6 +2,8 @@
 // Starts `grunt watcher` and keeps it running while node is active
 //
 
+'use strict';
+
 var exec = require('child_process').exec;
 var ansi = require('ansi-styles');
 

@@ -2,6 +2,8 @@
 // Front-End Library server entry point
 //
 
+'use strict';
+
 // Load external dependencies
 var express = require('express');
 var swig    = require('swig');

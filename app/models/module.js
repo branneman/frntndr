@@ -2,7 +2,7 @@
 // Module model
 //
 
-var fs = require('fs');
+'use strict';
 
 var FileModel      = require('./file');
 var DocblockParser = require('../utils/docblock-parser');

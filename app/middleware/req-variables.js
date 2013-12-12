@@ -2,6 +2,8 @@
 // Sets common variables to the request object
 //
 
+'use strict';
+
 var url = require('url');
 
 // Expose module

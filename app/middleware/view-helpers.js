@@ -2,6 +2,8 @@
 // Various view helpers
 //
 
+'use strict';
+
 var swig = require('swig');
 
 // Expose module

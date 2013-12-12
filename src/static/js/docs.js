@@ -1,10 +1,13 @@
-/**
- * Resizable Demo module
- */
+//
+// Resizable Demo module
+//
+
 $(function ResizableDemo() {
 
-    var $resizableDemo = $('.resizable-demo'),
-        $resizable     = $('.resizable', $resizableDemo);
+    'use strict';
+
+    var $resizableDemo = $('.resizable-demo');
+    var $resizable     = $('.resizable', $resizableDemo);
 
     // Open Resizable Demo
     $('.controls .open', $resizableDemo).on('click', function() {
@@ -40,5 +43,4 @@ $(function ResizableDemo() {
             height: ''
         });
     };
-
-}());
+});

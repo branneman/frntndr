@@ -2,6 +2,8 @@
 // Parses a Swig comment block with variables and returns the result
 //
 
+'use strict';
+
 // Expose module
 module.exports.parse = parse;
 

@@ -2,6 +2,8 @@
 // Highlights files with Highlight.js
 //
 
+'use strict';
+
 var hljs = require('highlight.js');
 
 // Expose module
@@ -19,7 +21,7 @@ function highlight(extension, code) {
 
     // Remove docblock
     if (extension === 'html') {
-        code = code.replace(/{#([^#}]*)#}\s*/, '')
+        code = code.replace(/{#([^#}]*)#}\s*/, '');
     }
 
     if (extension in knownLanguages) {

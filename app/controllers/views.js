@@ -2,14 +2,16 @@
 // Views Controller
 //
 
+'use strict';
+
 var fs  = require('fs');
 var url = require('url');
 
 // Expose module
-module.exports = views;
+module.exports = viewsAction;
 
 // Render html views with Swig
-function views(req, res, next) {
+function viewsAction(req, res) {
 
     var pathname  = url.parse(req.url).pathname.substr(1);
     var file      = req.app.get('views') + '/' + (pathname || 'index.html');
@@ -17,7 +19,5 @@ function views(req, res, next) {
 
     if (validPath && fs.existsSync(file)) {
         res.render(file);
-    } else {
-        next();
     }
 }

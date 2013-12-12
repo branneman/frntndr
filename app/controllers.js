@@ -1,6 +1,9 @@
 //
 // Container for all controllers
 //
+
+'use strict';
+
 module.exports = {
     svg2png:  require('./controllers/svg2png'),
     docs:     require('./controllers/docs'),

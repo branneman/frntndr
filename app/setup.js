@@ -1,6 +1,9 @@
 //
 // Install Sass & Grunt CLI if it's not installed yet
 //
+
+'use strict';
+
 var exec = require('child_process').exec;
 var existsInPath = require('node-fs-exists-in-path');
 
@@ -17,7 +20,7 @@ existsInPath('sass', function(exists) {
         if (err) {
             console.log(stderr);
         } else {
-            exec('sass -v', function(err, stdout, stderr) {
+            exec('sass -v', function(err, stdout) {
                 console.log(stdout.replace(/\s+$/, '') + ' successfully installed.');
             });
         }

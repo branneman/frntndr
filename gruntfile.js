@@ -1,12 +1,19 @@
+/* jshint -W071 */
+
+//
+// Gruntfile.js — the config file for grunt
+//
+
+'use strict';
+
 var fs = require('fs');
 JSON.minify = require('jsonminify');
 
 module.exports = function Gruntfile(grunt) {
 
-    var pkg    = grunt.file.readJSON('package.json'),
-        config = grunt.file.readJSON('config.json');
+    var pkg    = grunt.file.readJSON('package.json');
+    var config = grunt.file.readJSON('config.json');
 
-    // Project configuration.
     grunt.initConfig({
 
         pkg: pkg,
@@ -102,7 +109,14 @@ module.exports = function Gruntfile(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**', '!**/*.{html,js}', '!**/layout/**', '!**/modules/**', '!**/static/{_css,scss}/**', '!**/static/css/*.map'],
+                    src: [
+                        '**',
+                        '!**/*.{html,js}',
+                        '!**/layout/**',
+                        '!**/modules/**',
+                        '!**/static/{_css,scss}/**',
+                        '!**/static/css/*.map'
+                    ],
                     dest: 'build'
                 }]
             }
@@ -167,6 +181,9 @@ module.exports = function Gruntfile(grunt) {
 
         jshint: {
             dist: [
+                'app.js',
+                'gruntfile.js',
+                'app/**/*.js',
                 'src/static/js/**/*.js',
                 grunt.file.read('.jshintignore').trim().split('\n').map(function(s) { return '!' + s; })
             ],

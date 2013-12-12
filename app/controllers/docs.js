@@ -2,6 +2,8 @@
 // Documentation Controller
 //
 
+'use strict';
+
 var glob = require('glob');
 var swig = require('swig');
 
@@ -35,11 +37,11 @@ function indexAction(req, res) {
 //
 // Renders the Documentation Module page for a single module
 //
-function moduleAction(req, res, next) {
+function moduleAction(req, res) {
 
     var module = ModuleModel.createModule(req.params[0]);
     if (!module) {
-        return next();
+        return;
     }
 
     res.render('docs/module.html', {
@@ -51,11 +53,11 @@ function moduleAction(req, res, next) {
 // Renders the content of the module page for a single module
 //  For use inside an <iframe>
 //
-function framedModuleAction(req, res, next) {
+function framedModuleAction(req, res) {
 
     var file = FileModel.createFile(req.params[0]);
     if (!file) {
-        return next();
+        return;
     }
 
     var template =
