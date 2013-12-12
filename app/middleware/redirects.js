@@ -22,6 +22,7 @@ function redirects(req, res, next) {
         );
         res.redirect(301, urls[req.path]);
     } else {
+        // Fall-through to next middleware
         next();
     }
 }

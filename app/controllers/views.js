@@ -11,7 +11,7 @@ var url = require('url');
 module.exports = viewsAction;
 
 // Render html views with Swig
-function viewsAction(req, res) {
+function viewsAction(req, res, next) {
 
     var pathname  = url.parse(req.url).pathname.substr(1);
     var file      = req.app.get('views') + '/' + (pathname || 'index.html');
@@ -19,5 +19,7 @@ function viewsAction(req, res) {
 
     if (validPath && fs.existsSync(file)) {
         res.render(file);
+    } else {
+        next();
     }
 }
