@@ -31,7 +31,7 @@ tools (and more), with more overhead and flexibility, without my strict rules.
 ### How to: Setup development environment
 Make sure the following is installed on your machine:
 
-- [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.22)
+- [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.23)
 - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
 When installed, run these commands to setup your environment. It will
