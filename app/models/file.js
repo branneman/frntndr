@@ -8,7 +8,7 @@ var path = require('path');
 var highlight = require('../utils/code-highlighter');
 
 // Expose module
-module.exports.FileModel = FileModel;
+module.exports.FileModel  = FileModel;
 module.exports.createFile = createFile;
 
 // File model

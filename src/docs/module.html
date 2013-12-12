@@ -4,7 +4,7 @@
 {%- block body %}
     <nav>&laquo; <a href="{{ baseUrl }}docs/">Documentation index</a></nav>
     <h1>Module: {{ module.title }}</h1>
-    <p>{{ module.description }}</p>
+    {% if module.description %}<p>{{ module.description }}</p>{% endif %}
 
     <section>
         <h2>Demo</h2>
@@ -26,7 +26,7 @@
         </div>
     </section>
 
-    {% if module.files %}
+    {% if module.files.length %}
         <section>
             <h2>Source</h2>
             {% for file in module.files %}

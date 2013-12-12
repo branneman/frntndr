@@ -53,5 +53,7 @@ function createModule(file) {
             return linkedFile;
         });
 
+    module.files.unshift(module.file);
+
     return new ModuleModel(module);
 }
