@@ -19,7 +19,6 @@ function parse(source) {
     if (!properties) return false;
 
     return properties;
-
 }
 
 // Grabs the contents of a Swig comment block, delimited with: {# and #}
