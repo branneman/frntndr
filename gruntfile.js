@@ -99,7 +99,7 @@ module.exports = function Gruntfile(grunt) {
                 files: {
                     'src/static/css/all.css': ['src/static/css/all.css'],
                     'src/static/css/all-oldie.css': ['src/static/css/all-oldie.css'],
-                    'src/static/css/github.css': ['src/static/css/github.css']
+                    'src/static/css/docs.css': ['src/static/css/docs.css']
                 }
             }
         },
@@ -173,7 +173,7 @@ module.exports = function Gruntfile(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**/*.{html,js}', '!**/layout/**', '!**/modules/**', '!**/js/**/_*.js', '!**/js/spec/**'],
+                    src: ['**/*.{html,js}', '!**/layout/**', '!**/docs/**', '!**/modules/**', '!**/js/**/_*.js', '!**/js/spec/**'],
                     dest: 'build/'
                 }]
             }
