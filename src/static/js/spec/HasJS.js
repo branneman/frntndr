@@ -1,3 +1,7 @@
+//
+// HasJS unit tests
+//
+
 describe('HasJS', function() {
     'use strict';
 
