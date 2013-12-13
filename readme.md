@@ -47,7 +47,7 @@ Done!
 ### How to: Start the development server
 
     cd /path/to/project
-    npm start
+    node app
 
 You can optionally configure your WebStorm to allow for a more easy server start, so you can click a fancy play button
 instead of having to work on the scary CLI.
@@ -55,7 +55,7 @@ instead of having to work on the scary CLI.
 Then point your browser to [`http://localhost:1337/`](http://localhost:1337/)
 
 ### How to: Build, test and deploy
-Make sure your server is running, then execute:
+Make sure your app is running, then execute:
 
     cd /path/to/project
     grunt
