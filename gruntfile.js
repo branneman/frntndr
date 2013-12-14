@@ -6,8 +6,11 @@
 
 'use strict';
 
-var fs = require('fs');
-JSON.minify = require('jsonminify');
+var fs     = require('fs');
+var glob   = require('glob');
+var minify = require('jsonminify');
+
+JSON.minify = minify;
 
 module.exports = function Gruntfile(grunt) {
 
@@ -96,11 +99,13 @@ module.exports = function Gruntfile(grunt) {
                 report: 'min'
             },
             dist: {
-                files: {
-                    'src/static/css/all.css': ['src/static/css/all.css'],
-                    'src/static/css/all-oldie.css': ['src/static/css/all-oldie.css'],
-                    'src/static/css/docs.css': ['src/static/css/docs.css']
-                }
+                files: (function() {
+                    var files = {};
+                    glob.sync('src/static/css/*.css').forEach(function(file) {
+                        files[file] = file;
+                    });
+                    return files;
+                }())
             }
         },
 
@@ -156,7 +161,10 @@ module.exports = function Gruntfile(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'build/',
-                    src: ['**/*.js', '!**/js/vendor/**'],
+                    src: [
+                        '**/*.js',
+                        '!**/js/vendor/**'
+                    ],
                     dest: 'build/'
                 }]
             }
@@ -173,7 +181,14 @@ module.exports = function Gruntfile(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**/*.{html,js}', '!**/layout/**', '!**/docs/**', '!**/modules/**', '!**/js/**/_*.js', '!**/js/spec/**'],
+                    src: [
+                        '**/*.{html,js}',
+                        '!**/layout/**',
+                        '!**/docs/**',
+                        '!**/modules/**',
+                        '!**/js/**/_*.js',
+                        '!**/js/spec/**'
+                    ],
                     dest: 'build/'
                 }]
             }
@@ -218,7 +233,11 @@ module.exports = function Gruntfile(grunt) {
                 },
                 src: 'build',
                 dest: config.build.deploy.dest,
-                exclusions: ['**/.DS_Store', '**/Thumbs.db', '**/.gitignore']
+                exclusions: [
+                    '**/.DS_Store',
+                    '**/Thumbs.db',
+                    '**/.gitignore'
+                ]
             }
         }
 
