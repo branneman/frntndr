@@ -165,7 +165,7 @@ module.exports = function Gruntfile(grunt) {
         httpcopy: {
             options: {
                 serverUrl: 'http://localhost:' + config.server.port + '/',
-                urlMapper: function(serverUrl, filePath) {
+                urlMapper: function urlMapper(serverUrl, filePath) {
                     return serverUrl + filePath.replace(/^src\//, '');
                 }
             },

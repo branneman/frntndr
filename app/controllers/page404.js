@@ -19,6 +19,5 @@ function page404Action(req, res) {
     var pathname = url.parse(req.url).pathname.substr(1);
     console.log(ansi.red.open + '404 Not Found: /' + pathname + ansi.red.close);
 
-    res.status(404).render(req.app.get('views') + config.server.page404);
-
+    res.status(404).render(config.server.page404, {baseUrl: req.baseUrl});
 }

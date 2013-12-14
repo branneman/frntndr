@@ -4,6 +4,6 @@
 {% block body %}
     <main class="wrapper">
         <h1>404 Not Found</h1>
-        <p><a href="{{ baseUrl }}index.html">Navigate to homepage</a></p>
+        <p><a href="{{ baseUrl || '/' }}">Navigate to homepage</a></p>
     </main>
 {% endblock %}

@@ -5,7 +5,6 @@
         "sassOutputStyle": "expanded",
         "sassBrowsers": ["> 1%", "last 2 versions", "ie >= 8"],
         "redirects": {
-            "/index.html": "/",
             "/favicon.ico": "/static/img/icon/favicon.ico",
             "/docs": "/docs/"
         }

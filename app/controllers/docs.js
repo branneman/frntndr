@@ -30,6 +30,7 @@ function indexAction(req, res) {
         });
 
     res.render('docs/index.html', {
+        baseUrl: req.baseUrl,
         modules: modules
     });
 }
@@ -37,14 +38,15 @@ function indexAction(req, res) {
 //
 // Renders the Documentation Module page for a single module
 //
-function moduleAction(req, res) {
+function moduleAction(req, res, next) {
 
     var module = ModuleModel.createModule(req.params[0]);
     if (!module) {
-        return;
+        return next();
     }
 
     res.render('docs/module.html', {
+        baseUrl: req.baseUrl,
         module: module
     });
 }
@@ -53,11 +55,11 @@ function moduleAction(req, res) {
 // Renders the content of the module page for a single module
 //  For use inside an <iframe>
 //
-function framedModuleAction(req, res) {
+function framedModuleAction(req, res, next) {
 
     var file = FileModel.createFile(req.params[0]);
     if (!file) {
-        return;
+        return next();
     }
 
     var template =
@@ -67,7 +69,8 @@ function framedModuleAction(req, res) {
         '{% endblock %}';
 
     var html = swig.render(template, {
-        filename: 'src/layout/docs/fake.html'
+        filename: 'src/layout/docs/fake.html',
+        locals: {baseUrl: req.baseUrl}
     });
 
     res.send(html);

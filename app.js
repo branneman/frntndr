@@ -14,7 +14,6 @@ var config       = require('./config.json');
 var gruntWatcher = require('./app/grunt-watcher');
 var redirects    = require('./app/middleware/redirects');
 var reqVariables = require('./app/middleware/req-variables');
-var viewHelpers  = require('./app/middleware/view-helpers');
 var controllers  = require('./app/controllers');
 
 // Start Grunt watcher, for Sass & Autoprefixer
@@ -32,7 +31,6 @@ app.set('view cache', false);
 app.use(express.compress());
 app.use(redirects);
 app.use(reqVariables(app));
-app.use(viewHelpers);
 
 // Set controllers
 app.get('/static/img/*.svg.*.png', controllers.svg2png);
