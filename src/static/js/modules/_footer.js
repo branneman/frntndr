@@ -5,4 +5,4 @@
 $(function() {
     'use strict';
     $('footer a').attr('target', '_blank');
-}());
+});
