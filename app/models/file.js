@@ -47,7 +47,7 @@ function createFile(partialPath) {
     file.path.pretty    = getPrettyRelativeFilename(file.path.absolute);
 
     file.contents.raw    = fs.readFileSync(file.path.absolute).toString();
-    file.contents.pretty = highlight(file.path.extension, file.contents.raw);
+    file.contents.pretty = highlight(file.contents.raw, file.path.extension);
 
     return new FileModel(file);
 }

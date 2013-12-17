@@ -4,7 +4,7 @@
 {%- block body %}
     <nav>&laquo; <a href="{{ baseUrl }}docs/">Documentation index</a></nav>
     <h1>Module: {{ module.title }}</h1>
-    {% if module.description %}<p>{{ module.description }}</p>{% endif %}
+    {% if module.description %}{{ module.description|safe }}{% endif %}
 
     <section>
         <h2>Demo</h2>

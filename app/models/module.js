@@ -4,8 +4,11 @@
 
 'use strict';
 
+var marked = require('marked');
+
 var FileModel      = require('./file');
 var DocblockParser = require('../utils/docblock-parser');
+var highlight      = require('../utils/code-highlighter');
 
 // Expose module
 module.exports.ModuleModel  = ModuleModel;
@@ -31,14 +34,17 @@ function createModule(file) {
         return false;
     }
 
+    // Parse YAML docblock, if available
     var properties = DocblockParser.parse(module.file.contents.raw);
     if (!properties || !properties.title) {
         return false;
     }
 
     module.title = properties.title;
+
+    // Parse description as Markdown
     if (properties.description) {
-        module.description = properties.description;
+        module.description = marked(properties.description, {highlight: highlight});
     }
 
     // @todo Optionally define a parent

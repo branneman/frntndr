@@ -28,7 +28,8 @@
     "glob": "~3.2.7",
     "highlight.js": "~7.5.0",
     "js-yaml": "~3.0.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "marked": "~0.2.10"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

@@ -17,7 +17,7 @@ var knownLanguages = {
 };
 
 // Highlights the code of a single file
-function highlight(extension, code) {
+function highlight(code, extension) {
 
     // Remove docblock
     if (extension === 'html') {
