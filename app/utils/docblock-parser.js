@@ -4,12 +4,15 @@
 
 'use strict';
 
+var _    = require('lodash');
+var yaml = require('js-yaml');
+
 // Expose module
 module.exports.parse = parse;
 
 // Allowed properties
-var allowedProperties = ['title', 'description', 'parent'],
-    allowedFiles      = ['html', 'js', 'scss'];
+var allowedProperties = ['title', 'description'],
+    allowedResources  = ['html', 'js', 'scss'];
 
 // Parse swig comment block - control function
 function parse(source) {
@@ -29,29 +32,41 @@ function getDocBlock(source) {
     return (result && result[1] ? result[1] : false);
 }
 
-// Parse a multiline string for $key:value pairs
+// Parse the YAML block into an object
 function getProperties(docblock) {
 
-    // Get the lines of the docblock separately
-    var result = docblock.match(/(\$.*:.*[^\s])/g);
-    if (!result || !result.length) {
-        return false;
-    }
+    var yamlProperties = yaml.safeLoad(docblock);
+    var properties     = {files: []};
 
-    var properties = {files: []};
-    result.forEach(function(line) {
+    // Iterate over all properties
+    Object.keys(yamlProperties).forEach(function(key) {
 
-        var property = {
-            lang: line.match(/\$([^:\s]+)/)[1],
-            file: line.match(/:\s*(.*)/)[1]
-        };
+        var val = yamlProperties[key];
 
-        if (allowedProperties.indexOf(property.lang) !== -1) {
-            properties[property.lang] = property.file;
+        // Handle Properties (title, description, ...)
+        if (allowedProperties.indexOf(key) !== -1) {
+            return properties[key] = val;
         }
 
-        if (allowedFiles.indexOf(property.lang) !== -1) {
-            properties.files.push(property);
+        // Handle Resources
+        if (key === 'resources') {
+
+            Object.keys(val).forEach(function(key) {
+                var ext = key;
+
+                // Add multiple resources for this filetype
+                if (_.isArray(val[key])) {
+                    val[key].forEach(function(key) {
+                        properties.files.push(key + '.' + ext);
+                    });
+                    return;
+                }
+
+                // Add a single resource for this filetype
+                if (allowedResources.indexOf(key) !== -1) {
+                    properties.files.push(val[key] + '.' + key);
+                }
+            });
         }
     });
 

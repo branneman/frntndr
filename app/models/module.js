@@ -45,12 +45,11 @@ function createModule(file) {
 
     // Create File models for every linked file
     module.files = properties.files
-        .map(function(linkedFile) {
-            var filename = linkedFile.file + '.' + linkedFile.lang;
-            return FileModel.createFile(filename);
+        .map(function(file) {
+            return FileModel.createFile(file);
         })
-        .filter(function(linkedFile) {
-            return linkedFile;
+        .filter(function(file) {
+            return file;
         });
 
     module.files.unshift(module.file);
