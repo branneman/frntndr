@@ -8,9 +8,6 @@
 
 var fs     = require('fs');
 var glob   = require('glob');
-var minify = require('jsonminify');
-
-JSON.minify = minify;
 
 module.exports = function Gruntfile(grunt) {
 
@@ -199,10 +196,11 @@ module.exports = function Gruntfile(grunt) {
                 'app.js',
                 'gruntfile.js',
                 'app/**/*.js',
-                'src/static/js/**/*.js',
-                grunt.file.read('.jshintignore').trim().split('\n').map(function(s) { return '!' + s; })
+                'src/static/js/**/*.js'
             ],
-            options: JSON.parse(JSON.minify(fs.readFileSync('.jshintrc', 'utf8')))
+            options: {
+                jshintrc: true
+            }
         },
 
         jasmine: {
