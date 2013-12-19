@@ -53,6 +53,7 @@ function createFile(partialPath) {
 }
 
 // Autocomplete a filename:
+//  footer                     ->  src/modules/footer.html
 //  footer.html                ->  src/modules/footer.html
 //  src/modules/articles.html  ->  src/modules/articles.html
 //  modules/footer.scss        ->  src/static/scss/modules/_footer.scss
@@ -70,10 +71,16 @@ function autocompleteFilename(file) {
         file = file.substr(8);
     }
 
-    // Determine possible filenames
-    var prefix    = __dirname + '/../../src/',
-        extension = getFileExtension(file),
-        tests     = [
+    // Optionally add extension
+    var extension = getFileExtension(file);
+    if (!extension) {
+        extension = 'html';
+        file += '.html';
+    }
+
+    // Guess possible filenames
+    var prefix = __dirname + '/../../src/',
+        tests  = [
             prefix + 'modules/' + file,
             prefix + 'modules/' + prefixUnderscoreFilename(file),
             prefix + 'static/' + extension + '/' + file,
@@ -97,8 +104,8 @@ function autocompleteFilename(file) {
 
 // Return the extension of a file, without the dot
 function getFileExtension(file) {
-    var ext = file.match(/\.((?!.*\.).*)/)[1];
-    return ext ? ext : false;
+    var ext = file.match(/\.((?!.*\.).*)/);
+    return ext ? ext[1] : false;
 }
 
 // Prefix an underscores to a filename:

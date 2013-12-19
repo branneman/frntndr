@@ -21,11 +21,18 @@ function ModuleModel(module) {
     this.files = module.files;
 
     this.title = module.title;
-    this.description = module.description;
+
+    if (module.description) {
+        this.description = module.description;
+    }
+
+    if (module.parent) {
+        this.parent = module.parent;
+    }
 }
 
 // Tries to create a Module model, when passed a file
-function createModule(file) {
+function createModule(file, recursion) {
 
     var module = {};
 
@@ -47,7 +54,12 @@ function createModule(file) {
         module.description = marked(properties.description, {highlight: highlight});
     }
 
-    // @todo Optionally define a parent
+    if (properties.parent && !recursion) {
+        var parent = createModule(properties.parent, true);
+        if (parent) {
+            module.parent = parent;
+        }
+    }
 
     // Create File models for every linked file
     module.files = properties.files

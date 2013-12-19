@@ -11,7 +11,7 @@ var yaml = require('js-yaml');
 module.exports.parse = parse;
 
 // Allowed properties
-var allowedProperties = ['title', 'description'],
+var allowedProperties = ['title', 'description', 'parent'],
     allowedResources  = ['html', 'js', 'scss'];
 
 // Parse swig comment block - control function
@@ -45,7 +45,7 @@ function getProperties(docblock) {
 
         // Handle Properties (title, description, ...)
         if (allowedProperties.indexOf(key) !== -1) {
-            return properties[key] = val;
+            properties[key] = val;
         }
 
         // Handle Resources
