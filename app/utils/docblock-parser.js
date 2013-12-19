@@ -36,7 +36,7 @@ function getDocBlock(source) {
 function getProperties(docblock) {
 
     var yamlProperties = yaml.safeLoad(docblock);
-    var properties     = {files: []};
+    var properties     = {resources: []};
 
     // Iterate over all properties
     Object.keys(yamlProperties).forEach(function(key) {
@@ -57,14 +57,14 @@ function getProperties(docblock) {
                 // Add multiple resources for this filetype
                 if (_.isArray(val[key])) {
                     val[key].forEach(function(key) {
-                        properties.files.push(key + '.' + ext);
+                        properties.resources.push(key + '.' + ext);
                     });
                     return;
                 }
 
                 // Add a single resource for this filetype
                 if (allowedResources.indexOf(key) !== -1) {
-                    properties.files.push(val[key] + '.' + key);
+                    properties.resources.push(val[key] + '.' + key);
                 }
             });
         }

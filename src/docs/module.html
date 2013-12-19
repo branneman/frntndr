@@ -43,10 +43,10 @@
         </div>
     </section>
 
-    {% if module.files.length %}
+    {% if module.resources.length %}
         <section>
             <h2>Source</h2>
-            {% for file in module.files %}
+            {% for file in module.resources %}
                 <h4 class="filename">
                     <span title="{{ file.path.absolute }}">{{ file.path.pretty|safe }}</span>
                     <span class="language">{{ file.path.extension|upper }}</span>

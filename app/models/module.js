@@ -23,7 +23,7 @@ var maxRecursionDepth = 5;
 function ModuleModel(module) {
 
     this.file = module.file;
-    this.files = module.files;
+    this.resources = module.resources;
 
     this.title = module.title;
 
@@ -70,8 +70,8 @@ function createModule(file, recursionDepth) { // jshint -W071
     module.children = _findChildren(module, recursionDepth);
 
     // Create File models for every linked file
-    module.files = FileModel.createFiles(properties.files);
-    module.files.unshift(module.file);
+    module.resources = FileModel.createFiles(properties.resources);
+    module.resources.unshift(module.file);
 
     return new ModuleModel(module);
 }
