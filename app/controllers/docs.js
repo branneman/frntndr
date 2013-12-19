@@ -4,7 +4,6 @@
 
 'use strict';
 
-var glob = require('glob');
 var swig = require('swig');
 
 var FileModel   = require('../models/file');
@@ -21,13 +20,7 @@ module.exports._module = framedModuleAction;
 function indexAction(req, res) {
 
     // Grab all .html files with a docblock and create Modules
-    var modules = glob.sync('src/modules/**/*.html')
-        .map(function(file) {
-            return ModuleModel.createModule(file);
-        })
-        .filter(function(module) {
-            return module;
-        });
+    var modules = ModuleModel.createModules('src/modules', 0);
 
     res.render('docs/index.html', {
         baseUrl: req.baseUrl,
@@ -40,7 +33,7 @@ function indexAction(req, res) {
 //
 function moduleAction(req, res, next) {
 
-    var module = ModuleModel.createModule(req.params[0]);
+    var module = ModuleModel.createModule(req.params[0], 0);
     if (!module) {
         return next();
     }

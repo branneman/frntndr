@@ -10,8 +10,9 @@ var path = require('path');
 var highlight = require('../utils/code-highlighter');
 
 // Expose module
-module.exports.FileModel  = FileModel;
-module.exports.createFile = createFile;
+module.exports.FileModel   = FileModel;
+module.exports.createFile  = createFile;
+module.exports.createFiles = createFiles;
 
 // File model
 function FileModel(file) {
@@ -50,6 +51,18 @@ function createFile(partialPath) {
     file.contents.pretty = highlight(file.contents.raw, file.path.extension);
 
     return new FileModel(file);
+}
+
+// Tries to create multiple Files models, when passed an array of (partial) urls
+function createFiles(files) {
+
+    return files
+        .map(function(file) {
+            return createFile(file);
+        })
+        .filter(function(file) {
+            return file;
+        });
 }
 
 // Autocomplete a filename:

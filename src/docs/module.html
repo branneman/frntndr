@@ -3,12 +3,24 @@
 
 {%- block body %}
     <nav>&laquo; <a href="{{ baseUrl }}docs/">Documentation index</a></nav>
-    <h1>Module: {{ module.title }}</h1>
-    {% if module.parent %}
-        <p><b>Parent module: <a href="{{ baseUrl }}docs/{{ module.parent.file.path.relative }}">{{ module.parent.title }}</a></b></p>
-    {% endif %}
+    <h1>
+        {% if module.parent %}
+            <a href="{{ baseUrl }}docs/{{ module.parent.file.path.relative }}">{{ module.parent.title }}</a> /
+        {% endif %}
+        {{ module.title }}
+    </h1>
+
     {% if module.description %}
         {{ module.description|safe }}
+    {% endif %}
+
+    {% if module.children.length %}
+        <h2>Variants:</h2>
+        <ul>
+            {% for child in module.children %}
+                <li><a href="{{ baseUrl }}docs/{{ child.file.path.relative }}">{{ child.title }}</a></li>
+            {% endfor %}
+        </ul>
     {% endif %}
 
     <section>
