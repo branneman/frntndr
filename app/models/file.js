@@ -38,14 +38,14 @@ function createFile(partialPath) {
         contents: {}
     };
 
-    file.path.absolute = autocompleteFilename(partialPath);
+    file.path.absolute = _autocompleteFilename(partialPath);
     if (!file.path.absolute) {
         return false;
     }
 
-    file.path.extension = getFileExtension(file.path.absolute);
-    file.path.relative  = unixifyPath(path.relative('src/', file.path.absolute));
-    file.path.pretty    = getPrettyRelativeFilename(file.path.absolute);
+    file.path.extension = _getFileExtension(file.path.absolute);
+    file.path.relative  = _unixifyPath(path.relative('src/', file.path.absolute));
+    file.path.pretty    = _getPrettyRelativeFilename(file.path.absolute);
 
     file.contents.raw    = fs.readFileSync(file.path.absolute).toString();
     file.contents.pretty = highlight(file.contents.raw, file.path.extension);
@@ -72,7 +72,7 @@ function createFiles(files) {
 //  modules/footer.scss        ->  src/static/scss/modules/_footer.scss
 //  has-js.js                  ->  src/static/js/_has-js.js
 //  modules/nav.js             ->  src/static/js/modules/_nav.js
-function autocompleteFilename(file) {
+function _autocompleteFilename(file) {
 
     // Optionally remove 'src/' prefix
     if (file.substr(0, 4) === 'src/') {
@@ -85,7 +85,7 @@ function autocompleteFilename(file) {
     }
 
     // Optionally add extension
-    var extension = getFileExtension(file);
+    var extension = _getFileExtension(file);
     if (!extension) {
         extension = 'html';
         file += '.html';
@@ -95,15 +95,15 @@ function autocompleteFilename(file) {
     var prefix = __dirname + '/../../src/',
         tests  = [
             prefix + 'modules/' + file,
-            prefix + 'modules/' + prefixUnderscoreFilename(file),
+            prefix + 'modules/' + _prefixUnderscoreFilename(file),
             prefix + 'static/' + extension + '/' + file,
-            prefix + 'static/' + extension + '/' + prefixUnderscoreFilename(file),
+            prefix + 'static/' + extension + '/' + _prefixUnderscoreFilename(file),
             prefix + 'static/' + extension + '/modules/' + file,
-            prefix + 'static/' + extension + '/modules/' + prefixUnderscoreFilename(file)
+            prefix + 'static/' + extension + '/modules/' + _prefixUnderscoreFilename(file)
         ];
 
     tests = tests.map(function(test) {
-        return unixifyPath(path.resolve(test));
+        return _unixifyPath(path.resolve(test));
     });
 
     // Return first match
@@ -116,7 +116,7 @@ function autocompleteFilename(file) {
 }
 
 // Return the extension of a file, without the dot
-function getFileExtension(file) {
+function _getFileExtension(file) {
     var ext = file.match(/\.((?!.*\.).*)/);
     return ext ? ext[1] : false;
 }
@@ -124,7 +124,7 @@ function getFileExtension(file) {
 // Prefix an underscores to a filename:
 //  aap.html            ->  _aap.html
 //  aap/noot/mies.html  ->  aap/noot/_mies.html
-function prefixUnderscoreFilename(file) {
+function _prefixUnderscoreFilename(file) {
     if (-1 !== file.indexOf('/')) {
         return file.replace(/\/(?!.*\/)/g, '/_');
     }
@@ -134,10 +134,10 @@ function prefixUnderscoreFilename(file) {
 // Returns a relative (to src/) path with the filename wrapped with a <span>
 //  src\aap.html       ->  <span class="file">aap.html</span>
 //  src\aap\noot.html  ->  aap/<span class="file">noot.html</span>
-function getPrettyRelativeFilename(file) {
+function _getPrettyRelativeFilename(file) {
 
     file = path.relative('src/', file);
-    file = unixifyPath(file);
+    file = _unixifyPath(file);
     file = file.replace(/\/((?!.*\/).*)/g, '/<span class="file">$1</span>');
 
     return file;
@@ -145,6 +145,6 @@ function getPrettyRelativeFilename(file) {
 
 // Returns a path with UNIX slashes
 //  aap\noot\mies.html  ->  aap/noot/mies.html
-function unixifyPath(file) {
+function _unixifyPath(file) {
     return file.replace(/\\/g, '/');
 }

@@ -17,23 +17,23 @@ var allowedProperties = ['title', 'description'],
 // Parse swig comment block - control function
 function parse(source) {
 
-    var docblock = getDocBlock(source);
+    var docblock = _getDocBlock(source);
     if (!docblock) return false;
 
-    var properties = getProperties(docblock);
+    var properties = _getProperties(docblock);
     if (!properties) return false;
 
     return properties;
 }
 
 // Grabs the contents of a Swig comment block, delimited with: {# and #}
-function getDocBlock(source) {
+function _getDocBlock(source) {
     var result = source.match(/{#([^#}]*)#}/);
     return (result && result[1] ? result[1] : false);
 }
 
 // Parse the YAML block into an object
-function getProperties(docblock) {
+function _getProperties(docblock) {
 
     var yamlProperties = yaml.safeLoad(docblock);
     var properties     = {resources: []};
