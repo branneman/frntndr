@@ -7,23 +7,14 @@
 var url = require('url');
 
 // Expose module
-module.exports = setRequestVariablesFactory;
+module.exports = setRequestVariables;
 
-// Function to 'catch' the `app` variable in a scope
-function setRequestVariablesFactory(app) {
+function setRequestVariables(req, res, next) {
 
-    // This function is executed for every request
-    return function setRequestVariables(req, res, next) {
+    // baseUrl
+    var pathname = url.parse(req.url).pathname.substr(1);
+    req.baseUrl  = new Array(pathname.split('/').length).join('../');
 
-        // Set global app variable to the request
-        req.app = app;
-
-        // Set base url as request parameter, for other
-        var pathname = url.parse(req.url).pathname.substr(1);
-        var baseUrl  = new Array(pathname.split('/').length).join('../');
-        req.baseUrl = baseUrl;
-
-        // Fall-through to next middleware
-        next();
-    };
+    // Fall-through to next middleware
+    next();
 }

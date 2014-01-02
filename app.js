@@ -30,7 +30,7 @@ app.disable('view cache');
 // Set middleware
 app.use(express.compress());
 app.use(redirects);
-app.use(reqVariables(app));
+app.use(reqVariables);
 
 // Set controllers
 app.get('/static/img/*.svg.*.png', controllers.svg2png);
