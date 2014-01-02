@@ -25,7 +25,7 @@ app.engine('.html', swig.renderFile);
 app.engine('.js', swig.renderFile);
 app.set('views', __dirname + '/src/');
 app.set('view engine', 'html');
-app.set('view cache', false);
+app.disable('view cache');
 
 // Set middleware
 app.use(express.compress());
