@@ -29,20 +29,24 @@ tools (and more), with more overhead and flexibility, without my strict rules.
 ## Development environment
 
 ### How to: Setup development environment
-Make sure the following is installed on your machine:
+1. Make sure the following is installed on your machine:
+  - [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.25)
+  - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
-- [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.23)
-- [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
+2. Download most recent stable: [github.com/branneman/frontend-library/archive/master.zip](https://github.com/branneman/frontend-library/archive/master.zip)
 
-When installed, run these commands to setup your environment. It will
-[install Sass](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#using_sass) and the
-[grunt cli](https://github.com/gruntjs/grunt-cli) when they're not found. And of course it also installs all the
-[node dependencies](https://github.com/branneman/frontend-library/blob/master/package.json):
+3. Unzip the contents of the `frontend-library-master` directory into your new project directory.
 
+4. Run these commands to setup your environment:
+
+    ```
     cd /path/to/project
+    gem install sass --pre
+    npm i -g grunt-cli
     npm i
+    ```
 
-Done!
+Done! You can now start your development server.
 
 ### How to: Start the development server
 
