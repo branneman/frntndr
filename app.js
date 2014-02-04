@@ -34,7 +34,7 @@ app.use(reqVariables);
 
 // Set controllers
 app.get('/static/img/*.svg.*.png', controllers.svg2png);
-app.get('/docs/', controllers.docs.index);
+app.get(/(^\/docs\/$|(^\/docs\/index\.html$))/, controllers.docs.index);
 app.get(/\/docs\/modules\/(.*)/, controllers.docs.module);
 app.get(/\/docs\/_modules\/(.*)/, controllers.docs._module);
 app.get('/static/js/*.js', controllers.concatJS);
