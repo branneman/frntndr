@@ -2,7 +2,7 @@
 {% block title %}Module: {{ module.title }}{% endblock %}
 
 {%- block body %}
-    <nav>&laquo; <a href="{{ baseUrl }}docs/">Documentation index</a></nav>
+    <nav>&laquo; <a href="{{ baseUrl }}docs/index.html">Documentation index</a></nav>
     <h1>
         {% if module.parent %}
             <a href="{{ baseUrl }}docs/{{ module.parent.file.path.relative }}">{{ module.parent.title }}</a> /

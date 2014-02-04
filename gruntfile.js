@@ -168,25 +168,59 @@ module.exports = function Gruntfile(grunt) {
         },
 
         httpcopy: {
-            options: {
-                serverUrl: 'http://localhost:' + config.server.port + '/',
-                urlMapper: function urlMapper(serverUrl, filePath) {
-                    return serverUrl + filePath.replace(/^src\//, '');
-                }
-            },
             dist: {
+                options: {
+                    serverUrl: 'http://localhost:' + config.server.port + '/',
+                    urlMapper: function urlMapper(serverUrl, filePath) {
+                        return serverUrl + filePath.replace(/^src\//, '');
+                    }
+                },
                 files: [{
                     expand: true,
                     cwd: 'src/',
                     src: [
                         '**/*.{html,js}',
                         '!**/layout/**',
-                        '!**/docs/**',
+                        '!**/includes/**',
                         '!**/modules/**',
+                        '!**/docs/**',
                         '!**/js/**/_*.js',
                         '!**/js/spec/**'
                     ],
                     dest: 'build/'
+                }]
+            },
+            docs: {
+                options: {
+                    serverUrl: 'http://localhost:' + config.server.port + '/',
+                    urlMapper: function(serverUrl, filePath) {
+                        return serverUrl + 'docs/' + filePath.replace(/^src\//, '');
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/',
+                    src: [
+                        'index.html',
+                        'modules/**/*.html'
+                    ],
+                    dest: 'build/docs/'
+                }]
+            },
+            docsModules: {
+                options: {
+                    serverUrl: 'http://localhost:' + config.server.port + '/',
+                    urlMapper: function(serverUrl, filePath) {
+                        return serverUrl + 'docs/_' + filePath.replace(/^src\//, '');
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/modules/',
+                    src: [
+                        '**/*.html'
+                    ],
+                    dest: 'build/docs/_modules/'
                 }]
             }
         },
