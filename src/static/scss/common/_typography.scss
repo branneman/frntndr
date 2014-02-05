@@ -1,10 +1,4 @@
 //
-// Colors
-//
-$bodycopy: #333;
-$linkblue: royalblue;
-
-//
 // Defaults
 //
 html {
@@ -12,7 +6,7 @@ html {
 }
 body > .wrapper { // quick fix for chrome bugs #320754, #296380, #319623, just 'body' would suffice normally
     @include rem(font-size, 18px);
-    color: $bodycopy;
+    color: color('off-black');
     font-family: Constantia, Baskerville, Georgia, serif;
     @include old-ie {
         font-family: monospace;
@@ -40,7 +34,7 @@ h2 {
 // Links
 //
 a {
-    color: $linkblue;
+    color: color('primary-a');
     text-decoration: none;
 }
 a:hover,

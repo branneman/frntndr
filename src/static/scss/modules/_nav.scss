@@ -1,6 +1,6 @@
 nav {
     @include rem(padding-bottom, 16px);
 
-    border-bottom: solid $linkblue;
+    border-bottom: solid color('primary-b');
     @include rem(border-bottom-width, 1px);
 }

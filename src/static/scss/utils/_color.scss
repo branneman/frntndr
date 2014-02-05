@@ -1,0 +1,19 @@
+//
+// Function to get a color by it's name
+//
+//  See also: common/_colors.scss
+//
+//  Usage:
+//   border: 1px solid color('primary-a');
+//
+@function color($name) {
+    $index: null;
+
+    @for $i from 1 through length($colors) {
+        @if nth(nth($colors, $i), 1) == $name {
+            $index: $i;
+        }
+    }
+
+    @return nth(nth($colors, $index), 2);
+}
