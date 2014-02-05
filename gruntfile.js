@@ -125,31 +125,16 @@ module.exports = function Gruntfile(grunt) {
         },
 
         imagemin: {
-            png: {
-                options: {
-                    optimizationLevel: 7
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'src/static/img/',
-                        src: ['**/*.png'],
-                        dest: 'build/static/img/'
-                    }
-                ]
+            options: {
+                pngquant: true
             },
-            jpg: {
-                options: {
-                    progressive: true
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'src/static/img/',
-                        src: ['**/*.jpg'],
-                        dest: 'build/static/img/'
-                    }
-                ]
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/static/img/',
+                    src: ['**/*.{png,jpg,gif}'],
+                    dest: 'build/static/img/'
+                }]
             }
         },
 
