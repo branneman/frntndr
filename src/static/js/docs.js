@@ -1,4 +1,18 @@
 //
+// Quick Reference Card
+//
+$(function QuickReferenceCard(){
+
+    'use strict';
+
+    $('iframe').load(function() {
+        $(this).css({
+            height: $(this.contentDocument.body).outerHeight() + 10
+        });
+    });
+});
+
+//
 // Resizable Demo module
 //
 

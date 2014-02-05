@@ -57,7 +57,7 @@ function framedModuleAction(req, res, next) {
 
     var template =
         '{% extends \'framed.html\' %}' +
-        '{% block demo %}' +
+        '{% block body %}' +
             file.contents.raw +
         '{% endblock %}';
 

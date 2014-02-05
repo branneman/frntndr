@@ -6,8 +6,8 @@
 
 'use strict';
 
-var fs     = require('fs');
-var glob   = require('glob');
+var fs   = require('fs');
+var glob = require('glob');
 
 module.exports = function Gruntfile(grunt) {
 
@@ -153,9 +153,11 @@ module.exports = function Gruntfile(grunt) {
         },
 
         httpcopy: {
-            dist: {
+            options: {
+                serverUrl: 'http://localhost:' + config.server.port + '/'
+            },
+            pages: {
                 options: {
-                    serverUrl: 'http://localhost:' + config.server.port + '/',
                     urlMapper: function urlMapper(serverUrl, filePath) {
                         return serverUrl + filePath.replace(/^src\//, '');
                     }
@@ -177,24 +179,39 @@ module.exports = function Gruntfile(grunt) {
             },
             docs: {
                 options: {
-                    serverUrl: 'http://localhost:' + config.server.port + '/',
                     urlMapper: function(serverUrl, filePath) {
-                        return serverUrl + 'docs/' + filePath.replace(/^src\//, '');
+                        return serverUrl + filePath.replace(/^src\//, '');
                     }
                 },
                 files: [{
                     expand: true,
-                    cwd: 'src/',
+                    cwd: 'src/docs/',
                     src: [
                         'index.html',
-                        'modules/**/*.html'
+                        'qrc.html',
+                        'qrc/_typography.html',
+                        'qrc/_colors.html'
                     ],
                     dest: 'build/docs/'
                 }]
             },
             docsModules: {
                 options: {
-                    serverUrl: 'http://localhost:' + config.server.port + '/',
+                    urlMapper: function(serverUrl, filePath) {
+                        return serverUrl + 'docs/' + filePath.replace(/^src\//, '');
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/modules/',
+                    src: [
+                        '**/*.html'
+                    ],
+                    dest: 'build/docs/modules/'
+                }]
+            },
+            docsModulePreviews: {
+                options: {
                     urlMapper: function(serverUrl, filePath) {
                         return serverUrl + 'docs/_' + filePath.replace(/^src\//, '');
                     }
@@ -251,6 +268,7 @@ module.exports = function Gruntfile(grunt) {
                 src: 'build',
                 dest: config.build.deploy.dest,
                 exclusions: [
+                    '**/desktop.ini',
                     '**/.DS_Store',
                     '**/Thumbs.db',
                     '**/.gitignore'
