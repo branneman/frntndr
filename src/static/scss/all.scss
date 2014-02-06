@@ -3,10 +3,13 @@
 @import 'utils/respond';
 @import 'utils/generated-content';
 @import 'utils/position';
+@import 'utils/color';
 
-//@import 'normalize';
-@import 'typography';
-@import 'grid';
+@import 'vendor/normalize';
+
+@import 'common/colors';
+@import 'common/typography';
+@import 'common/grid';
 
 @import 'modules/nav';
 @import 'modules/footer';

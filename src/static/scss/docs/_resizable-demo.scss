@@ -1,0 +1,120 @@
+.resizable-demo {
+    z-index: 9000;
+
+    button {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .resizable {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2RTAzMzk0QzQzMDgxMUUzODg2MEMwQzY0QjNFQTI2MyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2RTAzMzk0RDQzMDgxMUUzODg2MEMwQzY0QjNFQTI2MyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjZFMDMzOTRBNDMwODExRTM4ODYwQzBDNjRCM0VBMjYzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjZFMDMzOTRCNDMwODExRTM4ODYwQzBDNjRCM0VBMjYzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+tJA4ygAAAC1JREFUeNpifPfuHQM2ICgoiFWciYFEMKqBGMD4//9/rBLv378fDSX6aQAIMADeGQjmD2cexwAAAABJRU5ErkJggg==');
+        font-size: 0;
+    }
+
+    &.fullscreen {
+        @include position(absolute, 0px 0px 0px 0px);
+        background: lightgrey;
+
+        .controls {
+            @include position(absolute, 0px 0px 0 0px);
+            height: 30px;
+            text-align: center;
+
+            .inactive {
+                display: none;
+            }
+
+            .active {
+                display: block;
+
+                .size {
+                    position: relative;
+                    width: 28px;
+                    height: 28px;
+                    margin-top: 2px;
+                    border-radius: 4px;
+                    background: darkgrey 50% 50% no-repeat;
+                    text-indent: -9999px;
+                    text-decoration: none;
+                    vertical-align: top;
+
+                    &.max {
+                        font-size: 11px;
+                        text-indent: 0;
+                        color: white;
+                    }
+                }
+
+                .icon-phone-portrait,
+                .icon-phone-landscape {
+                    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAQAAACFdibLAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJNJREFUGFeVjDEKwkAUBefHhUAQG8HGwguIR7Czs/Munkq8hunTWohoIWlUBBf3r99CA64g6CuHeSP3hU05sZeSq83oY1JJOFJRc2ZLYEhHMpvgd35AMr9xCsU7uuQqTlMNBVz4gAH4w/wdfmvGxIzgFGuXBSCAwS3PRFaH5oMQAKHntEUXgCVr5s+Ei/aKjRk13QeKojmLEk117AAAAABJRU5ErkJggg==');
+                }
+                .icon-tablet-portrait,
+                .icon-tablet-landscape {
+                    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAQAAAAqnqXBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALdJREFUKM/VkjEKwkAQRd/EVQKClYgIgmKnjWXu4C3sPIClrZXHsRQEPYG1qKCNINaCyexaBGIKN2jpdH/+4/8pRuyIBS184zgwkeREB8V5oICAjbF1Eom4eoKGLGkatSDn8PYZejQANQpQ8Z2kZQCTUDSp+x2khVDqmrgQin+o+1tIAe8PoO6dZL1JFsBYoeRW22e2v1OmliVVBQJjL/QZ5PrGdJm9pYOjrCM3p5dr2BPSzumdTF90y0NcVdvNJQAAAABJRU5ErkJggg==');
+                }
+                .icon-phone-landscape,
+                .icon-tablet-landscape {
+                    transform: rotate(90deg);
+                }
+
+                .close {
+                    position: relative;
+                    float: right;
+                    width: 25px;
+                    height: 25px;
+                    margin: 3px 3px 0 0;
+                    text-indent: -9999px;
+
+                    &::before {
+                        @include position(absolute, 0px 0 0 0px);
+                        content: '×';
+                        width: 25px;
+                        height: 25px;
+                        line-height: 25px;
+                        font-size: 36px;
+                        text-align: center;
+                        text-indent: 0;
+                    }
+                }
+            }
+        }
+
+        .resizable {
+            @include position(absolute, 30px 0px 0px 0px);
+
+            iframe {
+                height: 100% !important;
+                border-radius: 8px;
+            }
+        }
+    }
+
+    .inactive {
+        position: relative;
+        float: right;
+        margin: -35px 0 10px;
+        z-index: 2;
+
+        .open {
+            color: #4183C4;
+        }
+    }
+
+    .active {
+        display: none;
+    }
+
+    iframe {
+        box-sizing: border-box;
+        width: 100%;
+        border: 2px solid lightgrey;
+    }
+}

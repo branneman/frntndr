@@ -1,0 +1,49 @@
+.qrc-colors {
+    margin: -20px 0 0 0;
+    padding: 0;
+    list-style: none;
+
+    > li {
+        position: relative;
+        display: none;
+        width: 150px;
+        height: 150px;
+        margin: 20px 20px 0 0;
+
+        &:before,
+        &:after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 40px;
+            padding-left: 10px;
+            background: rgba(255, 255, 255, .4);
+            line-height: 39px;
+        }
+        &:before {
+            top: 0;
+        }
+        &:after {
+            bottom: 0;
+            font-size: 24px;
+            font-family: Consolas, 'Courier New', Courier, monospace;
+        }
+
+        @for $i from 1 through length($colors) {
+            $color: nth($colors, $i);
+            $name:  nth($color, 1);
+            $code:  nth($color, 2);
+
+            &:nth-child(#{$i}) {
+                display: inline-block;
+                background: $code;
+            }
+            &:nth-child(#{$i}):before {
+                content: '$' $name;
+            }
+            &:nth-child(#{$i}):after {
+                content: '#{$code}';
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 footer {
     @include rem(padding-top, 16px);
 
-    border-top: solid $linkblue;
+    border-top: solid color('primary-b');
     @include rem(border-top-width, 1px);
 
     p {

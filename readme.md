@@ -13,8 +13,7 @@ tools, but should be usable by novices.
 ## Features
 - Setup is *really* easy, you only need to install Node.js, configuration like setting up Apache is not necessary
 - The Sass watcher is automatically started, you don't have to worry about it anymore
-- [EJS](http://embeddedjs.com/) is used as a template engine where your HTML lives, it's basically JavaScript between
-these tags: `<% %>`
+- [Swig](http://paularmstrong.github.io/swig/) is used as a template engine where your HTML lives
 - Sass with the scss syntax makes your CSS3 code valid Sass. You can start writing Sass at will, or just write CSS3 but
 still have minification
 - Grunt is integrated as the preferred build tool, just run `grunt` in your project root to run the build.
@@ -30,25 +29,29 @@ tools (and more), with more overhead and flexibility, without my strict rules.
 ## Development environment
 
 ### How to: Setup development environment
-Make sure the following is installed on your machine:
+1. Make sure the following is installed on your machine:
+  - [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.25)
+  - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
-- [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.22)
-- [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
+2. Download most recent stable: [github.com/branneman/frontend-library/archive/master.zip](https://github.com/branneman/frontend-library/archive/master.zip)
 
-When installed, run these commands to setup your environment. It will
-[install Sass](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#using_sass) and the
-[grunt cli](https://github.com/gruntjs/grunt-cli) when they're not found. And of course it also installs all the
-[node dependencies](https://github.com/branneman/frontend-library/blob/master/package.json):
+3. Unzip the contents of the `frontend-library-master` directory into your new project directory.
 
+4. Run these commands to setup your environment:
+
+    ```
     cd /path/to/project
+    gem install sass --pre
+    npm i -g grunt-cli
     npm i
+    ```
 
-Done!
+Done! You can now start your development server.
 
 ### How to: Start the development server
 
     cd /path/to/project
-    npm start
+    node app
 
 You can optionally configure your WebStorm to allow for a more easy server start, so you can click a fancy play button
 instead of having to work on the scary CLI.
@@ -56,7 +59,7 @@ instead of having to work on the scary CLI.
 Then point your browser to [`http://localhost:1337/`](http://localhost:1337/)
 
 ### How to: Build, test and deploy
-Make sure your server is running, then execute:
+Make sure your app is running, then execute:
 
     cd /path/to/project
     grunt

@@ -1,0 +1,20 @@
+//
+// Colors
+//
+//  See also: utils/_color.scss
+//
+//  Usage:
+//   border: 1px solid color('primary-a');
+//
+$colors:
+    'primary-a'     #aac02c,
+    'primary-b'     #31571b,
+    'secondary-a'   #6f507a,
+    'secondary-b'   #da1d4d,
+    'secondary-c'   #8c6239,
+    'line'          #ddd,
+    'off-black'     #333,
+    'black'         #202020,
+    'muted-text'    #909090,
+    'line-on-black' #7d7d7d
+;

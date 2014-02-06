@@ -1,0 +1,23 @@
+{% extends '../layout/docs/default.html' %}
+
+{%- block body %}
+
+    <nav>&laquo; <a href="{{ baseUrl }}docs/index.html">Documentation index</a></nav>
+    <h1>Quick Reference Card</h1>
+
+    <h3>Index:</h3>
+    <ul>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#colors">Colors</a></li>
+    </ul>
+
+    <section id="typography">
+        <h2>Typography</h2>
+        <iframe class="qrc" src="{{ baseUrl }}docs/qrc/_typography.html"></iframe>
+    </section>
+
+    <section id="colors">
+        <h2>Colors</h2>
+        <iframe class="qrc" src="{{ baseUrl }}docs/qrc/_colors.html"></iframe>
+    </section>
+{% endblock -%}

@@ -1,12 +1,19 @@
-var fs = require('fs');
-JSON.minify = require('jsonminify');
+/* jshint -W071 */
 
-module.exports = function(grunt) {
+//
+// Gruntfile.js — the config file for grunt
+//
 
-    var pkg     = grunt.file.readJSON('package.json'),
-        config  = grunt.file.readJSON('config.json');
+'use strict';
 
-    // Project configuration.
+var fs   = require('fs');
+var glob = require('glob');
+
+module.exports = function Gruntfile(grunt) {
+
+    var pkg    = grunt.file.readJSON('package.json');
+    var config = grunt.file.readJSON('config.json');
+
     grunt.initConfig({
 
         pkg: pkg,
@@ -83,45 +90,51 @@ module.exports = function(grunt) {
             }
         },
 
+        csso: {
+            options: {
+                restructure: false,
+                report: 'min'
+            },
+            dist: {
+                files: (function() {
+                    var files = {};
+                    glob.sync('src/static/css/*.css').forEach(function(file) {
+                        files[file] = file;
+                    });
+                    return files;
+                }())
+            }
+        },
+
         copy: {
             dist: {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**', '!**/*.{html,js}', '!**/layout/**', '!**/modules/**', '!**/static/{_css,scss}/**', '!**/static/css/*.map'],
+                    src: [
+                        '**',
+                        '!**/*.{html,js}',
+                        '!**/layout/**',
+                        '!**/modules/**',
+                        '!**/static/{_css,scss}/**',
+                        '!**/static/css/*.map'
+                    ],
                     dest: 'build'
                 }]
             }
         },
 
         imagemin: {
-            png: {
-                options: {
-                    optimizationLevel: 7
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'src/static/img/',
-                        src: ['**/*.png'],
-                        dest: 'build/static/img/',
-                        ext: '.png'
-                    }
-                ]
+            options: {
+                pngquant: true
             },
-            jpg: {
-                options: {
-                    progressive: true
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'src/static/img/',
-                        src: ['**/*.jpg'],
-                        dest: 'build/static/img/',
-                        ext: '.jpg'
-                    }
-                ]
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/static/img/',
+                    src: ['**/*.{png,jpg,gif}'],
+                    dest: 'build/static/img/'
+                }]
             }
         },
 
@@ -130,7 +143,10 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'build/',
-                    src: ['**/*.js', '!**/js/vendor/**'],
+                    src: [
+                        '**/*.js',
+                        '!**/js/vendor/**'
+                    ],
                     dest: 'build/'
                 }]
             }
@@ -138,27 +154,89 @@ module.exports = function(grunt) {
 
         httpcopy: {
             options: {
-                serverUrl: 'http://localhost:' + config.server.port + '/',
-                urlMapper: function(serverUrl, filePath) {
-                    return serverUrl + filePath.replace(/^src\//, '');
-                }
+                serverUrl: 'http://localhost:' + config.server.port + '/'
             },
-            dist: {
+            pages: {
+                options: {
+                    urlMapper: function urlMapper(serverUrl, filePath) {
+                        return serverUrl + filePath.replace(/^src\//, '');
+                    }
+                },
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['**/*.{html,js}', '!**/layout/**', '!**/modules/**', '!**/js/**/_*.js', '!**/js/spec/**'],
+                    src: [
+                        '**/*.{html,js}',
+                        '!**/layout/**',
+                        '!**/includes/**',
+                        '!**/modules/**',
+                        '!**/docs/**',
+                        '!**/js/**/_*.js',
+                        '!**/js/spec/**'
+                    ],
                     dest: 'build/'
+                }]
+            },
+            docs: {
+                options: {
+                    urlMapper: function(serverUrl, filePath) {
+                        return serverUrl + filePath.replace(/^src\//, '');
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/docs/',
+                    src: [
+                        'index.html',
+                        'qrc.html',
+                        'qrc/_typography.html',
+                        'qrc/_colors.html'
+                    ],
+                    dest: 'build/docs/'
+                }]
+            },
+            docsModules: {
+                options: {
+                    urlMapper: function(serverUrl, filePath) {
+                        return serverUrl + 'docs/' + filePath.replace(/^src\//, '');
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/modules/',
+                    src: [
+                        '**/*.html'
+                    ],
+                    dest: 'build/docs/modules/'
+                }]
+            },
+            docsModulePreviews: {
+                options: {
+                    urlMapper: function(serverUrl, filePath) {
+                        return serverUrl + 'docs/_' + filePath.replace(/^src\//, '');
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/modules/',
+                    src: [
+                        '**/*.html'
+                    ],
+                    dest: 'build/docs/_modules/'
                 }]
             }
         },
 
         jshint: {
             dist: [
-                'src/static/js/**/*.js',
-                grunt.file.read('.jshintignore').trim().split('\n').map(function(s) { return '!' + s; })
+                'app.js',
+                'gruntfile.js',
+                'app/**/*.js',
+                'src/static/js/**/*.js'
             ],
-            options: JSON.parse(JSON.minify(fs.readFileSync('.jshintrc', 'utf8')))
+            options: {
+                jshintrc: true
+            }
         },
 
         jasmine: {
@@ -181,7 +259,7 @@ module.exports = function(grunt) {
         },
 
         'ftp-deploy': {
-            build: {
+            dist: {
                 auth: {
                     host: config.build.deploy.host,
                     port: config.build.deploy.port,
@@ -189,7 +267,12 @@ module.exports = function(grunt) {
                 },
                 src: 'build',
                 dest: config.build.deploy.dest,
-                exclusions: ['**/.DS_Store', '**/Thumbs.db', '**/.gitignore']
+                exclusions: [
+                    '**/desktop.ini',
+                    '**/.DS_Store',
+                    '**/Thumbs.db',
+                    '**/.gitignore'
+                ]
             }
         }
 
@@ -208,12 +291,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-httpcopy');
     grunt.loadNpmTasks('grunt-ftp-deploy');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-csso');
 
     // Default task
     grunt.registerTask('default', [
         'clean:dir',
         'sass:prod',
         'autoprefixer',
+        'csso',
         'copy',
         'imagemin',
         'httpcopy',
@@ -231,7 +316,6 @@ module.exports = function(grunt) {
 
     // Test task.
     grunt.registerTask('test', [
-        //'csslint',
         'jshint',
         'jasmine',
         'clean:test'

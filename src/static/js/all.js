@@ -1,2 +1,3 @@
-<% include _has-js.js %>
-<% include _features.js %>
+{% include 'common/_has-js.js' %}
+
+{% include 'modules/_footer.js' %}

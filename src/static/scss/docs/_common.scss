@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+}
+.wrapper {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+a:focus,
+a:hover {
+    text-decoration: underline;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+.filename {
+    margin-bottom: 0;
+    font-weight: normal;
+
+    .file,
+    .language {
+        font-weight: bold;
+    }
+    .language {
+        float: right;
+        color: #ccc;
+    }
+}
+.highlighted {
+    margin-top: 0px;
+}
+
+iframe.qrc {
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid lightgrey;
+}

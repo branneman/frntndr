@@ -1,5 +1,9 @@
-<% layout('layout/default') -%>
-<div class="wrapper">
-    <h1>404 Not Found</h1>
-    <p><a href="<%= baseUrl %>index.html">Navigate to homepage</a></p>
-</div>
+{% extends 'layout/default.html' %}
+{% block title %}404 Not Found{% endblock %}
+
+{% block body %}
+    <main class="wrapper">
+        <h1>404 Not Found</h1>
+        <p><a href="{{ baseUrl || '/' }}">Navigate to homepage</a></p>
+    </main>
+{% endblock %}

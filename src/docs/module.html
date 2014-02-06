@@ -1,0 +1,58 @@
+{% extends '../layout/docs/default.html' %}
+{% block title %}Module: {{ module.title }}{% endblock %}
+
+{%- block body %}
+    <nav>&laquo; <a href="{{ baseUrl }}docs/index.html">Documentation index</a></nav>
+    <h1>
+        {% if module.parent %}
+            <a href="{{ baseUrl }}docs/{{ module.parent.file.path.relative }}">{{ module.parent.title }}</a> /
+        {% endif %}
+        {{ module.title }}
+    </h1>
+
+    {% if module.description %}
+        {{ module.description|safe }}
+    {% endif %}
+
+    {% if module.children.length %}
+        <h2>Variants:</h2>
+        <ul>
+            {% for child in module.children %}
+                <li><a href="{{ baseUrl }}docs/{{ child.file.path.relative }}">{{ child.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <section>
+        <h2>Demo</h2>
+        <div class="resizable-demo">
+            <div class="controls">
+                <div class="inactive">
+                    &raquo; <button class="open">See in different resolutions</button>
+                </div>
+                <div class="active">
+                    <button class="size icon-phone-portrait" data-width="320" data-height="480" title="Phone portrait (320x480)">Phone portrait</button>
+                    <button class="size icon-phone-landscape" data-width="480" data-height="320" title="Phone landscape (480x320)">Phone landscape</button>
+                    <button class="size icon-tablet-portrait" data-width="768" data-height="1024" title="Tablet portrait (768x1024)">Tablet portrait</button>
+                    <button class="size icon-tablet-landscape" data-width="1024" data-height="768" title="Tablet landscape (1024x768)">Tablet landscape</button>
+                    <button class="size max" data-width="auto" data-height="auto" title="Current browser width">max</button>
+                    <button class="close">Close</button>
+                </div>
+            </div>
+            <div class="resizable"><iframe src="{{ baseUrl }}docs/_{{ module.file.path.relative }}"></iframe></div>
+        </div>
+    </section>
+
+    {% if module.resources.length %}
+        <section>
+            <h2>Source</h2>
+            {% for file in module.resources %}
+                <h4 class="filename">
+                    <span title="{{ file.path.absolute }}">{{ file.path.pretty|safe }}</span>
+                    <span class="language">{{ file.path.extension|upper }}</span>
+                </h4>
+                <pre class="highlighted"><code>{{ file.contents.pretty|safe }}</code></pre>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock -%}
