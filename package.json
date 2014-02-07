@@ -1,10 +1,10 @@
 {
-  "name": "front-end-library",
+  "name": "frntndr",
   "description": "",
   "version": "0.3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/branneman/frontend-library.git"
+    "url": "https://github.com/branneman/frntndr.git"
   },
   "author": "You <you@example.org> (http://example.org/)",
   "contributors": [
