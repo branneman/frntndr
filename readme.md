@@ -1,4 +1,4 @@
-# Front-End Library
+# frntndr
 This codebase is a blueprint environment to quick start new front-end codebases. It tries to save your precious time
 through having various tools preconfigured and dictating a workflow.
 
@@ -33,9 +33,9 @@ tools (and more), with more overhead and flexibility, without my strict rules.
   - [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.10.25)
   - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
 
-2. Download most recent stable: [github.com/branneman/frontend-library/archive/master.zip](https://github.com/branneman/frontend-library/archive/master.zip)
+2. Download most recent stable: [github.com/branneman/frntndr/archive/0.3.zip](https://github.com/branneman/frntndr/archive/0.3.zip)
 
-3. Unzip the contents of the `frontend-library-master` directory into your new project directory.
+3. Unzip the contents of the `frntndr-0.3` directory into your new project directory.
 
 4. Run these commands to setup your environment:
 
