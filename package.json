@@ -10,7 +10,10 @@
   "contributors": [
     "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)"
   ],
-  "license": "CC-BY-4.0",
+  "licenses": {
+    "type": "CC-BY-4.0",
+    "url": "http://creativecommons.org/licenses/by/4.0/"
+  },
   "private": true,
   "main": "app.js",
   "engines": {
