@@ -10,13 +10,15 @@ var url = require('url');
 // Expose module
 module.exports = staticAction;
 
-function staticAction(req, res) {
+function staticAction(req, res, next) {
 
     var pathname = url.parse(req.url).pathname.substr(1);
     var file     = req.app.get('views') + '/' + (pathname || 'index.html');
 
     if (fs.existsSync(file)) {
         res.sendfile(file);
+    } else {
+        next();
     }
 
 }
