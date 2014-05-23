@@ -11,8 +11,8 @@ var glob = require('glob');
 
 module.exports = function Gruntfile(grunt) {
 
-    var pkg    = grunt.file.readJSON('package.json');
-    var config = grunt.file.readJSON('config.json');
+    var pkg    = grunt.file.readJSON('./package.json');
+    var config = grunt.file.readJSON('./app/config.json');
 
     grunt.initConfig({
 
@@ -32,7 +32,7 @@ module.exports = function Gruntfile(grunt) {
                 }
             },
             test: {
-                src: ['.grunt', '_SpecRunner.html']
+                src: ['.grunt']
             },
             zip: {
                 src: ['<%= pkg.name %>.zip']
@@ -117,7 +117,8 @@ module.exports = function Gruntfile(grunt) {
                         '!**/layout/**',
                         '!**/modules/**',
                         '!**/static/{_css,scss}/**',
-                        '!**/static/css/*.map'
+                        '!**/static/css/*.map',
+                        '!**/static/js/**'
                     ],
                     dest: 'build'
                 }]
@@ -166,13 +167,12 @@ module.exports = function Gruntfile(grunt) {
                     expand: true,
                     cwd: 'src/',
                     src: [
-                        '**/*.{html,js}',
+                        '**/*.html',
                         '!**/layout/**',
                         '!**/includes/**',
                         '!**/modules/**',
                         '!**/docs/**',
-                        '!**/js/**/_*.js',
-                        '!**/js/spec/**'
+                        '!**/js/**/'
                     ],
                     dest: 'build/'
                 }]
@@ -232,20 +232,11 @@ module.exports = function Gruntfile(grunt) {
                 'app.js',
                 'gruntfile.js',
                 'app/**/*.js',
-                'src/static/js/**/*.js'
+                'src/static/js/**/*.js',
+                '!src/static/js/vendor/**'
             ],
             options: {
                 jshintrc: true
-            }
-        },
-
-        jasmine: {
-            dist: {
-                src: ['src/static/js/**/_*.js'],
-                options: {
-                    vendor: 'src/static/js/vendor/*.js',
-                    specs: 'src/static/js/spec/*.js'
-                }
             }
         },
 
@@ -285,7 +276,6 @@ module.exports = function Gruntfile(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-httpcopy');
@@ -317,7 +307,6 @@ module.exports = function Gruntfile(grunt) {
     // Test task.
     grunt.registerTask('test', [
         'jshint',
-        'jasmine',
         'clean:test'
     ]);
 

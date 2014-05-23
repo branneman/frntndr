@@ -1,7 +1,7 @@
 {
-  "name": "frntndr",
+  "name": "my-project",
   "description": "",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/branneman/frntndr.git"
@@ -41,7 +41,6 @@
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-compress": "~0.6.0",
     "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-jasmine": "~0.6.1",
     "grunt-contrib-imagemin": "~0.4.0",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-httpcopy": "~0.3.0",
