@@ -10,7 +10,7 @@ var swig    = require('swig');
 var app     = express();
 
 // Load app dependencies
-var config       = require('./config.json');
+var config       = require('./app/config');
 var gruntWatcher = require('./app/grunt-watcher');
 var redirects    = require('./app/middleware/redirects');
 var reqVariables = require('./app/middleware/req-variables');
@@ -22,7 +22,6 @@ gruntWatcher();
 // App & view configuration
 swig.setDefaults({cache: false});
 app.engine('.html', swig.renderFile);
-app.engine('.js', swig.renderFile);
 app.set('views', __dirname + '/src/');
 app.set('view engine', 'html');
 app.disable('view cache');
@@ -37,7 +36,6 @@ app.get('/static/img/*.svg.*.png', controllers.svg2png);
 app.get(/(^\/docs\/$|(^\/docs\/index\.html$))/, controllers.docs.index);
 app.get(/\/docs\/modules\/(.*)/, controllers.docs.module);
 app.get(/\/docs\/_modules\/(.*)/, controllers.docs._module);
-app.get('/static/js/*.js', controllers.concatJS);
 app.get('/static/*', controllers.static);
 app.use(controllers.views);
 app.use(controllers.page404);

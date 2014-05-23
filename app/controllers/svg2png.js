@@ -9,7 +9,7 @@ var fs   = require('fs');
 var exec = require('child_process').exec;
 var ansi = require('ansi-styles');
 
-var config = require('../../config.json');
+var config = require('../config');
 
 // Expose module
 module.exports = svg2pngAction;

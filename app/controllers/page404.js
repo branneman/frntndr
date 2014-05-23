@@ -7,7 +7,7 @@
 var url  = require('url');
 var ansi = require('ansi-styles');
 
-var config = require('../../config.json');
+var config = require('../config');
 
 // Expose module
 module.exports = page404Action;
