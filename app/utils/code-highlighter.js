@@ -11,7 +11,7 @@ module.exports = highlight;
 
 // Map file extension to Highlight.js language
 var knownLanguages = {
-    html: 'django', // Swig syntax is the same as Django's
+    html: 'django', // Swig syntax is the same as Django's (mustache syntax)
     scss: 'scss',
     js:   'javascript'
 };
