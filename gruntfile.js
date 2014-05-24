@@ -141,6 +141,9 @@ module.exports = function Gruntfile(grunt) {
         },
 
         uglify: {
+            options: {
+                sourceMap: true
+            },
             dist: {
                 files: [{
                     expand: true,
