@@ -113,12 +113,13 @@ module.exports = function Gruntfile(grunt) {
                     cwd: 'src/',
                     src: [
                         '**',
-                        '!**/*.{html,js}',
+                        '!**/*.html',
                         '!**/layout/**',
                         '!**/modules/**',
                         '!**/static/{_css,scss}/**',
                         '!**/static/css/*.map',
-                        '!**/static/js/**'
+                        '!**/static/js/**/*.{json,md}',
+                        '!**/static/js/spec/**'
                     ],
                     dest: 'build'
                 }]
@@ -145,8 +146,7 @@ module.exports = function Gruntfile(grunt) {
                     expand: true,
                     cwd: 'build/',
                     src: [
-                        '**/*.js',
-                        '!**/js/vendor/**'
+                        '**/*.js'
                     ],
                     dest: 'build/'
                 }]
@@ -233,7 +233,7 @@ module.exports = function Gruntfile(grunt) {
                 'gruntfile.js',
                 'app/**/*.js',
                 'src/static/js/**/*.js',
-                '!src/static/js/vendor/**'
+                '!src/static/js/{vendor,shim}/**'
             ],
             options: {
                 jshintrc: true
