@@ -6,7 +6,7 @@
 
 var ansi = require('ansi-styles');
 
-var urls = require('../../config.json').server.redirects;
+var urls = require('../config').server.redirects;
 
 module.exports = redirects;
 

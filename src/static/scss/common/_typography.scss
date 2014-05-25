@@ -54,9 +54,9 @@ ul {
         list-style: none;
 
         // Example of a SVG-PNG fallback
-        @include rem(background, url('/static/img/arrow-ltr-black.svg') no-repeat 15px 5px);
+        @include rem(background, url('../img/arrow-ltr-black.svg') no-repeat 15px 5px);
         @include old-ie {
-            background-image: url('/static/img/arrow-ltr-black.svg.10x15.png');
+            background-image: url('../img/arrow-ltr-black.svg.10x15.png');
         }
     }
 }

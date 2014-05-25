@@ -12,8 +12,8 @@ module.exports = staticAction;
 
 function staticAction(req, res, next) {
 
-    var pathname = url.parse(req.url).pathname.substr(1);
-    var file     = req.app.get('views') + '/' + (pathname || 'index.html');
+    var path = url.parse(req.url).pathname.substr(1);
+    var file = req.app.get('views') + '/' + (path || 'index.html');
 
     if (fs.existsSync(file)) {
         res.sendfile(file);

@@ -25,7 +25,7 @@
 
     <section>
         <h2>Demo</h2>
-        <div class="resizable-demo">
+        <div class="resizable-demo" data-module="ui/docs/ResizableDemo">
             <div class="controls">
                 <div class="inactive">
                     &raquo; <button class="open">See in different resolutions</button>
@@ -39,7 +39,7 @@
                     <button class="close">Close</button>
                 </div>
             </div>
-            <div class="resizable"><iframe src="{{ baseUrl }}docs/_{{ module.file.path.relative }}"></iframe></div>
+            <div class="resizable"><iframe data-module="ui/docs/iframeHeightResizer" src="{{ baseUrl }}docs/_{{ module.file.path.relative }}"></iframe></div>
         </div>
     </section>
 
