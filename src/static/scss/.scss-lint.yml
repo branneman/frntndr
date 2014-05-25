@@ -1,0 +1,22 @@
+#
+# scss-lint config file
+#  inherits all options from: https://github.com/causes/scss-lint/blob/master/config/default.yml
+# Linter documentation:
+#  https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md
+#
+
+exclude:
+  - 'vendor/**'
+  - 'docs/_github.scss'
+  - 'docs/_hljs-tomorrow.scss'
+
+linters:
+
+  Indentation:
+    width: 4
+
+  PropertySortOrder:
+    enabled: false
+
+  EmptyLineBetweenBlocks:
+    enabled: false
