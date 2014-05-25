@@ -25,7 +25,7 @@ $baseline-px: 10px;
     $baseline-rem: $baseline-px / 1rem * 1;
 
     // If there is only one (numeric) value, return the property/value line for it.
-    @if type-of($px-values) == "number" {
+    @if type-of($px-values) == 'number' {
         @return $px-values / $baseline-rem;
     } @else {
 
@@ -34,7 +34,7 @@ $baseline-px: 10px;
         @each $value in $px-values {
 
             // If the value is zero or not a number, return it
-            @if $value == 0 or type-of( $value ) != "number" {
+            @if $value == 0 or type-of($value) != 'number' {
                 $rem-values: append($rem-values, $value);
             } @else {
                 $rem-values: append($rem-values, $value / $baseline-rem);

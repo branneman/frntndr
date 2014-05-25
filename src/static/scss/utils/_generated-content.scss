@@ -1,10 +1,12 @@
 @mixin before-after {
     @if $old-ie {
-        &:before, &:after {
+        &:before,
+        &:after {
             @content;
         }
     } @else {
-        &::before, &::after {
+        &::before,
+        &::after {
             @content;
         }
     }
