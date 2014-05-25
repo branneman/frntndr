@@ -1,7 +1,7 @@
 //
 // Makes the footer link to Github open in a new tab/window
 //
-define([], function() {
+define(function() {
     'use strict';
 
     return function(element) {

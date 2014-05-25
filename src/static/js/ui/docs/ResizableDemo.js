@@ -1,39 +1,12 @@
 //
-// Module: Quick Reference Card
-//
-(function QuickReferenceCard() {
-
-    'use strict';
-
-    document.addEventListener('DOMContentLoaded', function() {
-
-        var iframes = document.querySelectorAll('iframe');
-        if (!iframes.length) return;
-
-        Array.prototype.forEach.call(iframes, function(iframe) {
-
-            iframe.contentWindow.addEventListener('load', (function(iframe) {
-                return function() {
-                    iframe.style.height = iframe.contentDocument.body.scrollHeight + 10 + 'px';
-                };
-            }(iframe)));
-        });
-    });
-}());
-
-//
 // Module: Resizable Demo
 //
-(function ResizableDemo() {
-
+define(function ResizableDemo() {
     'use strict';
 
-    document.addEventListener('DOMContentLoaded', function(e) {
+    return function(resizableDemo) {
 
-        if (e.target.defaultView.frameElement) return;
-
-        var resizableDemo = document.querySelector('.resizable-demo');
-        var resizable     = resizableDemo.querySelector('.resizable');
+        var resizable = resizableDemo.querySelector('.resizable');
 
         function resetStyles() {
             resizable.style.left = '';
@@ -72,5 +45,5 @@
                 }
             });
         });
-    });
-}());
+    };
+});
