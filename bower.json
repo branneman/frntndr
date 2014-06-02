@@ -2,7 +2,6 @@
   "name": "my-project",
   "version": "0.1.0",
   "private": true,
-  "directory": "vendor",
   "dependencies": {
     "conditioner": "~1.0.0",
     "requirejs": "~2.1.11"

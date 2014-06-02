@@ -37,7 +37,6 @@ tools (and more), with more overhead and flexibility, without my strict rules.
 	cd /path/to/project
 	npm install
 	bundle install
-    cd src/static/js/
     bower install
 	```
 6. You might want to update your `package.json` with the correct project name, repository and license.
