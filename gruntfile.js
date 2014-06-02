@@ -243,6 +243,15 @@ module.exports = function Gruntfile(grunt) {
             }
         },
 
+        scsslint: {
+            options: {
+                config: 'src/static/scss/.scss-lint.yml'
+            },
+            dist: [
+                'src/static/scss/**/*.scss'
+            ]
+        },
+
         compress: {
             dist: {
                 options: {
@@ -281,6 +290,7 @@ module.exports = function Gruntfile(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-scss-lint');
     grunt.loadNpmTasks('grunt-httpcopy');
     grunt.loadNpmTasks('grunt-ftp-deploy');
     grunt.loadNpmTasks('grunt-autoprefixer');
@@ -309,6 +319,7 @@ module.exports = function Gruntfile(grunt) {
 
     // Test task.
     grunt.registerTask('test', [
+        'scsslint',
         'jshint',
         'clean:test'
     ]);
