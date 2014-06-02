@@ -1,9 +1,9 @@
 # frntndr
 **See [frntndr.com](http://frntndr.com/) for more documentation**.
 
-This codebase is an **opinionated** blueprint environment to quick start new front-end codebases. It tries to save you some precious time through having various tools preconfigured and dictating a workflow.
+This codebase is an **_opinionated_** blueprint environment to quick start new front-end codebases. It tries to save you some precious time through having various tools preconfigured and dictating a workflow.
 
-It is based on a local [Node.js](http://nodejs.org/) server, which behaves like Apache. [Grunt](http://gruntjs.com/), [Sass](http://sass-lang.com/), [Autoprefixer](https://github.com/ai/autoprefixer), [CSSO](http://css.github.io/csso/), [UglifyJS](http://github.com/mishoo/UglifyJS), [JSHint](http://www.jshint.com/), [imagemin](https://github.com/gruntjs/grunt-contrib-imagemin) and more are included.
+It is based on a local [Node.js](http://nodejs.org/) server, which behaves like Apache. [Grunt](http://gruntjs.com/), [Sass](http://sass-lang.com/), [Autoprefixer](https://github.com/ai/autoprefixer), [CSSO](http://css.github.io/csso/), [UglifyJS](http://github.com/mishoo/UglifyJS), [JSHint](http://www.jshint.com/), [scss-lint](https://github.com/causes/scss-lint), [imagemin](https://github.com/gruntjs/grunt-contrib-imagemin) and more are included.
 
 **Warning**: I used a lot of conventions I personally prefer, which you might not agree with! Alternatively you can use [Yeoman](http://yeoman.io/), a great scaffolding tool which could give you the same stack of
 tools (and more), with more overhead and flexibility, without my strict rules.
@@ -23,43 +23,56 @@ tools (and more), with more overhead and flexibility, without my strict rules.
 1. Make sure the following is installed on your machine:
   - [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.11.12)
   - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
-
 2. Download most recent stable: [github.com/branneman/frntndr/archive/0.4.zip](https://github.com/branneman/frntndr/archive/0.4.zip)
-
 3. Unzip the contents of the `frntndr-0.4` directory into your new project directory.
-
-4. Run these commands to setup your environment:
+4. Run these commands to install the global dependencies:
 
     ```
-    cd /path/to/project
-    gem i sass scss-lint
-    npm i -g grunt-cli bower
-    npm i
+    npm install -g grunt-cli bower
+    gem install bundle
+    ```
+5. Run these commands to install the project-specific dependencies:
+
+	```
+	cd /path/to/project
+	npm install
+	bundle install
     cd src/static/js/
-    bower i
-    ```
-
-Done! You can now start your development server.
+    bower install
+	```
+6. You might want to update your `package.json` with the correct project name, repository and license.
+7. Done! You can now start your development server.
 
 ### How to: Start the development server
 
     cd /path/to/project
     node app
 
-You can optionally configure your WebStorm to allow for a more easy server start, so you can click a fancy play button
-instead of having to work on the scary CLI.
-
 Then point your browser to [`http://localhost:1337/`](http://localhost:1337/)
 
 ### How to: Build, test and deploy
-Make sure your app is running, then execute:
+- Make sure your app is running, then execute:
 
-    cd /path/to/project
-    grunt
+	```
+	grunt
+	```
 
-To run JSHint: `grunt test`
+    The resulting build files can be found inside the `build/` directory.
 
-*After* the build, to create a zip: `grunt zip`
+- To run scss-lint and JSHint:
 
-*After* the build, to upload the build directory to an ftp server (you have to update `config.json` & `.ftppass` first):
-`grunt deploy`
+	```
+	grunt test
+	```
+
+- *After* the build, to create a zip:
+
+	```
+	grunt zip
+	```
+
+- *After* the build, to upload the build directory to an ftp server (you have to update `config.json` & `.ftppass` first):
+
+	```
+	grunt deploy
+	```
