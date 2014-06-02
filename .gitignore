@@ -1,10 +1,18 @@
-.idea
-.grunt
-build
+# Dependencies
 node_modules
+gemfile.lock
 src/static/js/vendor
+
+# Build files
+build
+.grunt
 npm-debug.log
+*.zip
+
+# Cache
 .sass-cache
 css
 *.css.map
-*.zip
+
+# IDE's
+.idea
