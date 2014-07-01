@@ -22,7 +22,7 @@ tools (and more), with more overhead and flexibility, without my strict rules.
 ### How to: Setup development environment
 1. Make sure the following is installed on your machine:
   - [Node.js](http://nodejs.org/), 0.10 or bigger (tested up until 0.11.12)
-  - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX)
+  - [Ruby](http://www.ruby-lang.org/en/) (shipped with OSX) and [Ruby DevKit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit#installation-instructions)
 2. Download most recent stable: [github.com/branneman/frntndr/archive/0.4.zip](https://github.com/branneman/frntndr/archive/0.4.zip)
 3. Unzip the contents of the `frntndr-0.4` directory into your new project directory.
 4. Run these commands to install the global dependencies:
