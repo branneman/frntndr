@@ -1,5 +1,3 @@
-/* jshint -W071 */
-
 //
 // Gruntfile.js — the config file for grunt
 //
@@ -9,7 +7,7 @@
 var fs   = require('fs');
 var glob = require('glob');
 
-module.exports = function Gruntfile(grunt) {
+module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
     var pkg    = grunt.file.readJSON('./package.json');
     var config = grunt.file.readJSON('./app/config.json');
