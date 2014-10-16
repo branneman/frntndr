@@ -50,8 +50,7 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
         sass: {
             dev: {
                 options: {
-                    style: 'expanded',
-                    trace: true
+                    style: 'expanded'
                 },
                 files: [{
                     expand: true,
