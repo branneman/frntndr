@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "conditioner": "~1.0.0",
-    "requirejs": "~2.1.11"
+    "conditioner": "~1.0.1",
+    "requirejs": "~2.1.15"
   }
 }
