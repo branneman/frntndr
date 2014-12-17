@@ -128,13 +128,18 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
         imagemin: {
             options: {
-                pngquant: true
+                optimizationLevel: 7,
+                svgoPlugins: [
+                    { removeViewBox: false },               // don't remove the viewbox atribute from the SVG
+                    { removeUselessStrokeAndFill: false },  // don't remove Useless Strokes and Fills
+                    { removeEmptyAttrs: false }             // don't remove Empty Attributes from the SVG]
+                ]
             },
             dist: {
                 files: [{
                     expand: true,
                     cwd: 'src/static/img/',
-                    src: ['**/*.{png,jpg,gif}'],
+                    src: ['**/*.{png,jpg,gif,svg}'],
                     dest: 'build/static/img/'
                 }]
             }
