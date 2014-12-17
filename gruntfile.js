@@ -80,7 +80,9 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
         autoprefixer: {
             options: {
-                browsers: config.server.sassBrowsers
+                browsers: config.server.sassBrowsers,
+                map: true,
+                cascade: false
             },
             dist: {
                 expand: true,
