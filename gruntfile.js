@@ -140,7 +140,8 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
         uglify: {
             options: {
-                sourceMap: true
+                sourceMap: true,
+                preserveComments: 'some' // preserve copyright notice and stuff like that
             },
             dist: {
                 files: [{
