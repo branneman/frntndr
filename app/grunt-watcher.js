@@ -13,16 +13,20 @@ module.exports = gruntWatcher;
 function gruntWatcher() {
 
     // Start grunt watcher (which in turn starts sass watcher and autoprefixer)
-    var sassProcess = exec('grunt watcher', function(err, stdout, stderr) {
+    var gruntProcess = exec('grunt watcher', function(err, stdout, stderr) {
         if (err) {
             console.log(ansi.red[0], err, stderr, ansi.red[1]);
         }
         console.log(stdout);
     });
 
+    // Output data
+    gruntProcess.stdout.pipe(process.stdout);
+    gruntProcess.stderr.pipe(process.stderr);
+
     // Exit watcher when node.js is getting killed
     process.on('SIGINT', function() {
-        sassProcess.kill();
+        gruntProcess.kill();
         process.exit();
     });
 
