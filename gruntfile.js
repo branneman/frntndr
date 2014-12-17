@@ -40,7 +40,7 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
         watch: {
             scss: {
                 files: ['src/static/scss/**/*.scss'],
-                tasks: ['sass:dev', 'autoprefixer', 'clean:sass'],
+                tasks: ['sass:dev', 'autoprefixer'],
                 options: {
                     spawn: false,
                     atBegin: true
@@ -319,6 +319,7 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
     // Watch task.
     grunt.registerTask('watcher', [
+        'clean:sass',
         'watch'
     ]);
 

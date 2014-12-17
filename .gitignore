@@ -12,6 +12,7 @@ npm-debug.log
 # Cache
 .sass-cache
 css
+_css
 *.css.map
 
 # IDE's
