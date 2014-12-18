@@ -40,9 +40,10 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
         watch: {
             scss: {
                 files: ['src/static/scss/**/*.scss'],
-                tasks: ['sass:dev', 'autoprefixer', 'clean:sass'],
+                tasks: ['sass:dev', 'autoprefixer'],
                 options: {
-                    spawn: false
+                    spawn: false,
+                    atBegin: true
                 }
             }
         },
@@ -50,7 +51,8 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
         sass: {
             dev: {
                 options: {
-                    style: 'expanded'
+                    style: 'expanded',
+                    update: true
                 },
                 files: [{
                     expand: true,
@@ -63,7 +65,8 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
             prod: {
                 options: {
                     style: 'compressed',
-                    noCache: true
+                    noCache: true,
+                    sourcemap: 'none'
                 },
                 files: [{
                     expand: true,
@@ -77,7 +80,9 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
         autoprefixer: {
             options: {
-                browsers: config.server.sassBrowsers
+                browsers: config.server.sassBrowsers,
+                map: true,
+                cascade: false
             },
             dist: {
                 expand: true,
@@ -125,13 +130,19 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
         imagemin: {
             options: {
-                pngquant: true
+                pngquant: true,
+                optimizationLevel: 7,
+                svgoPlugins: [
+                    { removeViewBox: false },               // don't remove the viewbox atribute from the SVG
+                    { removeUselessStrokeAndFill: false },  // don't remove Useless Strokes and Fills
+                    { removeEmptyAttrs: false }             // don't remove Empty Attributes from the SVG]
+                ]
             },
             dist: {
                 files: [{
                     expand: true,
                     cwd: 'src/static/img/',
-                    src: ['**/*.{png,jpg,gif}'],
+                    src: ['**/*.{png,jpg,gif,svg}'],
                     dest: 'build/static/img/'
                 }]
             }
@@ -139,7 +150,8 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
         uglify: {
             options: {
-                sourceMap: true
+                sourceMap: true,
+                preserveComments: 'some' // preserve copyright notice and stuff like that
             },
             dist: {
                 files: [{
@@ -308,8 +320,6 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
     // Watch task.
     grunt.registerTask('watcher', [
-        'sass:dev',
-        'autoprefixer',
         'clean:sass',
         'watch'
     ]);
