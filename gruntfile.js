@@ -130,6 +130,7 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
 
         imagemin: {
             options: {
+                pngquant: true,
                 optimizationLevel: 7,
                 svgoPlugins: [
                     { removeViewBox: false },               // don't remove the viewbox atribute from the SVG
