@@ -34,8 +34,8 @@ define(function ResizableDemo() {
             button.addEventListener('click', function(evt) {
                 resetStyles();
 
-                var width  = evt.target.getAttribute('data-width');
-                var height = evt.target.getAttribute('data-height');
+                var width  = evt.target.getAttribute('data-width'),
+                    height = evt.target.getAttribute('data-height');
 
                 if (width !== 'auto') {
                     resizable.style.width      = width + 'px';
