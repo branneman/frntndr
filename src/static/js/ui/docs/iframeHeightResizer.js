@@ -1,20 +1,36 @@
 //
 // Module: Quick Reference Card
 //
-define(function iframeHeightResizer() {
+define(function() {
     'use strict';
 
-    function resizeIframeHeight(iframe) {
-        iframe.style.height = iframe.contentDocument.body.scrollHeight + 10 + 'px';
+    /**
+     * @constructor
+     */
+    function iframeHeightResizer(elem) {
+        this.iframe = elem;
+        this.bindOnLoad();
+        this.onLoad();
     }
 
-    return function(iframe) {
+    /**
+     * Bind events
+     */
+    iframeHeightResizer.prototype.bindOnLoad = function() {
+        document.addEventListener('readystatechange', this.onLoad.bind(this));
+    };
 
-        iframe.contentWindow.addEventListener('load', resizeIframeHeight);
-
-        // Load event already fired? Run now
+    /**
+     * Event handler
+     */
+    iframeHeightResizer.prototype.onLoad = function() {
         if (document.readyState === 'complete') {
-            resizeIframeHeight(iframe);
+            this.iframe.style.height = this.iframe.contentDocument.body.scrollHeight + 10 + 'px';
         }
     };
+
+    /**
+     * Expose constructor
+     */
+    return iframeHeightResizer;
 });
