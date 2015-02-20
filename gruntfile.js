@@ -261,6 +261,26 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
             ]
         },
 
+        jscs: {
+            options: {
+                config: '.jscsrc'
+            },
+            dist: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/static/js/',
+                        src: [
+                            '**/*.js',
+                            '!**/*.min.js',
+                            '!**/vendor/**',
+                            '!**/shim/**'
+                        ]
+                    }
+                ]
+            }
+        },
+
         compress: {
             dist: {
                 options: {
@@ -304,6 +324,7 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
     grunt.loadNpmTasks('grunt-ftp-deploy');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-csso');
+    grunt.loadNpmTasks('grunt-jscs');
 
     // Default task
     grunt.registerTask('default', [
@@ -327,6 +348,7 @@ module.exports = function Gruntfile(grunt) { // jshint ignore:line
     // Test task.
     grunt.registerTask('test', [
         'scsslint',
+        'jscs',
         'jshint',
         'clean:test'
     ]);

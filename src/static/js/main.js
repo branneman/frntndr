@@ -1,5 +1,9 @@
 require.config({
-    map: { '*': { conditioner: 'vendor/conditioner/conditioner' } }
+    map: {
+        '*': {
+            conditioner: 'vendor/conditioner/conditioner'
+        }
+    }
 });
 
 require(['common/has-js', 'conditioner'], function(hasJS, conditioner) {
